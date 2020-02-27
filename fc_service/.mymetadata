@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="persieService"
+  id="myeclipse.1558157663290"
+  context-root="/persieService"
+  j2ee-spec="5.0"
+  archive="persieService.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

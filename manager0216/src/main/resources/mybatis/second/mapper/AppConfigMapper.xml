@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.second.mapper.AppConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.second.model.AppConfig" >
+    <id column="ddAppId" property="ddappid" jdbcType="VARCHAR" />
+    <result column="ddCheckVersion" property="ddcheckversion" jdbcType="VARCHAR" />
+    <result column="ddProgram" property="ddprogram" jdbcType="INTEGER" />
+    <result column="ddName" property="ddname" jdbcType="VARCHAR" />
+    <result column="ddGameUrl" property="ddgameurl" jdbcType="VARCHAR" />
+    <result column="ddCode" property="ddcode" jdbcType="INTEGER" />
+    <result column="ddCheckCode" property="ddcheckcode" jdbcType="INTEGER" />
+    <result column="ddTime" property="ddtime" jdbcType="TIMESTAMP" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ddAppId, ddCheckVersion, ddProgram, ddName, ddGameUrl, ddCode, ddCheckCode, ddTime, 
+    remark
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from app_config
+    where ddAppId = #{ddappid,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from app_config
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from app_config
+    where ddAppId = #{ddappid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.second.model.AppConfig" >
+    insert into app_config (ddAppId, ddCheckVersion, ddProgram, 
+      ddName, ddGameUrl, ddCode, 
+      ddCheckCode, ddTime, remark
+      )
+    values (#{ddappid,jdbcType=VARCHAR}, #{ddcheckversion,jdbcType=VARCHAR}, #{ddprogram,jdbcType=INTEGER},
+      #{ddname,jdbcType=VARCHAR}, #{ddgameurl,jdbcType=VARCHAR}, #{ddcode,jdbcType=INTEGER}, 
+      #{ddcheckcode,jdbcType=INTEGER}, #{ddtime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.second.model.AppConfig" >
+    insert into app_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ddappid != null" >
+        ddAppId,
+      </if>
+      <if test="ddcheckversion != null" >
+        ddCheckVersion,
+      </if>
+      <if test="ddprogram != null" >
+        ddProgram,
+      </if>
+      <if test="ddname != null" >
+        ddName,
+      </if>
+      <if test="ddgameurl != null" >
+        ddGameUrl,
+      </if>
+      <if test="ddcode != null" >
+        ddCode,
+      </if>
+      <if test="ddcheckcode != null" >
+        ddCheckCode,
+      </if>
+      <if test="ddtime != null" >
+        ddTime,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ddappid != null" >
+        #{ddappid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddcheckversion != null" >
+        #{ddcheckversion,jdbcType=VARCHAR},
+      </if>
+      <if test="ddprogram != null" >
+        #{ddprogram,jdbcType=INTEGER},
+      </if>
+      <if test="ddname != null" >
+        #{ddname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddgameurl != null" >
+        #{ddgameurl,jdbcType=VARCHAR},
+      </if>
+      <if test="ddcode != null" >
+        #{ddcode,jdbcType=INTEGER},
+      </if>
+      <if test="ddcheckcode != null" >
+        #{ddcheckcode,jdbcType=INTEGER},
+      </if>
+      <if test="ddtime != null" >
+        #{ddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.second.model.AppConfig" >
+    update app_config
+    <set >
+      <if test="ddcheckversion != null" >
+        ddCheckVersion = #{ddcheckversion,jdbcType=VARCHAR},
+      </if>
+      <if test="ddprogram != null" >
+        ddProgram = #{ddprogram,jdbcType=INTEGER},
+      </if>
+      <if test="ddname != null" >
+        ddName = #{ddname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddgameurl != null" >
+        ddGameUrl = #{ddgameurl,jdbcType=VARCHAR},
+      </if>
+      <if test="ddcode != null" >
+        ddCode = #{ddcode,jdbcType=INTEGER},
+      </if>
+      <if test="ddcheckcode != null" >
+        ddCheckCode = #{ddcheckcode,jdbcType=INTEGER},
+      </if>
+      <if test="ddtime != null" >
+        ddTime = #{ddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ddAppId = #{ddappid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.second.model.AppConfig" >
+    update app_config
+    set ddCheckVersion = #{ddcheckversion,jdbcType=VARCHAR},
+      ddProgram = #{ddprogram,jdbcType=INTEGER},
+      ddName = #{ddname,jdbcType=VARCHAR},
+      ddGameUrl = #{ddgameurl,jdbcType=VARCHAR},
+      ddCode = #{ddcode,jdbcType=INTEGER},
+      ddCheckCode = #{ddcheckcode,jdbcType=INTEGER},
+      ddTime = #{ddtime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR}
+    where ddAppId = #{ddappid,jdbcType=VARCHAR}
+  </update>
+</mapper>

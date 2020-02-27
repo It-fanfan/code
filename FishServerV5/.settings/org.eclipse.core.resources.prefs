@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//config/config.properties=UTF-8
+encoding//config/redis.properties=UTF-8
+encoding//config/weixin.properties=UTF-8
+encoding/<project>=UTF-8

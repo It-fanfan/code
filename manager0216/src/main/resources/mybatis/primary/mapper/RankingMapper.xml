@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fish.dao.primary.mapper.RankingMapper">
+    <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.Ranking">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="matchId" jdbcType="VARCHAR" property="matchid"/>
+        <result column="matchDate" jdbcType="DATE" property="matchdate"/>
+        <result column="gameCode" jdbcType="INTEGER" property="gamecode"/>
+        <result column="matchIndex" jdbcType="INTEGER" property="matchindex"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="ranking" jdbcType="BIGINT" property="ranking"/>
+        <result column="mark" jdbcType="BIGINT" property="mark"/>
+        <result column="awardType" jdbcType="VARCHAR" property="awardtype"/>
+        <result column="awardTotal" jdbcType="INTEGER" property="awardtotal"/>
+        <result column="insertTime" jdbcType="TIMESTAMP" property="inserttime"/>
+        <result column="ddgroup" jdbcType="TINYINT" property="ddgroup"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, matchId, matchDate, gameCode, matchIndex, uid, ranking, mark, awardType, awardTotal, 
+    insertTime, ddgroup
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ranking
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ranking
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fish.dao.primary.model.Ranking">
+    insert into ranking (id, matchId, matchDate, 
+      gameCode, matchIndex, uid, 
+      ranking, mark, awardType, 
+      awardTotal, insertTime, ddgroup
+      )
+    values (#{id,jdbcType=BIGINT}, #{matchid,jdbcType=VARCHAR}, #{matchdate,jdbcType=DATE}, 
+      #{gamecode,jdbcType=INTEGER}, #{matchindex,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, 
+      #{ranking,jdbcType=BIGINT}, #{mark,jdbcType=BIGINT}, #{awardtype,jdbcType=VARCHAR}, 
+      #{awardtotal,jdbcType=INTEGER}, #{inserttime,jdbcType=TIMESTAMP}, #{ddgroup,jdbcType=TINYINT}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.fish.dao.primary.model.Ranking">
+        insert into ranking
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="matchid != null">
+                matchId,
+            </if>
+            <if test="matchdate != null">
+                matchDate,
+            </if>
+            <if test="gamecode != null">
+                gameCode,
+            </if>
+            <if test="matchindex != null">
+                matchIndex,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="ranking != null">
+                ranking,
+            </if>
+            <if test="mark != null">
+                mark,
+            </if>
+            <if test="awardtype != null">
+                awardType,
+            </if>
+            <if test="awardtotal != null">
+                awardTotal,
+            </if>
+            <if test="inserttime != null">
+                insertTime,
+            </if>
+            <if test="ddgroup != null">
+                ddgroup,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="matchid != null">
+                #{matchid,jdbcType=VARCHAR},
+            </if>
+            <if test="matchdate != null">
+                #{matchdate,jdbcType=DATE},
+            </if>
+            <if test="gamecode != null">
+                #{gamecode,jdbcType=INTEGER},
+            </if>
+            <if test="matchindex != null">
+                #{matchindex,jdbcType=INTEGER},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="ranking != null">
+                #{ranking,jdbcType=BIGINT},
+            </if>
+            <if test="mark != null">
+                #{mark,jdbcType=BIGINT},
+            </if>
+            <if test="awardtype != null">
+                #{awardtype,jdbcType=VARCHAR},
+            </if>
+            <if test="awardtotal != null">
+                #{awardtotal,jdbcType=INTEGER},
+            </if>
+            <if test="inserttime != null">
+                #{inserttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ddgroup != null">
+                #{ddgroup,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.primary.model.Ranking">
+        update ranking
+        <set>
+            <if test="matchid != null">
+                matchId = #{matchid,jdbcType=VARCHAR},
+            </if>
+            <if test="matchdate != null">
+                matchDate = #{matchdate,jdbcType=DATE},
+            </if>
+            <if test="gamecode != null">
+                gameCode = #{gamecode,jdbcType=INTEGER},
+            </if>
+            <if test="matchindex != null">
+                matchIndex = #{matchindex,jdbcType=INTEGER},
+            </if>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="ranking != null">
+                ranking = #{ranking,jdbcType=BIGINT},
+            </if>
+            <if test="mark != null">
+                mark = #{mark,jdbcType=BIGINT},
+            </if>
+            <if test="awardtype != null">
+                awardType = #{awardtype,jdbcType=VARCHAR},
+            </if>
+            <if test="awardtotal != null">
+                awardTotal = #{awardtotal,jdbcType=INTEGER},
+            </if>
+            <if test="inserttime != null">
+                insertTime = #{inserttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="ddgroup != null">
+                ddgroup = #{ddgroup,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fish.dao.primary.model.Ranking">
+    update ranking
+    set matchId = #{matchid,jdbcType=VARCHAR},
+      matchDate = #{matchdate,jdbcType=DATE},
+      gameCode = #{gamecode,jdbcType=INTEGER},
+      matchIndex = #{matchindex,jdbcType=INTEGER},
+      uid = #{uid,jdbcType=VARCHAR},
+      ranking = #{ranking,jdbcType=BIGINT},
+      mark = #{mark,jdbcType=BIGINT},
+      awardType = #{awardtype,jdbcType=VARCHAR},
+      awardTotal = #{awardtotal,jdbcType=INTEGER},
+      insertTime = #{inserttime,jdbcType=TIMESTAMP},
+      ddgroup = #{ddgroup,jdbcType=TINYINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <insert id="insertBatch">
+        INSERT INTO ranking(id, matchId, matchDate,
+        gameCode, matchIndex, uid,
+        ranking, mark, awardType,
+        awardTotal, insertTime,ddgroup)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.id},#{item.matchid},#{item.matchdate},#{item.gamecode},#{item.matchindex},#{item.uid},
+            #{item.ranking},#{item.mark},#{item.awardtype},#{item.awardtotal},#{item.inserttime},#{item.ddgroup})
+        </foreach>
+    </insert>
+    <select id="selectByGameCode" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ranking
+    </select>
+
+    <select id="selectByAllDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ranking
+        where ddgroup = FALSE GROUP BY matchId,gameCode,matchDate
+    </select>
+    <select id="selectByAllDateProgram" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ranking
+        where ddgroup = TRUE GROUP BY matchId,gameCode,matchDate
+    </select>
+
+    <select id="selectByDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ranking
+        where matchDate = #{matchdate,jdbcType=VARCHAR} and ddgroup = FALSE GROUP BY matchId,gameCode
+    </select>
+    <select id="selectByDateGroup" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from ranking
+        where matchDate = #{matchdate,jdbcType=VARCHAR} and ddgroup = TRUE GROUP BY matchId,gameCode
+    </select>
+
+    <select id="selectResult" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ranking
+        WHERE matchDate = #{matchdate,jdbcType=VARCHAR} AND gameCode = #{gamecode,jdbcType=INTEGER}
+        AND matchId =#{matchid,jdbcType=VARCHAR} AND matchIndex = #{matchindex,jdbcType=INTEGER} and ddgroup = FALSE
+        ORDER BY mark DESC
+    </select>
+    <select id="selectGroupResult" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ranking
+        WHERE matchDate = #{matchdate,jdbcType=VARCHAR} AND gameCode = #{gamecode,jdbcType=INTEGER}
+        AND matchId =#{matchid,jdbcType=VARCHAR} AND matchIndex = #{matchindex,jdbcType=INTEGER} and ddgroup = TRUE
+    </select>
+    <select id="selectIsSameData" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ranking
+        WHERE matchDate = #{matchdate,jdbcType=VARCHAR} AND gameCode = #{gamecode,jdbcType=INTEGER}
+        AND matchId =#{matchid,jdbcType=VARCHAR} AND matchIndex = #{matchindex,jdbcType=INTEGER}
+        AND uid = #{uid,jdbcType=VARCHAR} AND ranking = #{ranking,jdbcType=BIGINT} AND mark = #{mark,jdbcType=BIGINT}
+        and ddgroup = TRUE
+
+    </select>
+</mapper>

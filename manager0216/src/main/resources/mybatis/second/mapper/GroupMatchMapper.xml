@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.second.mapper.GroupMatchMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.second.model.GroupMatch" >
+    <id column="ddId" property="ddid" jdbcType="VARCHAR" />
+    <result column="ddState" property="ddstate" jdbcType="INTEGER" />
+    <result column="ddGame" property="ddgame" jdbcType="INTEGER" />
+    <result column="ddMatch" property="ddmatch" jdbcType="VARCHAR" />
+    <result column="ddStart" property="ddstart" jdbcType="INTEGER" />
+    <result column="ddEnd" property="ddend" jdbcType="INTEGER" />
+    <result column="ddTime" property="ddtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ddId, ddState, ddGame, ddMatch, ddStart, ddEnd, ddTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from group_match
+    where ddId = #{ddid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from group_match
+    where ddId = #{ddid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.second.model.GroupMatch" >
+    insert into group_match (ddId, ddState, ddGame, 
+      ddMatch, ddStart, ddEnd, 
+      ddTime)
+    values (#{ddid,jdbcType=VARCHAR}, #{ddstate,jdbcType=INTEGER}, #{ddgame,jdbcType=INTEGER}, 
+      #{ddmatch,jdbcType=VARCHAR}, #{ddstart,jdbcType=INTEGER}, #{ddend,jdbcType=INTEGER}, 
+      #{ddtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.second.model.GroupMatch" >
+    insert into group_match
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ddid != null" >
+        ddId,
+      </if>
+      <if test="ddstate != null" >
+        ddState,
+      </if>
+      <if test="ddgame != null" >
+        ddGame,
+      </if>
+      <if test="ddmatch != null" >
+        ddMatch,
+      </if>
+      <if test="ddstart != null" >
+        ddStart,
+      </if>
+      <if test="ddend != null" >
+        ddEnd,
+      </if>
+      <if test="ddtime != null" >
+        ddTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ddid != null" >
+        #{ddid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddstate != null" >
+        #{ddstate,jdbcType=INTEGER},
+      </if>
+      <if test="ddgame != null" >
+        #{ddgame,jdbcType=INTEGER},
+      </if>
+      <if test="ddmatch != null" >
+        #{ddmatch,jdbcType=VARCHAR},
+      </if>
+      <if test="ddstart != null" >
+        #{ddstart,jdbcType=INTEGER},
+      </if>
+      <if test="ddend != null" >
+        #{ddend,jdbcType=INTEGER},
+      </if>
+      <if test="ddtime != null" >
+        #{ddtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.second.model.GroupMatch" >
+    update group_match
+    <set >
+      <if test="ddstate != null" >
+        ddState = #{ddstate,jdbcType=INTEGER},
+      </if>
+      <if test="ddgame != null" >
+        ddGame = #{ddgame,jdbcType=INTEGER},
+      </if>
+      <if test="ddmatch != null" >
+        ddMatch = #{ddmatch,jdbcType=VARCHAR},
+      </if>
+      <if test="ddstart != null" >
+        ddStart = #{ddstart,jdbcType=INTEGER},
+      </if>
+      <if test="ddend != null" >
+        ddEnd = #{ddend,jdbcType=INTEGER},
+      </if>
+      <if test="ddtime != null" >
+        ddTime = #{ddtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ddId = #{ddid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.second.model.GroupMatch" >
+    update group_match
+    set ddState = #{ddstate,jdbcType=INTEGER},
+      ddGame = #{ddgame,jdbcType=INTEGER},
+      ddMatch = #{ddmatch,jdbcType=VARCHAR},
+      ddStart = #{ddstart,jdbcType=INTEGER},
+      ddEnd = #{ddend,jdbcType=INTEGER},
+      ddTime = #{ddtime,jdbcType=TIMESTAMP}
+    where ddId = #{ddid,jdbcType=VARCHAR}
+  </update>
+</mapper>

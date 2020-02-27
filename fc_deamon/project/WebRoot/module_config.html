@@ -1,0 +1,102 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>配置页面</title>
+    <link href="libui/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link href="libui/ligerUI/skins/Gray/css/all.css" rel="stylesheet" type="text/css" /> 
+    <link href="libui/ligerUI/skins/ligerui-icons.css" rel="stylesheet" />
+    <script src="libui/jquery/jquery-1.9.0.min.js"></script>
+    <script src="libui/ligerUI/js/ligerui.all.js" type="text/javascript"></script> 
+    <script src="libui/ligerUI/js/plugins/ligerForm.js"></script>
+	<script src="libui/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+    <script src="libui/json2.js" type="text/javascript"></script>
+     <style type="text/css">
+        .middle input {
+            display: block;width:30px; margin:2px;
+        }
+    </style>
+</head>
+<body style="padding:0px;">   
+	<div id="layout1" style="width:99.2%; margin:0 auto; margin-top:4px; "> 
+		<div id="formDesign" style="clear:both;"></div>
+		<div id="btnSaveToFile" style="margin-top:15px; margin-left:145px;float:left;"></div>
+    </div> 
+
+    <script type="text/javascript">
+	
+        var demoData = [], demoGrid = { columns: [] };
+        for (var i = 0; i < 9; i++) demoData.push({ id: i, value: i, text: '[数据' + i + ']' });
+        demoGrid.columns.push({ display: 'ID', name: 'id' });
+        demoGrid.columns.push({ display: 'Text', name: 'text' });
+        demoGrid.data = { Rows: demoData };
+	
+	function f_loadFile(result)
+        {
+		formDesign.set({
+			inputWidth: 280,
+			labelWidth: 120,
+			space: 40,
+			fields: [
+				{ name: "hiddenTest", type: "hidden" },
+				{ label: "文本测试", name: "textTest", width: 280, labelWidth: 120, space: 40, newline: true, type: "text"},
+				{
+					label: "组合框测试", name: "comboTest", width: 280, labelWidth: 120, space: 40, newline: true, type: "select", textField: "comboTest", 
+					editor: {
+						data: demoData
+					}
+				},
+				{ label: "日期测试1", name: "checkboxTest1", width: 280, labelWidth: 0, space: 40, newline: true, type: "checkbox" },
+				{  name: "checkboxTest", width: 20, labelWidth: 0, space: 0, newline: true, type: "checkbox", afterContent: "多选框测试" },
+				{ label: "日期测试3", name: "checkboxTest2", width: 280, labelWidth: 0, space: 40, newline: true, type: "checkbox" },
+				{ label: "日期测试", name: "dateTest", width: 280, labelWidth: 120, space: 40, newline: true, type: "date" },
+				{ label: "小数测试", name: "floatTest", width: 280, labelWidth: 120, space: 40, newline: true, type: "number" },
+				{ label: "整数测试", name: "integerTest", width: 280, labelWidth: 120, space: 40, newline: true, type: "digits" },
+				{ label: "整数测试1", name: "integerTest1", width: 280, labelWidth: 120, space: 40, newline: true, type: "digits" },
+				{ label: "文本区域测试", name: "editTest", labelWidth: 120, space: 40, newline: true, type: "textarea", width: 280 }
+			]
+		});
+
+		formDesign.setData({
+			checkboxTest: "true" ,
+			comboTest: "111"
+		});
+		
+		console.log("feng -- " , formDesign.getData());
+        }
+		
+        function showMessage(message)
+        {
+		var input = $("<textarea style='width:99%;height:220px' />").val(message);
+		$.ligerDialog.show({
+			target: input,
+			width: 400,
+			height:290,
+			showMax: false,
+			showToggle: false,
+			showMin: false 
+		});
+        }
+		
+        function f_submit()
+        {
+		console.log("feng111 -- " , formDesign.getData());
+        }
+
+        $("#layout1").ligerLayout({ 
+            rightWidth: 250,
+            height: '100%',
+            heightDiff: -4,
+            space: 4 
+        }); 
+      
+        var formDesign = $("#formDesign").ligerForm({});
+        var btnSaveToFile = $("#btnSaveToFile").ligerButton({
+            click: f_submit, text: '编辑完毕，保存并提交数据' , width:170
+        });
+		
+	f_loadFile();
+	 
+     </script> 
+</body>
+</html>

@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.RoundsMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.Rounds" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="ddCode" property="ddcode" jdbcType="VARCHAR" />
+    <result column="ddGroup" property="ddgroup" jdbcType="TINYINT" />
+    <result column="ddPriority" property="ddpriority" jdbcType="INTEGER" />
+    <result column="ddName" property="ddname" jdbcType="VARCHAR" />
+    <result column="ddName128u" property="ddname128u" jdbcType="VARCHAR" />
+    <result column="ddHour0" property="ddhour0" jdbcType="INTEGER" />
+    <result column="ddAward0512a" property="ddaward0512a" jdbcType="VARCHAR" />
+    <result column="ddHour1" property="ddhour1" jdbcType="INTEGER" />
+    <result column="ddAward1512a" property="ddaward1512a" jdbcType="VARCHAR" />
+    <result column="ddHour2" property="ddhour2" jdbcType="INTEGER" />
+    <result column="ddAward2512a" property="ddaward2512a" jdbcType="VARCHAR" />
+    <result column="ddHour3" property="ddhour3" jdbcType="INTEGER" />
+    <result column="ddAward3512a" property="ddaward3512a" jdbcType="VARCHAR" />
+    <result column="ddHour4" property="ddhour4" jdbcType="INTEGER" />
+    <result column="ddAward4512a" property="ddaward4512a" jdbcType="VARCHAR" />
+    <result column="ddHour5" property="ddhour5" jdbcType="INTEGER" />
+    <result column="ddAward5512a" property="ddaward5512a" jdbcType="VARCHAR" />
+    <result column="ddHour6" property="ddhour6" jdbcType="INTEGER" />
+    <result column="ddAward6512a" property="ddaward6512a" jdbcType="VARCHAR" />
+    <result column="ddHour7" property="ddhour7" jdbcType="INTEGER" />
+    <result column="ddAward7512a" property="ddaward7512a" jdbcType="VARCHAR" />
+    <result column="ddHour8" property="ddhour8" jdbcType="INTEGER" />
+    <result column="ddAward8512a" property="ddaward8512a" jdbcType="VARCHAR" />
+    <result column="ddHour9" property="ddhour9" jdbcType="INTEGER" />
+    <result column="ddAward9512a" property="ddaward9512a" jdbcType="VARCHAR" />
+    <result column="creat_time" property="creatTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ddCode, ddGroup, ddPriority, ddName, ddName128u, ddHour0, ddAward0512a, ddHour1, 
+    ddAward1512a, ddHour2, ddAward2512a, ddHour3, ddAward3512a, ddHour4, ddAward4512a, 
+    ddHour5, ddAward5512a, ddHour6, ddAward6512a, ddHour7, ddAward7512a, ddHour8, ddAward8512a, 
+    ddHour9, ddAward9512a, creat_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from rounds
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from rounds
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.primary.model.Rounds" >
+    insert into rounds (id, ddCode, ddGroup, 
+      ddPriority, ddName, ddName128u, 
+      ddHour0, ddAward0512a, ddHour1, 
+      ddAward1512a, ddHour2, ddAward2512a, 
+      ddHour3, ddAward3512a, ddHour4, 
+      ddAward4512a, ddHour5, ddAward5512a, 
+      ddHour6, ddAward6512a, ddHour7, 
+      ddAward7512a, ddHour8, ddAward8512a, 
+      ddHour9, ddAward9512a, creat_time
+)
+    values (#{id,jdbcType=INTEGER}, #{ddcode,jdbcType=VARCHAR}, #{ddgroup,jdbcType=TINYINT}, 
+      #{ddpriority,jdbcType=INTEGER}, #{ddname,jdbcType=VARCHAR}, #{ddname128u,jdbcType=VARCHAR}, 
+      #{ddhour0,jdbcType=INTEGER}, #{ddaward0512a,jdbcType=VARCHAR}, #{ddhour1,jdbcType=INTEGER}, 
+      #{ddaward1512a,jdbcType=VARCHAR}, #{ddhour2,jdbcType=INTEGER}, #{ddaward2512a,jdbcType=VARCHAR}, 
+      #{ddhour3,jdbcType=INTEGER}, #{ddaward3512a,jdbcType=VARCHAR}, #{ddhour4,jdbcType=INTEGER}, 
+      #{ddaward4512a,jdbcType=VARCHAR}, #{ddhour5,jdbcType=INTEGER}, #{ddaward5512a,jdbcType=VARCHAR}, 
+      #{ddhour6,jdbcType=INTEGER}, #{ddaward6512a,jdbcType=VARCHAR}, #{ddhour7,jdbcType=INTEGER}, 
+      #{ddaward7512a,jdbcType=VARCHAR}, #{ddhour8,jdbcType=INTEGER}, #{ddaward8512a,jdbcType=VARCHAR}, 
+      #{ddhour9,jdbcType=INTEGER}, #{ddaward9512a,jdbcType=VARCHAR}, #{creatTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.primary.model.Rounds" >
+    insert into rounds
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ddcode != null" >
+        ddCode,
+      </if>
+      <if test="ddgroup != null" >
+        ddGroup,
+      </if>
+      <if test="ddpriority != null" >
+        ddPriority,
+      </if>
+      <if test="ddname != null" >
+        ddName,
+      </if>
+      <if test="ddname128u != null" >
+        ddName128u,
+      </if>
+      <if test="ddhour0 != null" >
+        ddHour0,
+      </if>
+      <if test="ddaward0512a != null" >
+        ddAward0512a,
+      </if>
+      <if test="ddhour1 != null" >
+        ddHour1,
+      </if>
+      <if test="ddaward1512a != null" >
+        ddAward1512a,
+      </if>
+      <if test="ddhour2 != null" >
+        ddHour2,
+      </if>
+      <if test="ddaward2512a != null" >
+        ddAward2512a,
+      </if>
+      <if test="ddhour3 != null" >
+        ddHour3,
+      </if>
+      <if test="ddaward3512a != null" >
+        ddAward3512a,
+      </if>
+      <if test="ddhour4 != null" >
+        ddHour4,
+      </if>
+      <if test="ddaward4512a != null" >
+        ddAward4512a,
+      </if>
+      <if test="ddhour5 != null" >
+        ddHour5,
+      </if>
+      <if test="ddaward5512a != null" >
+        ddAward5512a,
+      </if>
+      <if test="ddhour6 != null" >
+        ddHour6,
+      </if>
+      <if test="ddaward6512a != null" >
+        ddAward6512a,
+      </if>
+      <if test="ddhour7 != null" >
+        ddHour7,
+      </if>
+      <if test="ddaward7512a != null" >
+        ddAward7512a,
+      </if>
+      <if test="ddhour8 != null" >
+        ddHour8,
+      </if>
+      <if test="ddaward8512a != null" >
+        ddAward8512a,
+      </if>
+      <if test="ddhour9 != null" >
+        ddHour9,
+      </if>
+      <if test="ddaward9512a != null" >
+        ddAward9512a,
+      </if>
+      <if test="creatTime != null" >
+        creat_time,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ddcode != null" >
+        #{ddcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ddgroup != null" >
+        #{ddgroup,jdbcType=TINYINT},
+      </if>
+      <if test="ddpriority != null" >
+        #{ddpriority,jdbcType=INTEGER},
+      </if>
+      <if test="ddname != null" >
+        #{ddname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddname128u != null" >
+        #{ddname128u,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour0 != null" >
+        #{ddhour0,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward0512a != null" >
+        #{ddaward0512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour1 != null" >
+        #{ddhour1,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward1512a != null" >
+        #{ddaward1512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour2 != null" >
+        #{ddhour2,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward2512a != null" >
+        #{ddaward2512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour3 != null" >
+        #{ddhour3,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward3512a != null" >
+        #{ddaward3512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour4 != null" >
+        #{ddhour4,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward4512a != null" >
+        #{ddaward4512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour5 != null" >
+        #{ddhour5,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward5512a != null" >
+        #{ddaward5512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour6 != null" >
+        #{ddhour6,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward6512a != null" >
+        #{ddaward6512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour7 != null" >
+        #{ddhour7,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward7512a != null" >
+        #{ddaward7512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour8 != null" >
+        #{ddhour8,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward8512a != null" >
+        #{ddaward8512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour9 != null" >
+        #{ddhour9,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward9512a != null" >
+        #{ddaward9512a,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.primary.model.Rounds" >
+    update rounds
+    <set >
+      <if test="ddcode != null" >
+        ddCode = #{ddcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ddgroup != null" >
+        ddGroup = #{ddgroup,jdbcType=TINYINT},
+      </if>
+      <if test="ddpriority != null" >
+        ddPriority = #{ddpriority,jdbcType=INTEGER},
+      </if>
+      <if test="ddname != null" >
+        ddName = #{ddname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddname128u != null" >
+        ddName128u = #{ddname128u,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour0 != null" >
+        ddHour0 = #{ddhour0,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward0512a != null" >
+        ddAward0512a = #{ddaward0512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour1 != null" >
+        ddHour1 = #{ddhour1,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward1512a != null" >
+        ddAward1512a = #{ddaward1512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour2 != null" >
+        ddHour2 = #{ddhour2,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward2512a != null" >
+        ddAward2512a = #{ddaward2512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour3 != null" >
+        ddHour3 = #{ddhour3,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward3512a != null" >
+        ddAward3512a = #{ddaward3512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour4 != null" >
+        ddHour4 = #{ddhour4,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward4512a != null" >
+        ddAward4512a = #{ddaward4512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour5 != null" >
+        ddHour5 = #{ddhour5,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward5512a != null" >
+        ddAward5512a = #{ddaward5512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour6 != null" >
+        ddHour6 = #{ddhour6,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward6512a != null" >
+        ddAward6512a = #{ddaward6512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour7 != null" >
+        ddHour7 = #{ddhour7,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward7512a != null" >
+        ddAward7512a = #{ddaward7512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour8 != null" >
+        ddHour8 = #{ddhour8,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward8512a != null" >
+        ddAward8512a = #{ddaward8512a,jdbcType=VARCHAR},
+      </if>
+      <if test="ddhour9 != null" >
+        ddHour9 = #{ddhour9,jdbcType=INTEGER},
+      </if>
+      <if test="ddaward9512a != null" >
+        ddAward9512a = #{ddaward9512a,jdbcType=VARCHAR},
+      </if>
+      <if test="creatTime != null" >
+        creat_time = #{creatTime,jdbcType=TIMESTAMP},
+      </if>
+
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.primary.model.Rounds" >
+    update rounds
+    set ddCode = #{ddcode,jdbcType=VARCHAR},
+      ddGroup = #{ddgroup,jdbcType=TINYINT},
+      ddPriority = #{ddpriority,jdbcType=INTEGER},
+      ddName = #{ddname,jdbcType=VARCHAR},
+      ddName128u = #{ddname128u,jdbcType=VARCHAR},
+      ddHour0 = #{ddhour0,jdbcType=INTEGER},
+      ddAward0512a = #{ddaward0512a,jdbcType=VARCHAR},
+      ddHour1 = #{ddhour1,jdbcType=INTEGER},
+      ddAward1512a = #{ddaward1512a,jdbcType=VARCHAR},
+      ddHour2 = #{ddhour2,jdbcType=INTEGER},
+      ddAward2512a = #{ddaward2512a,jdbcType=VARCHAR},
+      ddHour3 = #{ddhour3,jdbcType=INTEGER},
+      ddAward3512a = #{ddaward3512a,jdbcType=VARCHAR},
+      ddHour4 = #{ddhour4,jdbcType=INTEGER},
+      ddAward4512a = #{ddaward4512a,jdbcType=VARCHAR},
+      ddHour5 = #{ddhour5,jdbcType=INTEGER},
+      ddAward5512a = #{ddaward5512a,jdbcType=VARCHAR},
+      ddHour6 = #{ddhour6,jdbcType=INTEGER},
+      ddAward6512a = #{ddaward6512a,jdbcType=VARCHAR},
+      ddHour7 = #{ddhour7,jdbcType=INTEGER},
+      ddAward7512a = #{ddaward7512a,jdbcType=VARCHAR},
+      ddHour8 = #{ddhour8,jdbcType=INTEGER},
+      ddAward8512a = #{ddaward8512a,jdbcType=VARCHAR},
+      ddHour9 = #{ddhour9,jdbcType=INTEGER},
+      ddAward9512a = #{ddaward9512a,jdbcType=VARCHAR},
+      creat_time = #{creatTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rounds
+  </select>
+  <select id="selectAllS" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rounds where  ddGroup = FALSE
+  </select>
+
+  <select id="selectByDdCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rounds
+    where ddCode = #{ddcode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByDdCodeS" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rounds
+    where ddCode = #{ddcode,jdbcType=VARCHAR} and ddGroup = FALSE
+  </select>
+  <select id="selectByDdCodeQ" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from rounds
+    where ddCode = #{ddcode,jdbcType=VARCHAR} and ddGroup = TRUE
+  </select>
+
+</mapper>

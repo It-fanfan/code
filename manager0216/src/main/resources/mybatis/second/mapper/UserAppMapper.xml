@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.second.mapper.UserAppMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.second.model.UserApp" >
+    <id column="ddOId" property="ddoid" jdbcType="VARCHAR" />
+    <result column="ddUid" property="dduid" jdbcType="VARCHAR" />
+    <result column="ddAppId" property="ddappid" jdbcType="VARCHAR" />
+    <result column="ddClientVersion" property="ddclientversion" jdbcType="VARCHAR" />
+    <result column="ddRegisterTime" property="ddregistertime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ddOId, ddUid, ddAppId, ddClientVersion, ddRegisterTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_app
+    where ddUid = #{dduid,jdbcType=VARCHAR}
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_app
+    where ddOId = #{ddoid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.second.model.UserApp" >
+    insert into user_app (ddOId, ddUid, ddAppId, 
+      ddClientVersion, ddRegisterTime)
+    values (#{ddoid,jdbcType=VARCHAR}, #{dduid,jdbcType=VARCHAR}, #{ddappid,jdbcType=VARCHAR}, 
+      #{ddclientversion,jdbcType=VARCHAR}, #{ddregistertime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.second.model.UserApp" >
+    insert into user_app
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ddoid != null" >
+        ddOId,
+      </if>
+      <if test="dduid != null" >
+        ddUid,
+      </if>
+      <if test="ddappid != null" >
+        ddAppId,
+      </if>
+      <if test="ddclientversion != null" >
+        ddClientVersion,
+      </if>
+      <if test="ddregistertime != null" >
+        ddRegisterTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ddoid != null" >
+        #{ddoid,jdbcType=VARCHAR},
+      </if>
+      <if test="dduid != null" >
+        #{dduid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddappid != null" >
+        #{ddappid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddclientversion != null" >
+        #{ddclientversion,jdbcType=VARCHAR},
+      </if>
+      <if test="ddregistertime != null" >
+        #{ddregistertime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.second.model.UserApp" >
+    update user_app
+    <set >
+      <if test="dduid != null" >
+        ddUid = #{dduid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddappid != null" >
+        ddAppId = #{ddappid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddclientversion != null" >
+        ddClientVersion = #{ddclientversion,jdbcType=VARCHAR},
+      </if>
+      <if test="ddregistertime != null" >
+        ddRegisterTime = #{ddregistertime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ddOId = #{ddoid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.second.model.UserApp" >
+    update user_app
+    set ddUid = #{dduid,jdbcType=VARCHAR},
+      ddAppId = #{ddappid,jdbcType=VARCHAR},
+      ddClientVersion = #{ddclientversion,jdbcType=VARCHAR},
+      ddRegisterTime = #{ddregistertime,jdbcType=TIMESTAMP}
+    where ddOId = #{ddoid,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="searchOppenId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user_app
+    where ddUid = #{dduid,jdbcType=VARCHAR} and ddAppId = #{ddappid,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByOpenId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user_app
+    where ddOId = #{ddoid,jdbcType=VARCHAR}
+  </select>
+</mapper>

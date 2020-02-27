@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.RankingRecordMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.RankingRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ddUid" property="dduid" jdbcType="VARCHAR" />
+    <result column="ddGCode" property="ddgcode" jdbcType="INTEGER" />
+    <result column="ddMDate" property="ddmdate" jdbcType="DATE" />
+    <result column="ddMCode" property="ddmcode" jdbcType="VARCHAR" />
+    <result column="ddMIndex" property="ddmindex" jdbcType="INTEGER" />
+    <result column="ddMark" property="ddmark" jdbcType="INTEGER" />
+    <result column="ddRanking" property="ddranking" jdbcType="INTEGER" />
+    <result column="ddType" property="ddtype" jdbcType="VARCHAR" />
+    <result column="ddTotal" property="ddtotal" jdbcType="INTEGER" />
+    <result column="ddTime" property="ddtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ddUid, ddGCode, ddMDate, ddMCode, ddMIndex, ddMark, ddRanking, ddType, ddTotal, 
+    ddTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from ranking_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from ranking_record
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from ranking_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.primary.model.RankingRecord" >
+    insert into ranking_record (id, ddUid, ddGCode, 
+      ddMDate, ddMCode, ddMIndex, 
+      ddMark, ddRanking, ddType, 
+      ddTotal, ddTime)
+    values (#{id,jdbcType=BIGINT}, #{dduid,jdbcType=VARCHAR}, #{ddgcode,jdbcType=INTEGER}, 
+      #{ddmdate,jdbcType=DATE}, #{ddmcode,jdbcType=VARCHAR}, #{ddmindex,jdbcType=INTEGER}, 
+      #{ddmark,jdbcType=INTEGER}, #{ddranking,jdbcType=INTEGER}, #{ddtype,jdbcType=VARCHAR}, 
+      #{ddtotal,jdbcType=INTEGER}, #{ddtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.primary.model.RankingRecord" >
+    insert into ranking_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dduid != null" >
+        ddUid,
+      </if>
+      <if test="ddgcode != null" >
+        ddGCode,
+      </if>
+      <if test="ddmdate != null" >
+        ddMDate,
+      </if>
+      <if test="ddmcode != null" >
+        ddMCode,
+      </if>
+      <if test="ddmindex != null" >
+        ddMIndex,
+      </if>
+      <if test="ddmark != null" >
+        ddMark,
+      </if>
+      <if test="ddranking != null" >
+        ddRanking,
+      </if>
+      <if test="ddtype != null" >
+        ddType,
+      </if>
+      <if test="ddtotal != null" >
+        ddTotal,
+      </if>
+      <if test="ddtime != null" >
+        ddTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dduid != null" >
+        #{dduid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddgcode != null" >
+        #{ddgcode,jdbcType=INTEGER},
+      </if>
+      <if test="ddmdate != null" >
+        #{ddmdate,jdbcType=DATE},
+      </if>
+      <if test="ddmcode != null" >
+        #{ddmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ddmindex != null" >
+        #{ddmindex,jdbcType=INTEGER},
+      </if>
+      <if test="ddmark != null" >
+        #{ddmark,jdbcType=INTEGER},
+      </if>
+      <if test="ddranking != null" >
+        #{ddranking,jdbcType=INTEGER},
+      </if>
+      <if test="ddtype != null" >
+        #{ddtype,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtotal != null" >
+        #{ddtotal,jdbcType=INTEGER},
+      </if>
+      <if test="ddtime != null" >
+        #{ddtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.primary.model.RankingRecord" >
+    update ranking_record
+    <set >
+      <if test="dduid != null" >
+        ddUid = #{dduid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddgcode != null" >
+        ddGCode = #{ddgcode,jdbcType=INTEGER},
+      </if>
+      <if test="ddmdate != null" >
+        ddMDate = #{ddmdate,jdbcType=DATE},
+      </if>
+      <if test="ddmcode != null" >
+        ddMCode = #{ddmcode,jdbcType=VARCHAR},
+      </if>
+      <if test="ddmindex != null" >
+        ddMIndex = #{ddmindex,jdbcType=INTEGER},
+      </if>
+      <if test="ddmark != null" >
+        ddMark = #{ddmark,jdbcType=INTEGER},
+      </if>
+      <if test="ddranking != null" >
+        ddRanking = #{ddranking,jdbcType=INTEGER},
+      </if>
+      <if test="ddtype != null" >
+        ddType = #{ddtype,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtotal != null" >
+        ddTotal = #{ddtotal,jdbcType=INTEGER},
+      </if>
+      <if test="ddtime != null" >
+        ddTime = #{ddtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.primary.model.RankingRecord" >
+    update ranking_record
+    set ddUid = #{dduid,jdbcType=VARCHAR},
+      ddGCode = #{ddgcode,jdbcType=INTEGER},
+      ddMDate = #{ddmdate,jdbcType=DATE},
+      ddMCode = #{ddmcode,jdbcType=VARCHAR},
+      ddMIndex = #{ddmindex,jdbcType=INTEGER},
+      ddMark = #{ddmark,jdbcType=INTEGER},
+      ddRanking = #{ddranking,jdbcType=INTEGER},
+      ddType = #{ddtype,jdbcType=VARCHAR},
+      ddTotal = #{ddtotal,jdbcType=INTEGER},
+      ddTime = #{ddtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

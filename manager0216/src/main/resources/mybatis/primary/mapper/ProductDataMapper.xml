@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.ProductDataMapper">
+    <resultMap id="BaseResultMap" type="com.fish.dao.third.model.ProductData">
+        <id column="wx_date" property="wxDate" jdbcType="DATE"/>
+        <id column="wx_appid" property="wxAppid" jdbcType="VARCHAR"/>
+        <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="program_type" property="programType" jdbcType="INTEGER"/>
+        <result column="wx_new" property="wxNew" jdbcType="INTEGER"/>
+        <result column="wx_active" property="wxActive" jdbcType="INTEGER"/>
+        <result column="wx_visit" property="wxVisit" jdbcType="INTEGER"/>
+        <result column="recharge" property="recharge" jdbcType="DECIMAL"/>
+        <result column="ad_revenue" property="adRevenue" jdbcType="DECIMAL"/>
+        <result column="wx_video_income" property="wxVideoIncome" jdbcType="DECIMAL"/>
+        <result column="wx_banner_income" property="wxBannerIncome" jdbcType="DECIMAL"/>
+        <result column="active_up" property="activeUp" jdbcType="DECIMAL"/>
+        <result column="wx_share_user" property="wxShareUser" jdbcType="INTEGER"/>
+        <result column="wx_share_count" property="wxShareCount" jdbcType="INTEGER"/>
+        <result column="wx_share_rate" property="wxShareRate" jdbcType="DECIMAL"/>
+        <result column="wx_remain2" property="wxRemain2" jdbcType="DECIMAL"/>
+        <result column="wx_avg_login" property="wxAvgLogin" jdbcType="DECIMAL"/>
+        <result column="wx_avg_online" property="wxAvgOnline" jdbcType="DECIMAL"/>
+        <result column="insert_time" jdbcType="TIMESTAMP" property="insertTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    wx_date, wx_appid, product_name,program_type, wx_new, wx_active, wx_visit, recharge, ad_revenue,
+    wx_video_income,wx_banner_income, active_up, wx_share_user, wx_share_count, wx_share_rate, wx_remain2,
+    wx_avg_login, wx_avg_online, insert_time
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.fish.dao.third.model.ProductData">
+        select
+        <include refid="Base_Column_List"/>
+        from program_entering
+        where wx_date = #{wxDate,jdbcType=DATE}
+        and wx_appid = #{wxAppid,jdbcType=VARCHAR}
+    </select>
+    <select id="allDate" resultType="String">
+    SELECT wx_date FROM  program_entering GROUP BY  wx_date ORDER BY  wx_date DESC
+  </select>
+    <select id="selectByAppid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from program_entering
+        where wx_date = #{wxDate,jdbcType=VARCHAR}
+        and wx_appid = #{wxAppid,jdbcType=VARCHAR}
+    </select>
+    <select id="searchData" resultMap="BaseResultMap" parameterType="string">
+     ${_parameter}
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="com.fish.dao.third.model.ProductData">
+    delete from program_entering
+    where wx_date = #{wxDate,jdbcType=DATE}
+    and wx_appid = #{wxAppid,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.fish.dao.third.model.ProductData">
+    insert into program_entering (wx_date, wx_appid, product_name, program_type,
+      wx_new, wx_active, wx_visit, 
+      recharge, ad_revenue, wx_video_income, wx_banner_income,
+      active_up, wx_share_user, wx_share_count, 
+      wx_share_rate, wx_remain2, wx_avg_login, 
+      wx_avg_online, insert_time)
+    values (#{wxDate,jdbcType=DATE}, #{wxAppid,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, #{programType,jdbcType=INTEGER},
+      #{wxNew,jdbcType=INTEGER}, #{wxActive,jdbcType=INTEGER}, #{wxVisit,jdbcType=INTEGER}, 
+      #{recharge,jdbcType=DECIMAL}, #{adRevenue,jdbcType=DECIMAL}, #{wxVideoIncome,jdbcType=DECIMAL}, #{wxBannerIncome,jdbcType=DECIMAL},
+      #{activeUp,jdbcType=DECIMAL}, #{wxShareUser,jdbcType=INTEGER}, #{wxShareCount,jdbcType=INTEGER}, 
+      #{wxShareRate,jdbcType=DECIMAL}, #{wxRemain2,jdbcType=DECIMAL}, #{wxAvgLogin,jdbcType=DECIMAL}, 
+      #{wxAvgOnline,jdbcType=DECIMAL}, #{insertTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fish.dao.third.model.ProductData">
+        insert into program_entering
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="wxDate != null">
+                wx_date,
+            </if>
+            <if test="wxAppid != null">
+                wx_appid,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="programType != null">
+                program_type,
+            </if>
+            <if test="wxNew != null">
+                wx_new,
+            </if>
+            <if test="wxActive != null">
+                wx_active,
+            </if>
+            <if test="wxVisit != null">
+                wx_visit,
+            </if>
+            <if test="recharge != null">
+                recharge,
+            </if>
+            <if test="adRevenue != null">
+                ad_revenue,
+            </if>
+            <if test="wxVideoIncome != null">
+                wx_video_income,
+            </if>
+            <if test="wxBannerIncome != null">
+                wx_banner_income,
+            </if>
+            <if test="activeUp != null">
+                active_up,
+            </if>
+            <if test="wxShareUser != null">
+                wx_share_user,
+            </if>
+            <if test="wxShareCount != null">
+                wx_share_count,
+            </if>
+            <if test="wxShareRate != null">
+                wx_share_rate,
+            </if>
+            <if test="wxRemain2 != null">
+                wx_remain2,
+            </if>
+            <if test="wxAvgLogin != null">
+                wx_avg_login,
+            </if>
+            <if test="wxAvgOnline != null">
+                wx_avg_online,
+            </if>
+            <if test="insertTime != null">
+                insert_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="wxDate != null">
+                #{wxDate,jdbcType=DATE},
+            </if>
+            <if test="wxAppid != null">
+                #{wxAppid,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="programType != null">
+                #{programType,jdbcType=INTEGER},
+            </if>
+            <if test="wxNew != null">
+                #{wxNew,jdbcType=INTEGER},
+            </if>
+            <if test="wxActive != null">
+                #{wxActive,jdbcType=INTEGER},
+            </if>
+            <if test="wxVisit != null">
+                #{wxVisit,jdbcType=INTEGER},
+            </if>
+            <if test="recharge != null">
+                #{recharge,jdbcType=DECIMAL},
+            </if>
+            <if test="adRevenue != null">
+                #{adRevenue,jdbcType=DECIMAL},
+            </if>
+            <if test="wxVideoIncome != null">
+                #{wxVideoIncome,jdbcType=DECIMAL},
+            </if>
+            <if test="wxBannerIncome != null">
+                #{wxBannerIncome,jdbcType=DECIMAL},
+            </if>
+            <if test="activeUp != null">
+                #{activeUp,jdbcType=DECIMAL},
+            </if>
+            <if test="wxShareUser != null">
+                #{wxShareUser,jdbcType=INTEGER},
+            </if>
+            <if test="wxShareCount != null">
+                #{wxShareCount,jdbcType=INTEGER},
+            </if>
+            <if test="wxShareRate != null">
+                #{wxShareRate,jdbcType=DECIMAL},
+            </if>
+            <if test="wxRemain2 != null">
+                #{wxRemain2,jdbcType=DECIMAL},
+            </if>
+            <if test="wxAvgLogin != null">
+                #{wxAvgLogin,jdbcType=DECIMAL},
+            </if>
+            <if test="wxAvgOnline != null">
+                #{wxAvgOnline,jdbcType=DECIMAL},
+            </if>
+            <if test="insertTime != null">
+                #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.third.model.ProductData">
+        update program_entering
+        <set>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="programType != null">
+                program_type = #{programType,jdbcType=INTEGER},
+            </if>
+            <if test="wxNew != null">
+                wx_new = #{wxNew,jdbcType=INTEGER},
+            </if>
+            <if test="wxActive != null">
+                wx_active = #{wxActive,jdbcType=INTEGER},
+            </if>
+            <if test="wxVisit != null">
+                wx_visit = #{wxVisit,jdbcType=INTEGER},
+            </if>
+            <if test="recharge != null">
+                recharge = #{recharge,jdbcType=DECIMAL},
+            </if>
+            <if test="adRevenue != null">
+                ad_revenue = #{adRevenue,jdbcType=DECIMAL},
+            </if>
+            <if test="wxVideoIncome != null">
+                wx_video_income = #{wxVideoIncome,jdbcType=DECIMAL},
+            </if>
+            <if test="wxBannerIncome != null">
+                wx_banner_income = #{wxBannerIncome,jdbcType=DECIMAL},
+            </if>
+            <if test="activeUp != null">
+                active_up = #{activeUp,jdbcType=DECIMAL},
+            </if>
+            <if test="wxShareUser != null">
+                wx_share_user = #{wxShareUser,jdbcType=INTEGER},
+            </if>
+            <if test="wxShareCount != null">
+                wx_share_count = #{wxShareCount,jdbcType=INTEGER},
+            </if>
+            <if test="wxShareRate != null">
+                wx_share_rate = #{wxShareRate,jdbcType=DECIMAL},
+            </if>
+            <if test="wxRemain2 != null">
+                wx_remain2 = #{wxRemain2,jdbcType=DECIMAL},
+            </if>
+            <if test="wxAvgLogin != null">
+                wx_avg_login = #{wxAvgLogin,jdbcType=DECIMAL},
+            </if>
+            <if test="wxAvgOnline != null">
+                wx_avg_online = #{wxAvgOnline,jdbcType=DECIMAL},
+            </if>
+            <if test="insertTime != null">
+                insert_time = #{insertTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where wx_date = #{wxDate,jdbcType=DATE}
+        and wx_appid = #{wxAppid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fish.dao.third.model.ProductData">
+    update program_entering
+    set product_name = #{productName,jdbcType=VARCHAR},
+      program_type = #{programType,jdbcType=INTEGER},
+      wx_new = #{wxNew,jdbcType=INTEGER},
+      wx_active = #{wxActive,jdbcType=INTEGER},
+      wx_visit = #{wxVisit,jdbcType=INTEGER},
+      recharge = #{recharge,jdbcType=DECIMAL},
+      ad_revenue = #{adRevenue,jdbcType=DECIMAL},
+      wx_video_income = #{wxVideoIncome,jdbcType=DECIMAL},
+      wx_banner_income = #{wxBannerIncome,jdbcType=DECIMAL},
+      active_up = #{activeUp,jdbcType=DECIMAL},
+      wx_share_user = #{wxShareUser,jdbcType=INTEGER},
+      wx_share_count = #{wxShareCount,jdbcType=INTEGER},
+      wx_share_rate = #{wxShareRate,jdbcType=DECIMAL},
+      wx_remain2 = #{wxRemain2,jdbcType=DECIMAL},
+      wx_avg_login = #{wxAvgLogin,jdbcType=DECIMAL},
+      wx_avg_online = #{wxAvgOnline,jdbcType=DECIMAL},
+      insert_time = #{insertTime,jdbcType=TIMESTAMP}
+    where wx_date = #{wxDate,jdbcType=DATE}
+      and wx_appid = #{wxAppid,jdbcType=VARCHAR}
+  </update>
+    <insert id="insertBatch">
+        INSERT INTO program_entering(wx_date, wx_appid, product_name,program_type, wx_new, wx_active, wx_visit,
+        recharge, ad_revenue,
+        wx_video_income,wx_banner_income, active_up, wx_share_user, wx_share_count, wx_share_rate, wx_remain2,
+        wx_avg_login, wx_avg_online)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.wxDate},#{item.wxAppid},#{item.productName},#{item.programType},#{item.wxNew},#{item.wxActive},
+            #{item.wxVisit},#{item.recharge},#{item.adRevenue},#{item.wxVideoIncome},#{item.wxBannerIncome},#{item.activeUp},
+            #{item.wxShareUser},#{item.wxShareCount},
+            #{item.wxShareRate},#{item.wxRemain2},#{item.wxAvgLogin},#{item.wxAvgOnline})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        product_name = values(product_name),
+        program_type = values(program_type),
+        wx_new = values(wx_new),
+        wx_active = values(wx_active),
+        wx_visit = values(wx_visit),
+        recharge = values(recharge),
+        ad_revenue = values(ad_revenue),
+        wx_video_income = values(wx_video_income),
+        wx_banner_income = values(wx_banner_income),
+        active_up = values(active_up),
+        wx_share_user = values(wx_share_user),
+        wx_share_count = values(wx_share_count),
+        wx_share_rate = values(wx_share_rate),
+        wx_remain2 = values(wx_remain2),
+        wx_avg_login = values(wx_avg_login),
+        wx_avg_online = values(wx_avg_online)
+    </insert>
+</mapper>

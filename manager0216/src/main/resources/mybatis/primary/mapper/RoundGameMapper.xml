@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fish.dao.primary.mapper.RoundGameMapper">
+  <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.RoundGame">
+    <id column="ddCode" jdbcType="INTEGER" property="ddcode" />
+    <result column="ddName" jdbcType="VARCHAR" property="ddname" />
+    <result column="ddState" jdbcType="BIT" property="ddstate" />
+    <result column="ddGame" jdbcType="INTEGER" property="ddgame" />
+    <result column="ddRound" jdbcType="VARCHAR" property="ddround" />
+    <result column="ddStart" jdbcType="TIMESTAMP" property="ddstart" />
+    <result column="ddEnd" jdbcType="TIMESTAMP" property="ddend" />
+    <result column="times" jdbcType="TIMESTAMP" property="times" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ddCode, ddName, ddState, ddGame, ddRound, ddStart, ddEnd, times
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from round_game
+    where ddCode = #{ddcode,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from round_game
+  </select>
+  <select id="selectByRoundGame" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from round_game
+    where ddGame = #{ddgame,jdbcType=INTEGER} and ddRound = #{ddround,jdbcType=VARCHAR}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from round_game
+    where ddCode = #{ddcode,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.primary.model.RoundGame">
+    insert into round_game (ddCode, ddName, ddState, 
+      ddGame, ddRound, ddStart, 
+      ddEnd, times)
+    values (#{ddcode,jdbcType=INTEGER}, #{ddname,jdbcType=VARCHAR}, #{ddstate,jdbcType=BIT}, 
+      #{ddgame,jdbcType=INTEGER}, #{ddround,jdbcType=VARCHAR}, #{ddstart,jdbcType=TIMESTAMP}, 
+      #{ddend,jdbcType=TIMESTAMP}, #{times,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.primary.model.RoundGame">
+    insert into round_game
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ddcode != null">
+        ddCode,
+      </if>
+      <if test="ddname != null">
+        ddName,
+      </if>
+      <if test="ddstate != null">
+        ddState,
+      </if>
+      <if test="ddgame != null">
+        ddGame,
+      </if>
+      <if test="ddround != null">
+        ddRound,
+      </if>
+      <if test="ddstart != null">
+        ddStart,
+      </if>
+      <if test="ddend != null">
+        ddEnd,
+      </if>
+      <if test="times != null">
+        times,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ddcode != null">
+        #{ddcode,jdbcType=INTEGER},
+      </if>
+      <if test="ddname != null">
+        #{ddname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddstate != null">
+        #{ddstate,jdbcType=BIT},
+      </if>
+      <if test="ddgame != null">
+        #{ddgame,jdbcType=INTEGER},
+      </if>
+      <if test="ddround != null">
+        #{ddround,jdbcType=VARCHAR},
+      </if>
+      <if test="ddstart != null">
+        #{ddstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddend != null">
+        #{ddend,jdbcType=TIMESTAMP},
+      </if>
+      <if test="times != null">
+        #{times,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.primary.model.RoundGame">
+    update round_game
+    <set>
+      <if test="ddname != null">
+        ddName = #{ddname,jdbcType=VARCHAR},
+      </if>
+      <if test="ddstate != null">
+        ddState = #{ddstate,jdbcType=BIT},
+      </if>
+      <if test="ddgame != null">
+        ddGame = #{ddgame,jdbcType=INTEGER},
+      </if>
+      <if test="ddround != null">
+        ddRound = #{ddround,jdbcType=VARCHAR},
+      </if>
+      <if test="ddstart != null">
+        ddStart = #{ddstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddend != null">
+        ddEnd = #{ddend,jdbcType=TIMESTAMP},
+      </if>
+      <if test="times != null">
+        times = #{times,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ddCode = #{ddcode,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.primary.model.RoundGame">
+    update round_game
+    set ddName = #{ddname,jdbcType=VARCHAR},
+      ddState = #{ddstate,jdbcType=BIT},
+      ddGame = #{ddgame,jdbcType=INTEGER},
+      ddRound = #{ddround,jdbcType=VARCHAR},
+      ddStart = #{ddstart,jdbcType=TIMESTAMP},
+      ddEnd = #{ddend,jdbcType=TIMESTAMP},
+      times = #{times,jdbcType=TIMESTAMP}
+    where ddCode = #{ddcode,jdbcType=INTEGER}
+  </update>
+</mapper>

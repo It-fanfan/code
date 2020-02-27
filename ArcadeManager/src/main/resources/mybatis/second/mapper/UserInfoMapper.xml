@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.second.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.second.model.UserInfo" >
+    <id column="userId" property="userid" jdbcType="BIGINT" />
+    <result column="openId" property="openid" jdbcType="VARCHAR" />
+    <result column="unionId" property="unionid" jdbcType="VARCHAR" />
+    <result column="nickName" property="nickname" jdbcType="VARCHAR" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="invite" property="invite" jdbcType="BIGINT" />
+    <result column="groupId" property="groupid" jdbcType="VARCHAR" />
+    <result column="registTime" property="registtime" jdbcType="TIMESTAMP" />
+    <result column="loginTime" property="logintime" jdbcType="TIMESTAMP" />
+    <result column="inviteGroupId" property="invitegroupid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userId, openId, unionId, nickName, icon, platform, sex, city, province, country, 
+    invite, groupId, registTime, loginTime, inviteGroupId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from userinfo
+    where userId = #{userid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from userinfo
+    where userId = #{userid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.second.model.UserInfo" >
+    insert into userinfo (userId, openId, unionId, 
+      nickName, icon, platform, 
+      sex, city, province, 
+      country, invite, groupId, 
+      registTime, loginTime, inviteGroupId
+      )
+    values (#{userid,jdbcType=BIGINT}, #{openid,jdbcType=VARCHAR}, #{unionid,jdbcType=VARCHAR}, 
+      #{nickname,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{invite,jdbcType=BIGINT}, #{groupid,jdbcType=VARCHAR}, 
+      #{registtime,jdbcType=TIMESTAMP}, #{logintime,jdbcType=TIMESTAMP}, #{invitegroupid,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.second.model.UserInfo" >
+    insert into userinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="openid != null" >
+        openId,
+      </if>
+      <if test="unionid != null" >
+        unionId,
+      </if>
+      <if test="nickname != null" >
+        nickName,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="invite != null" >
+        invite,
+      </if>
+      <if test="groupid != null" >
+        groupId,
+      </if>
+      <if test="registtime != null" >
+        registTime,
+      </if>
+      <if test="logintime != null" >
+        loginTime,
+      </if>
+      <if test="invitegroupid != null" >
+        inviteGroupId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="openid != null" >
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null" >
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="invite != null" >
+        #{invite,jdbcType=BIGINT},
+      </if>
+      <if test="groupid != null" >
+        #{groupid,jdbcType=VARCHAR},
+      </if>
+      <if test="registtime != null" >
+        #{registtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logintime != null" >
+        #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invitegroupid != null" >
+        #{invitegroupid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.second.model.UserInfo" >
+    update userinfo
+    <set >
+      <if test="openid != null" >
+        openId = #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null" >
+        unionId = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickname != null" >
+        nickName = #{nickname,jdbcType=VARCHAR},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="invite != null" >
+        invite = #{invite,jdbcType=BIGINT},
+      </if>
+      <if test="groupid != null" >
+        groupId = #{groupid,jdbcType=VARCHAR},
+      </if>
+      <if test="registtime != null" >
+        registTime = #{registtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logintime != null" >
+        loginTime = #{logintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="invitegroupid != null" >
+        inviteGroupId = #{invitegroupid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.second.model.UserInfo" >
+    update userinfo
+    set openId = #{openid,jdbcType=VARCHAR},
+      unionId = #{unionid,jdbcType=VARCHAR},
+      nickName = #{nickname,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      platform = #{platform,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      city = #{city,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      invite = #{invite,jdbcType=BIGINT},
+      groupId = #{groupid,jdbcType=VARCHAR},
+      registTime = #{registtime,jdbcType=TIMESTAMP},
+      loginTime = #{logintime,jdbcType=TIMESTAMP},
+      inviteGroupId = #{invitegroupid,jdbcType=VARCHAR}
+    where userId = #{userid,jdbcType=BIGINT}
+  </update>
+</mapper>

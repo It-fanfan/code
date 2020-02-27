@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.second.mapper.UserStealMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.second.model.UserSteal" >
+    <id column="userId" property="userid" jdbcType="BIGINT" />
+    <id column="ftId" property="ftid" jdbcType="INTEGER" />
+    <result column="stealUserId" property="stealuserid" jdbcType="BIGINT" />
+    <result column="updateTime" property="updatetime" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    userId, ftId, stealUserId, updateTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.fish.dao.second.model.UserStealKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_steal
+    where userId = #{userid,jdbcType=BIGINT}
+      and ftId = #{ftid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.fish.dao.second.model.UserStealKey" >
+    delete from user_steal
+    where userId = #{userid,jdbcType=BIGINT}
+      and ftId = #{ftid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.second.model.UserSteal" >
+    insert into user_steal (userId, ftId, stealUserId, 
+      updateTime)
+    values (#{userid,jdbcType=BIGINT}, #{ftid,jdbcType=INTEGER}, #{stealuserid,jdbcType=BIGINT}, 
+      #{updatetime,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.second.model.UserSteal" >
+    insert into user_steal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        userId,
+      </if>
+      <if test="ftid != null" >
+        ftId,
+      </if>
+      <if test="stealuserid != null" >
+        stealUserId,
+      </if>
+      <if test="updatetime != null" >
+        updateTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userid != null" >
+        #{userid,jdbcType=BIGINT},
+      </if>
+      <if test="ftid != null" >
+        #{ftid,jdbcType=INTEGER},
+      </if>
+      <if test="stealuserid != null" >
+        #{stealuserid,jdbcType=BIGINT},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.second.model.UserSteal" >
+    update user_steal
+    <set >
+      <if test="stealuserid != null" >
+        stealUserId = #{stealuserid,jdbcType=BIGINT},
+      </if>
+      <if test="updatetime != null" >
+        updateTime = #{updatetime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where userId = #{userid,jdbcType=BIGINT}
+      and ftId = #{ftid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.second.model.UserSteal" >
+    update user_steal
+    set stealUserId = #{stealuserid,jdbcType=BIGINT},
+      updateTime = #{updatetime,jdbcType=BIGINT}
+    where userId = #{userid,jdbcType=BIGINT}
+      and ftId = #{ftid,jdbcType=INTEGER}
+  </update>
+</mapper>

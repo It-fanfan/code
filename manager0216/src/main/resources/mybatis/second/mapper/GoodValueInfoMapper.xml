@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.second.mapper.GoodValueInfoMapper" >
+    <resultMap id="GoodValueInfoResultMap" type="com.fish.dao.second.model.GoodValueInfo" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="state" property="state" jdbcType="INTEGER" />
+        <result column="goodsName" property="goodsName" jdbcType="VARCHAR" />
+        <result column="icon" property="icon" jdbcType="VARCHAR" />
+        <result column="labelUrl" property="labelUrl" jdbcType="VARCHAR" />
+        <result column="rmb" property="rmb" jdbcType="INTEGER" />
+        <result column="firstSave" property="firstSave" jdbcType="INTEGER" />
+        <result column="virtualValue" property="virtualValue" jdbcType="INTEGER" />
+        <result column="wealthType" property="wealthType" jdbcType="VARCHAR" />
+        <result column="total" property="total" jdbcType="INTEGER" />
+        <result column="startTime" property="startTime" jdbcType="TIMESTAMP" />
+        <result column="endTime" property="endTime" jdbcType="TIMESTAMP" />
+        <result column="discount" property="discount" jdbcType="INTEGER" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    id,state,goodsName,icon,labelUrl,rmb,firstSave,virtualValue, wealthType ,
+    total,startTime,endTime ,discount
+  </sql>
+    <select id="selectByGoodsId" resultMap="GoodValueInfoResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from goods_value
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAll" resultMap="GoodValueInfoResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from goods_value
+    </select>
+</mapper>

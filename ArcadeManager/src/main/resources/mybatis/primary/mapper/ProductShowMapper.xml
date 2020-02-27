@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.ProductShowMapper">
+    <resultMap id="ShowResultMap" type="com.fish.dao.primary.model.ProductShow">
+        <id column="new_day" property="newDay" jdbcType="DATE"/>
+     <!--   <result column="product_name" property="productName" jdbcType="VARCHAR"/>
+        <result column="plat_form" property="platForm" jdbcType="VARCHAR"/>-->
+        <result column="enter_count" property="enterCount" jdbcType="BIGINT"/>
+        <result column="new_usercount" property="newUserCount" jdbcType="BIGINT"/>
+        <result column="ac_usercount" property="acUserCount" jdbcType="BIGINT"/>
+        <result column="pay_usercount" property="payUserCount" jdbcType="BIGINT"/>
+        <result column="online_avg" property="onlineAvg" jdbcType="VARCHAR"/>
+        <result column="ad_revenue" property="adRevenue" jdbcType="DECIMAL"/>
+        <result column="in_revenue" property="inRevenue" jdbcType="DECIMAL"/>
+        <result column="in_arpu" property="inArpu" jdbcType="DECIMAL"/>
+        <result column="remain_1" property="remain1" jdbcType="BIGINT"/>
+        <result column="remain_3" property="remain3" jdbcType="BIGINT"/>
+    </resultMap>
+
+    <sql id="show_Column_List" >
+    id,new_day,enter_count,new_usercount,ac_usercount,
+    pay_usercount,online_avg,ad_revenue,in_revenue ,in_arpu,remain_1,remain_3
+  </sql>
+
+    <select id="showProductProfile" resultMap="ShowResultMap">
+        select
+        <include refid="show_Column_List" />
+        from product_show
+    </select>
+    <select id="showSearchProductProfile" resultMap="ShowResultMap">
+        select
+        <include refid="show_Column_List" />
+        from product_show where new_day =#{newDay,jdbcType=DATE} and
+        product_name =#{productName,jdbcType=VARCHAR} and
+        plat_form =#{platForm,jdbcType=VARCHAR}
+    </select>
+    <select id="selectShowProduct" resultMap="ShowResultMap">
+        SELECT
+          a.`new_day` as new_day,
+          c.`productName` as product_name,
+          c.`platform` as plat_form,
+          b.`enter_count`as enter_count,
+          a.`new_userCount` as new_usercount,
+          a.`ac_userCount` as ac_usercount,
+          b.`pay_usercount` as pay_usercount,
+          b.`online_avg` as online_avg,
+          b.`ad_revenue` as ad_revenue,
+          b.`in_revenue` as in_revenue,
+          b.`in_arpu` as in_arpu,
+          a.`remain_1` as remain_1,
+          a.`remain_3` as  remain_3
+        FROM
+          product_remain AS a
+          LEFT JOIN product_earn AS b
+            ON a.`app_id` = b.`app_id`
+            AND a.`new_day` = b.`new_day`
+          LEFT JOIN product_info AS c
+            ON a.`app_id` = c.`appId`
+        UNION
+        SELECT
+          a.`new_day` as new_day,
+          c.`productName` as product_name,
+          c.`platform` as plat_form,
+          b.`enter_count`as enter_count,
+          a.`new_userCount` as new_usercount,
+          a.`ac_userCount` as ac_usercount,
+          b.`pay_usercount` as pay_usercount,
+          b.`online_avg` as online_avg,
+          b.`ad_revenue` as ad_revenue,
+          b.`in_revenue` as in_revenue,
+          b.`in_arpu` as in_arpu,
+          a.`remain_1` as remain_1,
+          a.`remain_3` as  remain_3
+        FROM
+          product_remain AS a
+          RIGHT JOIN product_earn AS b
+            ON a.`app_id` = b.`app_id`
+            AND a.`new_day` = b.`new_day`
+          LEFT JOIN product_info AS c
+            ON a.`app_id` = c.`appId`
+    </select>
+    <insert id="insertShowProduct" parameterType="com.fish.dao.primary.model.ProductShow">
+        insert into product_show
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="newDay != null" >
+                new_day,
+            </if>
+            <if test="productName != null" >
+                product_name,
+            </if>
+            <if test="platForm != null" >
+                plat_form,
+            </if>
+            <if test="enterCount != null" >
+                enter_count,
+            </if>
+            <if test="newUserCount != null" >
+                new_usercount,
+            </if>
+            <if test="acUserCount != null" >
+                ac_usercount,
+            </if>
+            <if test="payUserCount != null" >
+                pay_usercount,
+            </if>
+            <if test="onlineAvg != null" >
+                online_avg,
+            </if>
+            <if test="adRevenue != null" >
+                ad_revenue,
+            </if>
+            <if test="inRevenue != null" >
+                in_revenue,
+            </if>
+            <if test="inArpu != null" >
+                in_arpu,
+            </if>
+            <if test="remain1 != null" >
+                remain_1,
+            </if>
+            <if test="remain3 != null" >
+                remain_3,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="newDay != null" >
+                #{newDay,jdbcType=DATE},
+            </if>
+            <if test="productName != null" >
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="platForm != null" >
+                #{platForm,jdbcType=VARCHAR},
+            </if>
+            <if test="enterCount != null" >
+                #{enterCount,jdbcType=BIGINT},
+            </if>
+            <if test="newUserCount != null" >
+                #{newUserCount,jdbcType=BIGINT},
+            </if>
+            <if test="acUserCount != null" >
+                #{acUserCount,jdbcType=BIGINT},
+            </if>
+            <if test="payUserCount != null" >
+                #{payUserCount,jdbcType=BIGINT},
+            </if>
+            <if test="onlineAvg != null" >
+                #{onlineAvg,jdbcType=VARCHAR},
+            </if>
+            <if test="adRevenue != null" >
+                #{adRevenue,jdbcType=DECIMAL},
+            </if>
+            <if test="inRevenue != null" >
+                #{inRevenue,jdbcType=DECIMAL},
+            </if>
+            <if test="inArpu != null" >
+                #{inArpu,jdbcType=DECIMAL},
+            </if>
+            <if test="remain1 != null" >
+                #{remain1,jdbcType=BIGINT},
+            </if>
+            <if test="remain3 != null" >
+                #{remain3,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+</mapper>

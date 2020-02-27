@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>文件上传</title>
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="stylesheet" href="../../layuiadmin/layui/css/layui.css" media="all">
+		<!-- 注意：如果你直接复制所有代码到本地，上述css路径需要改成你本地的 -->
+	</head>
+	<body>
+		<blockquote class="layui-elem-quote">为了节省上传接口滥用，统一使用该界面上传文件，文件不进行任何处理，上传后请自行保存链接地址。</blockquote>
+		<div class="layui-upload">
+			<button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
+			<button type="button" class="layui-btn layui-btn-normal" id="historyList">打开历史记录</button>
+			<div class="layui-upload-list">
+				<table class="layui-table">
+					<thead>
+						<tr>
+							<th>文件名</th>
+							<th>大小</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody id="demoList"></tbody>
+				</table>
+			</div>
+			<button type="button" class="layui-btn" id="testListAction">开始上传</button>
+		</div>
+		<script src="../../layuiadmin/layui/layui.js"></script>
+		<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+		<script>
+			function addHistory(history) {
+				let historyLocalStorge = window.localStorage.getItem('upload-cdn-history');
+				console.log(historyLocalStorge);
+				if (historyLocalStorge == undefined)
+					historyLocalStorge = [];
+				else
+					historyLocalStorge = JSON.parse(historyLocalStorge);
+				historyLocalStorge.push(history);
+				window.localStorage.setItem('upload-cdn-history', JSON.stringify(historyLocalStorge));
+			}
+
+			function getHistory() {
+				let historyLocalStorge = window.localStorage.getItem('upload-cdn-history');
+				if (historyLocalStorge == undefined || historyLocalStorge.length <= 0) {
+					return '空记录';
+				}
+				historyLocalStorge = JSON.parse(historyLocalStorge);
+				let str = "";
+				for (var i = historyLocalStorge.length - 1; i >= 0; i--) {
+					str += `<p class="layui-elem-quote">${historyLocalStorge[i]}</p> `;
+				}
+				return str;
+			}
+
+			function getDate() {
+				var myDate = new Date;
+				return `${myDate.getFullYear()}/${myDate.getMonth() + 1}/${myDate.getDate()} ${myDate.getHours()}:${myDate.getMinutes()}`;
+			}
+
+			layui.use('layer', function() {
+				var $ = layui.jquery,
+					layer = layui.layer;
+				$('#historyList').on('click', () => {
+					var that = this;
+					var history = getHistory();
+					//多窗口模式，层叠置顶
+					layer.open({
+						type: 1,
+						title: '上传历史记录',
+						shade: 0,
+						maxmin: true,
+						content: `<div class="clear">${history}</div>`,
+						btn: ['清空', '关闭'],
+						yes: function() {
+							window.localStorage.removeItem('upload-cdn-history');
+							layer.closeAll();
+							layer.msg('清空完成');
+						},
+						btn2: function() {
+							layer.closeAll();
+						},
+						zIndex: layer.zIndex,
+						success: function(layero) {
+
+						}
+					});
+				});
+			});
+			layui.use('upload', function() {
+				var $ = layui.jquery,
+					layer = layui.layer,
+					upload = layui.upload;
+				//多文件列表示例
+				var demoListView = $('#demoList'),
+					uploadListIns = upload.render({
+						elem: '#testList',
+						url: '/manager/upload',
+						accept: 'file',
+						multiple: true,
+						auto: false,
+						bindAction: '#testListAction',
+						choose: function(obj) {
+							var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+							//读取本地文件
+							obj.preview(function(index, file, result) {
+								var tr = $(['<tr id="upload-' + index + '">', '<td>' + file.name + '</td>', '<td>' + (file.size / 1014).toFixed(
+										1) + 'kb</td>', '<td>等待上传</td>', '<td>',
+									'<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>',
+									'<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>', '</td>', '</tr>'
+								].join(''));
+
+								//单个重传
+								tr.find('.demo-reload').on('click', function() {
+									obj.upload(index, file);
+								});
+
+								//删除
+								tr.find('.demo-delete').on('click', function() {
+									delete files[index]; //删除对应的文件
+									tr.remove();
+									uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+								});
+
+								demoListView.append(tr);
+							});
+						},
+						done: function(res, index, upload) {
+							if (res.code == 200) { //上传成功
+								var tr = demoListView.find('tr#upload-' + index),
+									tds = tr.children();
+								tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+								tds.eq(3).html(`<a href="${res.url}" target="_blank">${res.url}</a>`); //清空操作
+								let time = getDate();
+								layer.msg(`${tds.eq(0).html()},大小:${tds.eq(1).html()}`);
+								addHistory(`${time}<br>${tds.eq(0).html()}<br>${tds.eq(1).html()}<br>${res.url}`);
+								return delete this.files[index]; //删除文件队列已经上传成功的文件
+							}
+							this.error(index, upload);
+						},
+						error: function(index, upload) {
+							var tr = demoListView.find('tr#upload-' + index),
+								tds = tr.children();
+							tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+							tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+						}
+					});
+
+			});
+		</script>
+	</body>
+</html>

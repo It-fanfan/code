@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.ProductProfileMapper">
+    <resultMap id="ProfileResultMap" type="com.fish.dao.primary.model.ProductJson">
+        <id column="times" property="times" jdbcType="TIMESTAMP"/>
+        <result column="appId" property="appId" jdbcType="VARCHAR"/>
+        <result column="userId" property="userId" jdbcType="VARCHAR"/>
+        <result column="kind" property="kind" jdbcType="VARCHAR"/>
+        <result column="cost" property="cost" jdbcType="BIGINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    times, appId, userId, kind, cost
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ProfileResultMap" parameterType="java.util.Date">
+        select
+        <include refid="Base_Column_List"/>
+        from product_profile
+        where times = #{times,jdbcType=TIMESTAMP}
+    </select>
+
+    <insert id="insertSelective" parameterType="com.fish.dao.primary.model.ProductJson">
+        insert into product_profile
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="times != null">
+                times,
+            </if>
+            <if test="appid != null">
+                appId,
+            </if>
+            <if test="userid != null">
+                userId,
+            </if>
+            <if test="kind != null">
+                kind,
+            </if>
+            <if test="cost != null">
+                cost,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="times != null">
+                #{times,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appid != null">
+                #{appid,jdbcType=VARCHAR},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=VARCHAR},
+            </if>
+            <if test="kind != null">
+                #{kind,jdbcType=VARCHAR},
+            </if>
+            <if test="cost != null">
+                #{cost,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+
+    <insert id="insertJson" parameterType="com.fish.dao.primary.model.ProductJson">
+    insert into product_profile ( times, appId, userId, kind, cost)
+    values (#{times,jdbcType=TIMESTAMP}, #{appId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+      #{kind,jdbcType=VARCHAR}, #{cost,jdbcType=BIGINT})
+  </insert>
+    <select id="searchActiveUser" resultType="java.lang.Integer" parameterType="java.util.Map">
+        SELECT
+        COUNT(DISTINCT  a.`userId`)
+         FROM
+          product_profile a
+        WHERE DATE_FORMAT(a.`times`,'%j%m%d')
+        = DATE_FORMAT(#{newDay,jdbcType=TIMESTAMP},'%j%m%d') AND
+         a.`appId` =#{appId,jdbcType=VARCHAR}
+    </select>
+</mapper>
