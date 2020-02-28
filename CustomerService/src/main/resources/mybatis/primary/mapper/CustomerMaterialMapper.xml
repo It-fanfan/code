@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.CustomerMaterialMapper">
+    <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.CustomerMaterial">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="material_type" property="materialType" jdbcType="VARCHAR"/>
+        <result column="media_id" property="mediaId" jdbcType="VARCHAR"/>
+        <result column="material_created" property="materialCreated" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, material_type, media_id, material_created, create_time, update_time
+  </sql>
+
+    <select id="selectMediaId" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM customer_material WHERE create_time=(SELECT MAX(create_time) FROM customer_material)
+    </select>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from customer_material
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from customer_material
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.fish.dao.primary.model.CustomerMaterial">
+    insert into customer_material (id, material_type, media_id, 
+      material_created, create_time, update_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{materialType,jdbcType=VARCHAR}, #{mediaId,jdbcType=VARCHAR}, 
+      #{materialCreated,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.fish.dao.primary.model.CustomerMaterial">
+        insert into customer_material
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="materialType != null">
+                material_type,
+            </if>
+            <if test="mediaId != null">
+                media_id,
+            </if>
+            <if test="materialCreated != null">
+                material_created,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="materialType != null">
+                #{materialType,jdbcType=VARCHAR},
+            </if>
+            <if test="mediaId != null">
+                #{mediaId,jdbcType=VARCHAR},
+            </if>
+            <if test="materialCreated != null">
+                #{materialCreated,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.primary.model.CustomerMaterial">
+        update customer_material
+        <set>
+            <if test="materialType != null">
+                material_type = #{materialType,jdbcType=VARCHAR},
+            </if>
+            <if test="mediaId != null">
+                media_id = #{mediaId,jdbcType=VARCHAR},
+            </if>
+            <if test="materialCreated != null">
+                material_created = #{materialCreated,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fish.dao.primary.model.CustomerMaterial">
+    update customer_material
+    set material_type = #{materialType,jdbcType=VARCHAR},
+      media_id = #{mediaId,jdbcType=VARCHAR},
+      material_created = #{materialCreated,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

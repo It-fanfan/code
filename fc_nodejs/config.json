@@ -1,0 +1,46 @@
+{
+	/** 游戏服配置域名 - 客户端访问域名 **/
+    "gameAddr": "192.168.0.107",
+    "out":true,
+    "outFile":false,
+    "outPath":"d:\\frame\\",
+	/** 游戏服配置端口 - 客户端访问端口 **/
+    "gamePort": 9999,
+	/** 游戏分配权重 **/
+    "weight":200,
+    "maxPlayer":10,
+	/** 游戏特殊配置 - -1:表示全部允许开赛，1:仅允许PK模式,0:仅允许闯关模式 **/
+    "allow": -1,
+	/** 对应匹配服的地址 **/
+    "matchServerAddr": "192.168.0.107",
+	/** 对应匹配服端口 **/
+    "matchServerPort": 5555,
+    /** 上报分数服务器域名 **/
+    "httpHost": "127.0.0.1",
+    /** 上报分数服务器端口 **/
+    "httpPort": 8080,
+	/** 房间匹配最大时间（秒） **/
+    "timeMatchMaxTime": 5,
+	/** 房间选角色最大时间（秒） **/
+    "timeSelectRole": 10,
+	/** 进入房间前缓冲时间（秒） **/
+    "timeLoadingMaxTime": 2,
+	/** 房间无人后的保留时间（秒） **/
+    "timeRetainWithRoomEmpty": 60,
+	/** 新房间启动检测周期（秒） **/
+    "timeNewRoomCheck": 3,
+	/** 玩家出局后等待复活时间（秒） **/
+    "timeLosingMaxTime": 30,
+	/** 玩家挂机前的无操作时间（秒） **/
+    "timeHangUpMaxTime": 8,
+	/** 玩家挂机房间等待时间 **/
+    "timeHangWaitMaxTime": 60,
+	/** 游戏结束后，房间保留时间 **/
+    "timeFinishMaxTime": 60,
+	/** 广告暂停时间 **/
+    "videoPauseTime": 45,
+	/** 允许最大房间数量 **/
+    "countMaxRooms": 1,
+	/** 创建一个新房间的系统命令 **/
+    "newRoomCmd": "D:\\svn_online\\fb_burn\\project\\service\\fbService\\Debug\\fbService.exe"
+}

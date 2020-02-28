@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="persieService">
+    <output-path>$PROJECT_DIR$/classes/artifacts/persieService</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="persieService" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="libs" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="persieService/web/Web" />
+    </root>
+  </artifact>
+</component>

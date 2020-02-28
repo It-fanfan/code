@@ -1,0 +1,24 @@
+{
+	/** 上报服务器交互IP **/
+	"demonServiceAddr":"127.0.0.1",
+	"out":true,
+	/** 匹配最大时长 **/
+	"timeMatchMaxTime":10,
+
+	/** 队列默认等待时长 **/
+	"timeWaitingMaxTime":5,
+	/** 上报服务器交互端口 **/
+	"demonServicePort":6666,
+	/** 上报服务器所在地区 **/
+    "matchAres": 0,
+	/** 匹配域名 **/
+	"matchHostUrl":"192.168.0.107",
+	/** 权重,值越大分配越高 **/
+	"weight":100,
+	/** 检测房间判断是否以在线房间数为依据 **/
+	"checkType":"room",
+	/** 当前服务器端口 **/
+	"matchPort":9998,
+	/** 当前内部交互端口 **/
+	"pipePort":5555
+}

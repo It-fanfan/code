@@ -1,0 +1,65 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>同步图标</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+		<script type="text/javascript">
+			$(document).ready(()=>{
+				$("#flush").click(function () {
+					let appId = $("#remove #appId").val();					
+					let json = {appList:[appId]};
+					console.log('json:',json);
+					let flushUrl = "/manager/manage/wxconfig/flushpicture";
+					$.ajax({
+					  type: 'POST',
+					  url: flushUrl,
+					  data: JSON.stringify(json),
+					  contentType: "application/json",
+					  success: res=>{
+						$("#remove #appId").val("");
+						alert(res.msg);
+					  },
+					  dataType: "JSON"
+					});
+				});
+				$("#gameflush").click(function () {
+					let gameCode = $("#game #gameCode").val();					
+					let json = {gameList:[gameCode]};
+					console.log('json:',json);
+                    let flushUrl = "/manager/manage/games/flushgames";
+					$.ajax({
+					  type: 'POST',
+					  url: flushUrl,
+					  data: JSON.stringify(json),
+					  contentType: "application/json",
+					  success: res=>{
+						$("#game #gameCode").val("");
+						alert(res.msg);
+					  },
+					  dataType: "JSON"
+					});
+				});
+				
+				///games/flushgames
+			});			
+		</script>
+	</head>
+
+	<body>
+	
+	<form id="remove">
+		<label>需刷新appId</label>
+		<input type="text" id="appId" name="appId" />
+		<input type='button' class='btn-text' id ='flush' value='刷新' />
+	</form>		
+	<form id="game">
+		<label>需刷新游戏编号</label>
+		<input type="number" id="gameCode" name="gameCode" />
+		<input type='button' class='btn-text' id ='gameflush' value='刷新' />
+	</form>
+	</body>
+
+</html>

@@ -1,0 +1,41 @@
+<component name="libraryTable">
+  <library name="libs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/bcprov-jdk16-1.46.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/commons-beanutils-1.9.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/commons-codec-1.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/commons-collections-3.2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/commons-httpclient-3.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/commons-lang-2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/commons-lang3-3.9.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/commons-logging-1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/commons-pool2-2.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/cors-filter-2.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/druid-1.1.19.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/dsn.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/ejb3-persistence.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/ezmorph-1.0.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/fastjson-1.2.59.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/gson-2.6.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/imap.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/java-property-utils-1.9.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/jedis-2.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/jta.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/logback-access-1.2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/logback-classic-1.2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/logback-core-1.2.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/mail.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/mailapi.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/mysql-connector-java-8.0.15.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/pop3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/quartz-all-1.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/slf4j-api-1.7.25.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/smtp.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/spring-webmvc.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/spring.jar!/" />
+      <root url="jar://$PROJECT_DIR$/WebRoot/libs/xom-1.0d10.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

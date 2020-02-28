@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.PageInfoMapper" >
+    <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.PageInfo" >
+        <id column="page_id" property="pageId" jdbcType="BIGINT" />
+        <result column="page_parentid" property="pageParentId" jdbcType="BIGINT" />
+        <result column="page_name" property="pageName" jdbcType="VARCHAR" />
+        <result column="page_url" property="pageUrl" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Base_Column_List" >
+    page_id, page_parentid, page_name, page_url
+  </sql>
+    <select id="selectFirstParent"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from page_show
+        where page_parentid = 0
+    </select>
+    <select id="selectParent" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from page_show
+        where page_parentid = #{pageParentId,jdbcType=BIGINT}
+    </select>
+</mapper>
