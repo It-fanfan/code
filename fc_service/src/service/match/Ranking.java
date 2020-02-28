@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.List;
 
+<<<<<<< HEAD
 /**
  * @author xuwei
  */
@@ -18,6 +19,12 @@ public interface Ranking {
     /**
      * 赛场状态
      */
+=======
+public interface Ranking
+{
+
+    //赛场状态
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     String ROUND_REDIS_KEY = "round-status";
 
 
@@ -32,10 +39,17 @@ public interface Ranking {
      * @param userId 用户编号
      * @return 集合
      */
+<<<<<<< HEAD
     static List<String> getUserCollects(String... userId) {
         if (userId.length <= 0) {
             return null;
         }
+=======
+    static List<String> getUserCollects(String... userId)
+    {
+        if (userId.length <= 0)
+            return null;
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         String key = getUserCollectsKey();
         return RedisUtils.hmget(key, userId);
     }
@@ -45,7 +59,12 @@ public interface Ranking {
      *
      * @return 用户集合key
      */
+<<<<<<< HEAD
     static String getUserCollectsKey() {
+=======
+    static String getUserCollectsKey()
+    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         return "ranking-user-collect";
     }
 
@@ -55,12 +74,21 @@ public interface Ranking {
      * @param data     用户节点
      * @param gameCode 游戲編號
      */
+<<<<<<< HEAD
     static int getPkSuccess(JSONObject data, int gameCode) {
         String key = String.valueOf(gameCode);
         JSONObject pkSuccess = data.getJSONObject("pkSuccess");
         if (pkSuccess != null && pkSuccess.containsKey(key)) {
             return pkSuccess.getInteger(key);
         }
+=======
+    static int getPkSuccess(JSONObject data, int gameCode)
+    {
+        String key = String.valueOf(gameCode);
+        JSONObject pkSuccess = data.getJSONObject("pkSuccess");
+        if (pkSuccess != null && pkSuccess.containsKey(key))
+            return pkSuccess.getInteger(key);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         return 0;
     }
 
@@ -70,6 +98,7 @@ public interface Ranking {
      * @param uid 用户编号
      * @return 胜率信息
      */
+<<<<<<< HEAD
     static JSONObject getPkCount(String uid) {
         String key = getUserCollectsKey();
         String json = RedisUtils.hget(key, uid);
@@ -80,6 +109,17 @@ public interface Ranking {
         if (user != null) {
             return user.getJSONObject("pkSuccess");
         }
+=======
+    static JSONObject getPkCount(String uid)
+    {
+        String key = getUserCollectsKey();
+        String json = RedisUtils.hget(key, uid);
+        JSONObject user = null;
+        if (json != null)
+            user = JSONObject.parseObject(json);
+        if (user != null)
+            return user.getJSONObject("pkSuccess");
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         return null;
     }
 
@@ -89,6 +129,7 @@ public interface Ranking {
      * @param uid      用户编号
      * @param gameCode 游戏编号
      */
+<<<<<<< HEAD
     static void addPkSuccess(String uid, int gameCode) {
         String key = getUserCollectsKey();
         String json = RedisUtils.hget(key, uid);
@@ -109,6 +150,25 @@ public interface Ranking {
         } else {
             value += 1;
         }
+=======
+    static void addPkSuccess(String uid, int gameCode)
+    {
+        String key = getUserCollectsKey();
+        String json = RedisUtils.hget(key, uid);
+        JSONObject user = null;
+        if (json != null)
+            user = JSONObject.parseObject(json);
+        if (user == null)
+            user = new JSONObject();
+        JSONObject pkSuccess = user.getJSONObject("pkSuccess");
+        if (pkSuccess == null)
+            pkSuccess = new JSONObject();
+        Integer value = pkSuccess.getInteger(String.valueOf(gameCode));
+        if (value == null)
+            value = 1;
+        else
+            value += 1;
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         pkSuccess.put(String.valueOf(gameCode), value);
         user.put("pkSuccess", pkSuccess);
         RedisUtils.hset(key, uid, user.toJSONString());
@@ -121,16 +181,32 @@ public interface Ranking {
      * @param userList 用戶列表
      * @return 用戶詳情
      */
+<<<<<<< HEAD
     static JSONObject getPkSuccess(JSONArray userList) {
         JSONObject pkSuccess = new JSONObject();
         String[] field = new String[userList.size()];
         for (int i = 0; i < userList.size(); i++) {
+=======
+    static JSONObject getPkSuccess(JSONArray userList)
+    {
+        JSONObject pkSuccess = new JSONObject();
+        String[] field = new String[userList.size()];
+        for (int i = 0; i < userList.size(); i++)
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             field[i] = userList.getString(i);
         }
         //获取用户详情
         List<String> ifs = getUserCollects(field);
+<<<<<<< HEAD
         if (ifs != null) {
             for (String info : ifs) {
+=======
+        if (ifs != null)
+        {
+            for (String info : ifs)
+            {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 JSONObject data = JSONObject.parseObject(info);
                 pkSuccess.put(data.getString("uid"), data.getJSONObject("pkSuccess"));
             }
@@ -144,16 +220,32 @@ public interface Ranking {
      * @param userList 用戶列表
      * @return 用戶詳情
      */
+<<<<<<< HEAD
     static JSONArray globalRanking(JSONArray userList) {
         JSONArray array = new JSONArray();
         String[] field = new String[userList.size()];
         for (int i = 0; i < userList.size(); i++) {
+=======
+    static JSONArray globalRanking(JSONArray userList)
+    {
+        JSONArray array = new JSONArray();
+        String[] field = new String[userList.size()];
+        for (int i = 0; i < userList.size(); i++)
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             field[i] = userList.getString(i);
         }
         //获取用户详情
         List<String> ifs = getUserCollects(field);
+<<<<<<< HEAD
         if (ifs != null) {
             for (String info : ifs) {
+=======
+        if (ifs != null)
+        {
+            for (String info : ifs)
+            {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 JSONObject data = JSONObject.parseObject(info);
                 data.remove("pkSuccess");
                 array.add(data);
@@ -169,7 +261,12 @@ public interface Ranking {
      * @param key   排行榜key
      * @return 排行信息
      */
+<<<<<<< HEAD
     static JSONObject getUserRanking(String ddUid, String key) {
+=======
+    static JSONObject getUserRanking(String ddUid, String key)
+    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         return RedisUtils.zSetTuple(key, ddUid);
     }
 
@@ -178,7 +275,12 @@ public interface Ranking {
      *
      * @param uid 排行用户
      */
+<<<<<<< HEAD
     static JSONObject getRankingData(String uid, String matchKey) {
+=======
+    static JSONObject getRankingData(String uid, String matchKey)
+    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         JSONObject user = getUserRanking(uid, matchKey);
         user.put("uid", uid);
         return user;
@@ -191,7 +293,12 @@ public interface Ranking {
      * @param matchKey 賽場編號
      * @return 分數
      */
+<<<<<<< HEAD
     static Double getRankingScore(String uid, String matchKey) {
+=======
+    static Double getRankingScore(String uid, String matchKey)
+    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         return RedisUtils.zscore(matchKey, uid);
     }
 
@@ -201,10 +308,19 @@ public interface Ranking {
      * @param matchKey 赛区编号
      * @return 赛区信息
      */
+<<<<<<< HEAD
     static JSONObject getMatchInfo(String matchKey) {
         String matchJson = RedisUtils.hget(ROUND_REDIS_KEY, matchKey);
         if (matchJson != null) {
             JSONObject matchInfo = JSONObject.parseObject(matchJson);
+=======
+    static JSONObject getMatchInfo(String matchKey)
+    {
+        String matchJSON = RedisUtils.hget(ROUND_REDIS_KEY, matchKey);
+        if (matchJSON != null)
+        {
+            JSONObject matchInfo = JSONObject.parseObject(matchJSON);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             matchInfo.put("submit", matchInfo.getLong("submit") + 6000);
             return matchInfo;
         }
@@ -225,7 +341,12 @@ public interface Ranking {
      * @param ddGroup 群标签
      * @param ddIndex 轮次编号
      */
+<<<<<<< HEAD
     static String getField(int ddCode, boolean ddGroup, int ddIndex) {
+=======
+    static String getField(int ddCode, boolean ddGroup, int ddIndex)
+    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         return String.format("match-c%d-g%d-i%d", ddCode, ddGroup ? 1 : 0, ddIndex);
     }
 
@@ -237,7 +358,12 @@ public interface Ranking {
      * @param ddStart 赛场开启时间
      * @return 赛场索引
      */
+<<<<<<< HEAD
     static JSONObject getMatchIndex(boolean isPk, long now, Timestamp ddStart, Timestamp ddEnd, PeDbRoundExt ext) {
+=======
+    static JSONObject getMatchIndex(boolean isPk, long now, Timestamp ddStart, Timestamp ddEnd, PeDbRoundExt ext)
+    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         long ddTime = ext.ddTime + (isPk ? 5 * 60 : 0);
         BigDecimal value = CmTool.div(now - ddStart.getTime(), 1000 * ddTime, 0);
         JSONObject data = new JSONObject();
@@ -250,10 +376,19 @@ public interface Ranking {
         long submit = ddStart.getTime() + (index + 1) * 1000 * ddTime;
         long end = submit - (isPk ? 5 * 60 : 0);
         //赛制结束立马结束
+<<<<<<< HEAD
         if (submit > ddEnd.getTime()) {
             submit = ddEnd.getTime();
         }
         if (end > ddEnd.getTime()) {
+=======
+        if (submit > ddEnd.getTime())
+        {
+            submit = ddEnd.getTime();
+        }
+        if (end > ddEnd.getTime())
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             end = ddEnd.getTime();
         }
         data.put("start", new Timestamp(start));
@@ -266,18 +401,36 @@ public interface Ranking {
     /**
      * 设置排行榜服务
      */
+<<<<<<< HEAD
     default RankingService setRedisKey() {
         JSONObject matchInfo = getMatchInfo();
         if (matchInfo != null) {
             if ("running".equals(matchInfo.getString("status"))) {
+=======
+    default RankingService setRedisKey()
+    {
+        JSONObject matchInfo = getMatchInfo();
+        if (matchInfo != null)
+        {
+            if ("running".equals(matchInfo.getString("status")))
+            {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 int code = matchInfo.getInteger("code");
                 boolean isGroup = matchInfo.getBoolean("isGroup");
                 String matchKey = getField(code, isGroup, matchInfo.getInteger("index"));
                 int gameCode = matchInfo.getInteger("gameCode");
                 String ddRound = matchInfo.getString("round");
+<<<<<<< HEAD
                 if (!matchInfo.containsKey("name") && ddRound != null) {
                     PeDbRoundExt roundExt = PeDbRoundExt.getRoundFast(ddRound);
                     if (roundExt != null) {
+=======
+                if (!matchInfo.containsKey("name") && ddRound != null)
+                {
+                    PeDbRoundExt roundExt = PeDbRoundExt.getRoundFast(ddRound);
+                    if (roundExt != null)
+                    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                         matchInfo.put("name", roundExt.ddName);
                     }
                 }

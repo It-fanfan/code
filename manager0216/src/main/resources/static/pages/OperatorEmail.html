@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="chs">
+<head>
+    <meta charset="UTF-8">
+    <title>邮箱</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/modules/operation.js"></script>
+    <style type="text/css">
+        .layui-form .layui-table-cell {
+            height: auto;
+            overflow: visible;
+            text-overflow: inherit;
+            white-space: normal;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                    <!-- 搜索表单 -->
+                    <div class="layui-inline">
+                        <label class="layui-form-label">查询方式</label>
+                        <div class="layui-input-block">
+                            <select id="searchType" name="searchType" lay-filter="search-type" lay-verify="required">
+                                <option value="system" selected="selected">系统模板</option>
+                                <option value="notice">配置界面</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 数据表格 -->
+                <div class="layui-card-body">
+                    <table class="layui-hide" lay-filter="table-page" id="table-page"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/html" id="toolbar">
+    <div id="tool" name="tool">
+        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-1"></i></div>
+        <div class="layui-inline" lay-event="update"><i class="layui-icon layui-icon-edit"></i></div>
+    </div>
+</script>
+<script>
+    var operatorurl = '../admin/operator/email';
+    layui.use(['table', 'laydate', 'form', 'layer'], () => {
+        var $ = layui.jquery,
+            table = layui.table,
+            form = layui.form,
+            layer = layui.layer,
+            laydate = layui.laydate;
+        form.on('select(search-type)', (data) => {
+            switch (data.value) {
+                case 'system': {
+                    table.render({
+                        elem: '#table-page',
+                        autoSort: false,
+                        url: operatorurl + '?datagrid=system',
+                        cols: [
+                            [{
+                                field: 'udptype',
+                                width: 120,
+                                title: '邮件类型',
+                                sort: true
+                            },
+                                {
+                                    field: 'title',
+                                    width: 120,
+                                    title: '标题',
+                                    sort: true
+                                },
+                                {
+                                    field: 'msg',
+                                    width: 120,
+                                    title: '内容',
+                                    sort: true
+                                },
+                                {
+                                    field: 'button',
+                                    width: 120,
+                                    title: '操作类型',
+                                    sort: true,
+                                    templet: (d) => {
+                                        switch (d.button) {
+                                            case 'receive':
+                                                return '领取';
+                                            case 'none':
+                                                return '空';
+                                            case 'leave':
+                                                return '前往';
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                },
+                                {
+                                    field: 'reward',
+                                    width: 120,
+                                    title: '奖励内容',
+                                    hide: true
+                                }
+                            ]
+                        ],
+                        page: true,
+                        toolbar: '#toolbar',
+                        defaultToolbar: ['filter', 'exports']
+                    });
+                    $('#tool').removeClass('layui-show').addClass('layui-hide');
+                }
+                    break;
+                case 'notice': {
+                    table.render({
+                        elem: '#table-page',
+                        autoSort: false,
+                        url: operatorurl + '?datagrid=notice',
+                        cols: [
+                            [{type: 'checkbox'}, {
+                                field: 'id',
+                                width: 120,
+                                title: '序号',
+                                sort: true
+                            },
+                                {
+                                    field: 'state',
+                                    width: 120,
+                                    title: '状态',
+                                    sort: true,
+                                    templet: (d) => {
+                                        if (d.state)
+                                            return "开启";
+                                        return "关闭";
+                                    }
+                                },
+                                {
+                                    field: 'icon',
+                                    width: 120,
+                                    title: '图标',
+                                    sort: true,
+                                    templet: (d) => {
+                                        let url = d.icon;
+                                        if (url.indexOf('https://') != -1 || url.indexOf('http://') != -1) {
+                                            return `<img src='${url}' alt="图标" width="20%" height="20%" ></img>`;
+                                        }
+                                        return url;
+                                    }
+                                },
+                                {
+                                    field: 'title',
+                                    width: 120,
+                                    title: '标题',
+                                    sort: true
+                                },
+                                {
+                                    field: 'msg',
+                                    width: 120,
+                                    sort: true,
+                                    title: "内容"
+                                },
+                                {
+                                    field: 'reward',
+                                    width: 120,
+                                    title: '奖励',
+                                    hide: true
+                                },
+                                {
+                                    field: 'button',
+                                    width: 120,
+                                    title: '操作类型',
+                                    templet: (d) => {
+                                        switch (d.button) {
+                                            case 'receive':
+                                                return '领取';
+                                            case 'none':
+                                                return '空';
+                                            case 'leave':
+                                                return '前往';
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                },
+                                {
+                                    field: 'leavetype',
+                                    width: 120,
+                                    title: '前往类型',
+                                    templet: (d) => {
+                                        switch (d.leavetype) {
+                                            case 'none':
+                                                return "空";
+                                            case 'book':
+                                                return "新图鉴";
+                                            case 'basin':
+                                                return "海域";
+                                            case 'WishingWell':
+                                                return "许愿池";
+                                            case 'shop':
+                                                return "商店";
+                                            case 'achievement':
+                                                return "成就";
+                                            case 'daily':
+                                                return "日常";
+                                            case 'order':
+                                                return "订单";
+                                            default:
+                                                break;
+                                        }
+                                        return "空";
+                                    }
+                                },
+                                {
+                                    field: 'include',
+                                    width: 120,
+                                    title: '用户选择',
+                                    templet: (d) => {
+                                        switch (d.include) {
+                                            case -1:
+                                                return "全部";
+                                            case 0:
+                                                return "不包含";
+                                            case 1:
+                                                return "包含";
+                                            default:
+                                                break;
+                                        }
+                                    }
+                                },
+                                {
+                                    field: 'userlist',
+                                    width: 120,
+                                    title: '用户列表',
+                                    sort: true
+                                },
+                                {
+                                    field: 'starttime',
+                                    width: 120,
+                                    title: '时间范围',
+                                    templet: (d) => {
+                                        return d.starttime + " ~ " + d.endtime;
+                                    }
+                                }
+                            ]
+                        ],
+                        page: true,
+                        toolbar: '#toolbar',
+                        defaultToolbar: ['filter', 'exports']
+                    });
+
+
+                    $('#tool').removeClass('layui-hide').addClass('layui-show');
+                }
+                    break;
+                default:
+                    break;
+            }
+        });
+        $('.layui-form-select dl dd.layui-this').trigger('click');
+        laydate.render({
+            elem: '#starttime',
+            format: 'yyyy/MM/dd'
+        });
+        laydate.render({
+            elem: '#endtime',
+            format: 'yyyy/MM/dd'
+        });
+        form.on('select(search-button)', (data) => {
+            switch (data.value) {
+                case 'none': {
+                    $("#rewardNode").hide();
+                    $("#leaveNode").hide();
+                }
+                    break;
+                case 'leave': {
+                    $("#rewardNode").hide();
+                    $("#leaveNode").show();
+                }
+                    break;
+                case 'receive': {
+                    $("#rewardNode").show();
+                    $("#leaveNode").hide();
+                }
+                    break;
+            }
+        });
+        form.on('select(search-include)', (data) => {
+            if (data.value == -1) {
+                $("#userNode").hide();
+            } else {
+                $("#userNode").show();
+            }
+        });
+        $('.layui-form-select dl dd.layui-this').trigger('click');
+    })
+</script>
+
+<!-- 表单元素 -->
+<form id="form_table" class="layui-form layui-hide" lay-filter="form_table" style="padding: 20px 0 0 0;">
+    <div class="layui-form-item layui-hide">
+        <div class="layui-input-inline">
+            <input type="number" id="id" name="id" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">时间范围</label>
+        <div class="layui-input-inline" style="width: 6rem;">
+            <input type="text" id="starttime" name="starttime" lay-verify="required" autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-input-inline" style="width: 6rem;">
+            <input type="text" id="endtime" name="endtime" lay-verify="required" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-inline">
+            <input type="checkbox" id="state" name="state" lay-skin="switch" lay-text="ON|OFF">
+            <!-- <select class="layui-select" id="state" name="state">
+                <option value='true'>运行</option>
+                <option value='false'>停止</option>
+            </select> -->
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">图标</label>
+        <div class="layui-input-inline">
+            <input type="text" id="icon" name="icon" lay-verify="required" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">标题</label>
+        <div class="layui-input-inline">
+            <input type="text" id="title" name="title" lay-verify="required" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">内容</label>
+        <div class="layui-input-inline">
+            <textarea placeholder="请输入内容" id="msg" name="msg" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">操作类型</label>
+        <div class="layui-input-inline">
+            <select class="layui-select" id="button" name="button" lay-filter="search-button">
+                <option value="receive">领取</option>
+                <option value="leave">前往</option>
+                <option value="none" selected="selected">空</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item" id="rewardNode">
+        <label class="layui-form-label">奖励</label>
+        <div class="layui-input-inline">
+            <textarea placeholder="请输入内容" id="reward" name="reward" class="layui-textarea"></textarea>
+        </div>
+        <button  id="jsonTool" type="button" data-type="r" class="layui-btn layui-btn-normal" onclick="changeJson()">JSON转换工具</button>
+    </div>
+
+    <div class="layui-form-item " id="leaveNode">
+        <label class="layui-form-label">前往类型</label>
+        <div class="layui-input-inline">
+            <select class="layui-select" id="leavetype" name="leavetype">
+                <option value="book">新图鉴</option>
+                <option value="basin">海域</option>
+                <option value="WishingWell">许愿池</option>
+                <option value="shop">商店</option>
+                <option value="order">订单</option>
+                <option value="daily">日常</option>
+                <option value="achievement">成就</option>
+                <option value="none" selected="selected">空</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">用户操作</label>
+        <div class="layui-input-inline">
+            <select class="layui-select" id="include" name="include" lay-filter="search-include">
+                <option value="0">不包含</option>
+                <option value="1">包含</option>
+                <option value="-1" selected="selected">全部</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item " id="userNode">
+        <label class="layui-form-label">用户集合</label>
+        <div class="layui-input-inline">
+            <textarea placeholder="请输入内容" id="userlist" name="userlist" class="layui-textarea"></textarea>
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="front-submit" id="front-submit" value="确认">
+    </div>
+</form>
+<script>
+    function changeJson() {
+          layer.open({
+                type: 2
+                ,shade: 0
+                ,fixed: false //不固定
+                ,shadeClose: true
+                ,title: 'JSON转换工具'
+                ,area: ['359px', '450px']
+                ,id: 'jsonTool'+1 //防止重复弹出
+                ,content: 'RewardConvertTool.html'
+            });
+    }
+</script>
+</body>
+</html>

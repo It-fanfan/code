@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.second.mapper.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.second.model.Orders" >
+    <id column="ddId" property="ddid" jdbcType="VARCHAR" />
+    <result column="ddUid" property="dduid" jdbcType="VARCHAR" />
+    <result column="ddGId" property="ddgid" jdbcType="INTEGER" />
+    <result column="ddType" property="ddtype" jdbcType="VARCHAR" />
+    <result column="ddAccount" property="ddaccount" jdbcType="VARCHAR" />
+    <result column="ddOrder" property="ddorder" jdbcType="VARCHAR" />
+    <result column="ddError" property="dderror" jdbcType="VARCHAR" />
+    <result column="ddPrice" property="ddprice" jdbcType="DECIMAL" />
+    <result column="ddState" property="ddstate" jdbcType="INTEGER" />
+    <result column="ddTime" property="ddtime" jdbcType="TIMESTAMP" />
+    <result column="ddTrans" property="ddtrans" jdbcType="TIMESTAMP" />
+    <result column="ddOId" property="ddoid" jdbcType="VARCHAR" />
+    <result column="ddAppId" property="ddappid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ddId, ddUid, ddGId, ddType, ddAccount, ddOrder, ddError, ddPrice, ddState, ddTime, 
+    ddTrans, ddOId, ddAppId
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where ddId = #{ddid,jdbcType=VARCHAR}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from orders order by ddTime desc
+    </select>
+  <select id="selectBySQL" resultType="com.fish.dao.second.model.Orders">
+         ${_parameter}
+  </select>
+  <select id="selectResSingle" resultType="com.fish.dao.second.model.Orders">
+        ${_parameter}
+  </select>
+  <select id="selectByTimes" resultType="com.fish.dao.second.model.Orders" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List" />
+    from orders  where DATE(ddTime) between '${start}' and '${end}'  order by ddTime desc
+  </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from orders
+    where ddId = #{ddid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.second.model.Orders" >
+    insert into orders (ddId, ddUid, ddGId, 
+      ddType, ddAccount, ddOrder, 
+      ddError, ddPrice, ddState, 
+      ddTime, ddTrans, ddOId, 
+      ddAppId)
+    values (#{ddid,jdbcType=VARCHAR}, #{dduid,jdbcType=VARCHAR}, #{ddgid,jdbcType=INTEGER}, 
+      #{ddtype,jdbcType=VARCHAR}, #{ddaccount,jdbcType=VARCHAR}, #{ddorder,jdbcType=VARCHAR}, 
+      #{dderror,jdbcType=VARCHAR}, #{ddprice,jdbcType=DECIMAL}, #{ddstate,jdbcType=INTEGER}, 
+      #{ddtime,jdbcType=TIMESTAMP}, #{ddtrans,jdbcType=TIMESTAMP}, #{ddoid,jdbcType=VARCHAR}, 
+      #{ddappid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.second.model.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ddid != null" >
+        ddId,
+      </if>
+      <if test="dduid != null" >
+        ddUid,
+      </if>
+      <if test="ddgid != null" >
+        ddGId,
+      </if>
+      <if test="ddtype != null" >
+        ddType,
+      </if>
+      <if test="ddaccount != null" >
+        ddAccount,
+      </if>
+      <if test="ddorder != null" >
+        ddOrder,
+      </if>
+      <if test="dderror != null" >
+        ddError,
+      </if>
+      <if test="ddprice != null" >
+        ddPrice,
+      </if>
+      <if test="ddstate != null" >
+        ddState,
+      </if>
+      <if test="ddtime != null" >
+        ddTime,
+      </if>
+      <if test="ddtrans != null" >
+        ddTrans,
+      </if>
+      <if test="ddoid != null" >
+        ddOId,
+      </if>
+      <if test="ddappid != null" >
+        ddAppId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ddid != null" >
+        #{ddid,jdbcType=VARCHAR},
+      </if>
+      <if test="dduid != null" >
+        #{dduid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddgid != null" >
+        #{ddgid,jdbcType=INTEGER},
+      </if>
+      <if test="ddtype != null" >
+        #{ddtype,jdbcType=VARCHAR},
+      </if>
+      <if test="ddaccount != null" >
+        #{ddaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="ddorder != null" >
+        #{ddorder,jdbcType=VARCHAR},
+      </if>
+      <if test="dderror != null" >
+        #{dderror,jdbcType=VARCHAR},
+      </if>
+      <if test="ddprice != null" >
+        #{ddprice,jdbcType=DECIMAL},
+      </if>
+      <if test="ddstate != null" >
+        #{ddstate,jdbcType=INTEGER},
+      </if>
+      <if test="ddtime != null" >
+        #{ddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddtrans != null" >
+        #{ddtrans,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddoid != null" >
+        #{ddoid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddappid != null" >
+        #{ddappid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.second.model.Orders" >
+    update orders
+    <set >
+      <if test="dduid != null" >
+        ddUid = #{dduid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddgid != null" >
+        ddGId = #{ddgid,jdbcType=INTEGER},
+      </if>
+      <if test="ddtype != null" >
+        ddType = #{ddtype,jdbcType=VARCHAR},
+      </if>
+      <if test="ddaccount != null" >
+        ddAccount = #{ddaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="ddorder != null" >
+        ddOrder = #{ddorder,jdbcType=VARCHAR},
+      </if>
+      <if test="dderror != null" >
+        ddError = #{dderror,jdbcType=VARCHAR},
+      </if>
+      <if test="ddprice != null" >
+        ddPrice = #{ddprice,jdbcType=DECIMAL},
+      </if>
+      <if test="ddstate != null" >
+        ddState = #{ddstate,jdbcType=INTEGER},
+      </if>
+      <if test="ddtime != null" >
+        ddTime = #{ddtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddtrans != null" >
+        ddTrans = #{ddtrans,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddoid != null" >
+        ddOId = #{ddoid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddappid != null" >
+        ddAppId = #{ddappid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ddId = #{ddid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.second.model.Orders" >
+    update orders
+    set ddUid = #{dduid,jdbcType=VARCHAR},
+      ddGId = #{ddgid,jdbcType=INTEGER},
+      ddType = #{ddtype,jdbcType=VARCHAR},
+      ddAccount = #{ddaccount,jdbcType=VARCHAR},
+      ddOrder = #{ddorder,jdbcType=VARCHAR},
+      ddError = #{dderror,jdbcType=VARCHAR},
+      ddPrice = #{ddprice,jdbcType=DECIMAL},
+      ddState = #{ddstate,jdbcType=INTEGER},
+      ddTime = #{ddtime,jdbcType=TIMESTAMP},
+      ddTrans = #{ddtrans,jdbcType=TIMESTAMP},
+      ddOId = #{ddoid,jdbcType=VARCHAR},
+      ddAppId = #{ddappid,jdbcType=VARCHAR}
+    where ddId = #{ddid,jdbcType=VARCHAR}
+  </update>
+</mapper>

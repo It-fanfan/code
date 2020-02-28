@@ -9,7 +9,15 @@
       <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower" />
       <secret-storage>master_key</secret-storage>
       <user-name>root</user-name>
+<<<<<<< HEAD
       <introspection-schemas>*:@</introspection-schemas>
+=======
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" qname="@" />
+        </introspection-scope>
+      </schema-mapping>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     </data-source>
   </component>
 </project>

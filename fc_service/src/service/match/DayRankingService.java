@@ -17,7 +17,10 @@ public class DayRankingService implements Ranking
         setRedisKey(gameCode);
     }
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     public JSONObject getMatchInfo()
     {
         return matchInfo;

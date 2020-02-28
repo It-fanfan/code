@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.third.mapper.MinitjWxMapper">
+    <resultMap id="BaseResultMap" type="com.fish.dao.third.model.MinitjWx">
+        <id column="wx_appid" property="wxAppid" jdbcType="VARCHAR"/>
+        <id column="wx_date" property="wxDate" jdbcType="DATE"/>
+        <result column="wx_new" property="wxNew" jdbcType="INTEGER"/>
+        <result column="wx_active" property="wxActive" jdbcType="INTEGER"/>
+        <result column="wx_visit" property="wxVisit" jdbcType="INTEGER"/>
+        <result column="wx_avg_login" property="wxAvgLogin" jdbcType="DECIMAL"/>
+        <result column="wx_avg_online" property="wxAvgOnline" jdbcType="DECIMAL"/>
+        <result column="wx_remain2" property="wxRemain2" jdbcType="DECIMAL"/>
+        <result column="wx_video_show" property="wxVideoShow" jdbcType="INTEGER"/>
+        <result column="wx_video_clickrate" property="wxVideoClickrate" jdbcType="DECIMAL"/>
+        <result column="wx_video_income" property="wxVideoIncome" jdbcType="DECIMAL"/>
+        <result column="wx_banner_show" property="wxBannerShow" jdbcType="INTEGER"/>
+        <result column="wx_banner_clickrate" property="wxBannerClickrate" jdbcType="DECIMAL"/>
+        <result column="wx_banner_income" property="wxBannerIncome" jdbcType="DECIMAL"/>
+        <result column="wx_reg_ad" property="wxRegAd" jdbcType="INTEGER"/>
+        <result column="wx_reg_jump" property="wxRegJump" jdbcType="INTEGER"/>
+        <result column="wx_reg_search" property="wxRegSearch" jdbcType="INTEGER"/>
+        <result column="wx_reg_app" property="wxRegApp" jdbcType="INTEGER"/>
+        <result column="wx_reg_code" property="wxRegCode" jdbcType="INTEGER"/>
+        <result column="wx_reg_session" property="wxRegSession" jdbcType="INTEGER"/>
+        <result column="wx_active_women" property="wxActiveWomen" jdbcType="DECIMAL"/>
+        <result column="wx_share_user" property="wxShareUser" jdbcType="INTEGER"/>
+        <result column="wx_share_count" property="wxShareCount" jdbcType="INTEGER"/>
+        <result column="wx_share_rate" property="wxShareRate" jdbcType="DECIMAL"/>
+        <result column="wx_updatetime" property="wxUpdatetime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.fish.dao.third.model.MinitjWx" extends="BaseResultMap">
+        <result column="wx_reg_json" property="wxRegJson" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    wx_appid, wx_date, wx_new, wx_active, wx_visit, wx_avg_login, wx_avg_online, wx_remain2,
+    wx_video_show, wx_video_clickrate, wx_video_income, wx_banner_show, wx_banner_clickrate,
+    wx_banner_income, wx_reg_ad, wx_reg_jump, wx_reg_search, wx_reg_app, wx_reg_code,
+    wx_reg_session, wx_active_women, wx_share_user, wx_share_count, wx_share_rate, wx_updatetime
+  </sql>
+    <sql id="Blob_Column_List">
+    wx_reg_json
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="map">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from minitj_wx
+        where wx_appid = #{wxAppid,jdbcType=VARCHAR}
+        and wx_date = #{wxDate,jdbcType=VARCHAR}
+    </select>
+    <select id="searchData" resultMap="ResultMapWithBLOBs" parameterType="string">
+       ${_parameter}
+    </select>
+    <select id="dateCash" resultType="String">
+    SELECT wx_date FROM  minitj_wx GROUP BY  wx_date ORDER BY  wx_date DESC
+  </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from minitj_wx
+    where wx_appid = #{wxAppid,jdbcType=VARCHAR}
+      and wx_date = #{wxDate,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.fish.dao.third.model.MinitjWx">
+    insert into minitj_wx (wx_appid, wx_date, wx_new,
+      wx_active, wx_visit, wx_avg_login,
+      wx_avg_online, wx_remain2, wx_video_show,
+      wx_video_clickrate, wx_video_income, wx_banner_show,
+      wx_banner_clickrate, wx_banner_income, wx_reg_ad,
+      wx_reg_jump, wx_reg_search, wx_reg_app,
+      wx_reg_code, wx_reg_session, wx_active_women,
+      wx_share_user, wx_share_count, wx_share_rate,
+      wx_updatetime, wx_reg_json)
+    values (#{wxAppid,jdbcType=VARCHAR}, #{wxDate,jdbcType=DATE}, #{wxNew,jdbcType=INTEGER},
+      #{wxActive,jdbcType=INTEGER}, #{wxVisit,jdbcType=INTEGER}, #{wxAvgLogin,jdbcType=DECIMAL},
+      #{wxAvgOnline,jdbcType=DECIMAL}, #{wxRemain2,jdbcType=DECIMAL}, #{wxVideoShow,jdbcType=INTEGER},
+      #{wxVideoClickrate,jdbcType=DECIMAL}, #{wxVideoIncome,jdbcType=DECIMAL}, #{wxBannerShow,jdbcType=INTEGER},
+      #{wxBannerClickrate,jdbcType=DECIMAL}, #{wxBannerIncome,jdbcType=DECIMAL}, #{wxRegAd,jdbcType=INTEGER},
+      #{wxRegJump,jdbcType=INTEGER}, #{wxRegSearch,jdbcType=INTEGER}, #{wxRegApp,jdbcType=INTEGER},
+      #{wxRegCode,jdbcType=INTEGER}, #{wxRegSession,jdbcType=INTEGER}, #{wxActiveWomen,jdbcType=DECIMAL},
+      #{wxShareUser,jdbcType=INTEGER}, #{wxShareCount,jdbcType=INTEGER}, #{wxShareRate,jdbcType=DECIMAL},
+      #{wxUpdatetime,jdbcType=TIMESTAMP}, #{wxRegJson,jdbcType=LONGVARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fish.dao.third.model.MinitjWx">
+        insert into minitj_wx
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="wxAppid != null">
+                wx_appid,
+            </if>
+            <if test="wxDate != null">
+                wx_date,
+            </if>
+            <if test="wxNew != null">
+                wx_new,
+            </if>
+            <if test="wxActive != null">
+                wx_active,
+            </if>
+            <if test="wxVisit != null">
+                wx_visit,
+            </if>
+            <if test="wxAvgLogin != null">
+                wx_avg_login,
+            </if>
+            <if test="wxAvgOnline != null">
+                wx_avg_online,
+            </if>
+            <if test="wxRemain2 != null">
+                wx_remain2,
+            </if>
+            <if test="wxVideoShow != null">
+                wx_video_show,
+            </if>
+            <if test="wxVideoClickrate != null">
+                wx_video_clickrate,
+            </if>
+            <if test="wxVideoIncome != null">
+                wx_video_income,
+            </if>
+            <if test="wxBannerShow != null">
+                wx_banner_show,
+            </if>
+            <if test="wxBannerClickrate != null">
+                wx_banner_clickrate,
+            </if>
+            <if test="wxBannerIncome != null">
+                wx_banner_income,
+            </if>
+            <if test="wxRegAd != null">
+                wx_reg_ad,
+            </if>
+            <if test="wxRegJump != null">
+                wx_reg_jump,
+            </if>
+            <if test="wxRegSearch != null">
+                wx_reg_search,
+            </if>
+            <if test="wxRegApp != null">
+                wx_reg_app,
+            </if>
+            <if test="wxRegCode != null">
+                wx_reg_code,
+            </if>
+            <if test="wxRegSession != null">
+                wx_reg_session,
+            </if>
+            <if test="wxActiveWomen != null">
+                wx_active_women,
+            </if>
+            <if test="wxShareUser != null">
+                wx_share_user,
+            </if>
+            <if test="wxShareCount != null">
+                wx_share_count,
+            </if>
+            <if test="wxShareRate != null">
+                wx_share_rate,
+            </if>
+            <if test="wxUpdatetime != null">
+                wx_updatetime,
+            </if>
+            <if test="wxRegJson != null">
+                wx_reg_json,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="wxAppid != null">
+                #{wxAppid,jdbcType=VARCHAR},
+            </if>
+            <if test="wxDate != null">
+                #{wxDate,jdbcType=DATE},
+            </if>
+            <if test="wxNew != null">
+                #{wxNew,jdbcType=INTEGER},
+            </if>
+            <if test="wxActive != null">
+                #{wxActive,jdbcType=INTEGER},
+            </if>
+            <if test="wxVisit != null">
+                #{wxVisit,jdbcType=INTEGER},
+            </if>
+            <if test="wxAvgLogin != null">
+                #{wxAvgLogin,jdbcType=DECIMAL},
+            </if>
+            <if test="wxAvgOnline != null">
+                #{wxAvgOnline,jdbcType=DECIMAL},
+            </if>
+            <if test="wxRemain2 != null">
+                #{wxRemain2,jdbcType=DECIMAL},
+            </if>
+            <if test="wxVideoShow != null">
+                #{wxVideoShow,jdbcType=INTEGER},
+            </if>
+            <if test="wxVideoClickrate != null">
+                #{wxVideoClickrate,jdbcType=DECIMAL},
+            </if>
+            <if test="wxVideoIncome != null">
+                #{wxVideoIncome,jdbcType=DECIMAL},
+            </if>
+            <if test="wxBannerShow != null">
+                #{wxBannerShow,jdbcType=INTEGER},
+            </if>
+            <if test="wxBannerClickrate != null">
+                #{wxBannerClickrate,jdbcType=DECIMAL},
+            </if>
+            <if test="wxBannerIncome != null">
+                #{wxBannerIncome,jdbcType=DECIMAL},
+            </if>
+            <if test="wxRegAd != null">
+                #{wxRegAd,jdbcType=INTEGER},
+            </if>
+            <if test="wxRegJump != null">
+                #{wxRegJump,jdbcType=INTEGER},
+            </if>
+            <if test="wxRegSearch != null">
+                #{wxRegSearch,jdbcType=INTEGER},
+            </if>
+            <if test="wxRegApp != null">
+                #{wxRegApp,jdbcType=INTEGER},
+            </if>
+            <if test="wxRegCode != null">
+                #{wxRegCode,jdbcType=INTEGER},
+            </if>
+            <if test="wxRegSession != null">
+                #{wxRegSession,jdbcType=INTEGER},
+            </if>
+            <if test="wxActiveWomen != null">
+                #{wxActiveWomen,jdbcType=DECIMAL},
+            </if>
+            <if test="wxShareUser != null">
+                #{wxShareUser,jdbcType=INTEGER},
+            </if>
+            <if test="wxShareCount != null">
+                #{wxShareCount,jdbcType=INTEGER},
+            </if>
+            <if test="wxShareRate != null">
+                #{wxShareRate,jdbcType=DECIMAL},
+            </if>
+            <if test="wxUpdatetime != null">
+                #{wxUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="wxRegJson != null">
+                #{wxRegJson,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.third.model.MinitjWx">
+        update minitj_wx
+        <set>
+            <if test="wxNew != null">
+                wx_new = #{wxNew,jdbcType=INTEGER},
+            </if>
+            <if test="wxActive != null">
+                wx_active = #{wxActive,jdbcType=INTEGER},
+            </if>
+            <if test="wxVisit != null">
+                wx_visit = #{wxVisit,jdbcType=INTEGER},
+            </if>
+            <if test="wxAvgLogin != null">
+                wx_avg_login = #{wxAvgLogin,jdbcType=DECIMAL},
+            </if>
+            <if test="wxAvgOnline != null">
+                wx_avg_online = #{wxAvgOnline,jdbcType=DECIMAL},
+            </if>
+            <if test="wxRemain2 != null">
+                wx_remain2 = #{wxRemain2,jdbcType=DECIMAL},
+            </if>
+            <if test="wxVideoShow != null">
+                wx_video_show = #{wxVideoShow,jdbcType=INTEGER},
+            </if>
+            <if test="wxVideoClickrate != null">
+                wx_video_clickrate = #{wxVideoClickrate,jdbcType=DECIMAL},
+            </if>
+            <if test="wxVideoIncome != null">
+                wx_video_income = #{wxVideoIncome,jdbcType=DECIMAL},
+            </if>
+            <if test="wxBannerShow != null">
+                wx_banner_show = #{wxBannerShow,jdbcType=INTEGER},
+            </if>
+            <if test="wxBannerClickrate != null">
+                wx_banner_clickrate = #{wxBannerClickrate,jdbcType=DECIMAL},
+            </if>
+            <if test="wxBannerIncome != null">
+                wx_banner_income = #{wxBannerIncome,jdbcType=DECIMAL},
+            </if>
+            <if test="wxRegAd != null">
+                wx_reg_ad = #{wxRegAd,jdbcType=INTEGER},
+            </if>
+            <if test="wxRegJump != null">
+                wx_reg_jump = #{wxRegJump,jdbcType=INTEGER},
+            </if>
+            <if test="wxRegSearch != null">
+                wx_reg_search = #{wxRegSearch,jdbcType=INTEGER},
+            </if>
+            <if test="wxRegApp != null">
+                wx_reg_app = #{wxRegApp,jdbcType=INTEGER},
+            </if>
+            <if test="wxRegCode != null">
+                wx_reg_code = #{wxRegCode,jdbcType=INTEGER},
+            </if>
+            <if test="wxRegSession != null">
+                wx_reg_session = #{wxRegSession,jdbcType=INTEGER},
+            </if>
+            <if test="wxActiveWomen != null">
+                wx_active_women = #{wxActiveWomen,jdbcType=DECIMAL},
+            </if>
+            <if test="wxShareUser != null">
+                wx_share_user = #{wxShareUser,jdbcType=INTEGER},
+            </if>
+            <if test="wxShareCount != null">
+                wx_share_count = #{wxShareCount,jdbcType=INTEGER},
+            </if>
+            <if test="wxShareRate != null">
+                wx_share_rate = #{wxShareRate,jdbcType=DECIMAL},
+            </if>
+            <if test="wxUpdatetime != null">
+                wx_updatetime = #{wxUpdatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="wxRegJson != null">
+                wx_reg_json = #{wxRegJson,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where wx_appid = #{wxAppid,jdbcType=VARCHAR}
+        and wx_date = #{wxDate,jdbcType=DATE}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.fish.dao.third.model.MinitjWx">
+    update minitj_wx
+    set wx_new = #{wxNew,jdbcType=INTEGER},
+      wx_active = #{wxActive,jdbcType=INTEGER},
+      wx_visit = #{wxVisit,jdbcType=INTEGER},
+      wx_avg_login = #{wxAvgLogin,jdbcType=DECIMAL},
+      wx_avg_online = #{wxAvgOnline,jdbcType=DECIMAL},
+      wx_remain2 = #{wxRemain2,jdbcType=DECIMAL},
+      wx_video_show = #{wxVideoShow,jdbcType=INTEGER},
+      wx_video_clickrate = #{wxVideoClickrate,jdbcType=DECIMAL},
+      wx_video_income = #{wxVideoIncome,jdbcType=DECIMAL},
+      wx_banner_show = #{wxBannerShow,jdbcType=INTEGER},
+      wx_banner_clickrate = #{wxBannerClickrate,jdbcType=DECIMAL},
+      wx_banner_income = #{wxBannerIncome,jdbcType=DECIMAL},
+      wx_reg_ad = #{wxRegAd,jdbcType=INTEGER},
+      wx_reg_jump = #{wxRegJump,jdbcType=INTEGER},
+      wx_reg_search = #{wxRegSearch,jdbcType=INTEGER},
+      wx_reg_app = #{wxRegApp,jdbcType=INTEGER},
+      wx_reg_code = #{wxRegCode,jdbcType=INTEGER},
+      wx_reg_session = #{wxRegSession,jdbcType=INTEGER},
+      wx_active_women = #{wxActiveWomen,jdbcType=DECIMAL},
+      wx_share_user = #{wxShareUser,jdbcType=INTEGER},
+      wx_share_count = #{wxShareCount,jdbcType=INTEGER},
+      wx_share_rate = #{wxShareRate,jdbcType=DECIMAL},
+      wx_updatetime = #{wxUpdatetime,jdbcType=TIMESTAMP},
+      wx_reg_json = #{wxRegJson,jdbcType=LONGVARCHAR}
+    where wx_appid = #{wxAppid,jdbcType=VARCHAR}
+      and wx_date = #{wxDate,jdbcType=DATE}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.fish.dao.third.model.MinitjWx">
+    update minitj_wx
+    set wx_new = #{wxNew,jdbcType=INTEGER},
+      wx_active = #{wxActive,jdbcType=INTEGER},
+      wx_visit = #{wxVisit,jdbcType=INTEGER},
+      wx_avg_login = #{wxAvgLogin,jdbcType=DECIMAL},
+      wx_avg_online = #{wxAvgOnline,jdbcType=DECIMAL},
+      wx_remain2 = #{wxRemain2,jdbcType=DECIMAL},
+      wx_video_show = #{wxVideoShow,jdbcType=INTEGER},
+      wx_video_clickrate = #{wxVideoClickrate,jdbcType=DECIMAL},
+      wx_video_income = #{wxVideoIncome,jdbcType=DECIMAL},
+      wx_banner_show = #{wxBannerShow,jdbcType=INTEGER},
+      wx_banner_clickrate = #{wxBannerClickrate,jdbcType=DECIMAL},
+      wx_banner_income = #{wxBannerIncome,jdbcType=DECIMAL},
+      wx_reg_ad = #{wxRegAd,jdbcType=INTEGER},
+      wx_reg_jump = #{wxRegJump,jdbcType=INTEGER},
+      wx_reg_search = #{wxRegSearch,jdbcType=INTEGER},
+      wx_reg_app = #{wxRegApp,jdbcType=INTEGER},
+      wx_reg_code = #{wxRegCode,jdbcType=INTEGER},
+      wx_reg_session = #{wxRegSession,jdbcType=INTEGER},
+      wx_active_women = #{wxActiveWomen,jdbcType=DECIMAL},
+      wx_share_user = #{wxShareUser,jdbcType=INTEGER},
+      wx_share_count = #{wxShareCount,jdbcType=INTEGER},
+      wx_share_rate = #{wxShareRate,jdbcType=DECIMAL},
+      wx_updatetime = #{wxUpdatetime,jdbcType=TIMESTAMP}
+    where wx_appid = #{wxAppid,jdbcType=VARCHAR}
+      and wx_date = #{wxDate,jdbcType=DATE}
+  </update>
+</mapper>

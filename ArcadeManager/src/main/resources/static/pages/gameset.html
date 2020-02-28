@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="chs">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/modules/select.css" media="all">
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/modules/operation.js"></script>
+    <script src="../layuiadmin/modules/multiSelect.js"></script>
+    <script></script>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <!-- 搜索表单 -->
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                    <form class="layui-form-item" id="search-form">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">时间范围</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="times" placeholder=" - ">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit="" lay-filter="front-search">
+                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 数据表格 -->
+                <div class="layui-card-body">
+                    <table class="layui-hide" lay-filter="table-page" id="table-page"></table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/html" id="toolbar">
+    <div class="layui-table-tool-temp">
+        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-1"></i></div>
+        <div class="layui-inline" lay-event="update"><i class="layui-icon layui-icon-edit"></i></div>
+        <div class="layui-inline" lay-event="delete"><i class="layui-icon layui-icon-delete"></i></div>
+    </div>
+</script>
+<script>
+    var operatorurl = '../manage/gameset';
+
+    layui.use(['table', 'laydate', 'form', 'layer', 'multiSelect'], function () {
+        var table = layui.table,
+            form = layui.form,
+            layer = layui.layer,
+            $ = layui.jquery,
+            laydate = layui.laydate;
+
+        $(() => {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: '../manage/games/selectBox',
+                success: (data) => {
+                    data.forEach(function (val, index, arr) {
+                        $("#gameBox").append("<option  name='game'  value = '" + val.value + "'>" + val.title + "</option><br/>");
+                    });
+                    // Array.from (data, (json) => {
+                    //     $("#gameBox").append("<option  name='game'  value = '" + json.value + "'>"+json.title +"</option><br/>");
+                    // });
+                    layui.form.render("select");
+                },
+                error: function () {
+                    alert("查询失败")
+                }
+            })
+        });
+
+        table.render({
+            elem: '#table-page',
+            url: operatorurl + '?datagrid=data',
+            cols: [[
+                {type: 'checkbox'},
+
+                {field: 'ddcode', width: 120, title: '游戏集代号', sort: true},
+                {
+                    field: 'ddstate', width: 120, title: '合集类型', sort: true, templet: (d) => {
+                        if (d.ddstate == true)
+                            return "壳子模式";
+                        return "游戏模式";
+                    }
+                },
+                {field: 'ddname128u', width: 120, title: '游戏合集名称', sort: true},
+                {field: 'ddcontent512a', width: 120, title: '游戏合集内容', sort: true},
+                {field: 'dddesc512u', width: 120, title: '游戏合集内容描述', sort: true}
+            ]],
+            page: true,
+            toolbar: '#toolbar',
+            defaultToolbar: ['filter', 'exports']
+        });
+
+        laydate.render({
+            elem: '#times',
+            range: true
+        });
+        form.on('select(multi)', function (data) { // 打开控制台查看效果
+            //     console.log(data.elem); //得到select原始DOM对象
+            console.log(data.value); //得到被选中的值（数组类型）
+            //     console.log(data.current_value); //当前操作的值（选中或取消的值）
+        })
+    })
+
+</script>
+
+<!-- 表单元素 -->
+<form id="form_table" class="layui-form layui-hide" lay-filter="form_table" style="padding: 20px 0 0 0;">
+
+    <div class="layui-form-item layui-hide">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline">
+            <input type="text" id="id" name="id" autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">游戏合集代号</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddcode" name="ddcode" lay-verify="required" autocomplete="off"
+                   class="layui-input layui-input ">
+        </div>
+    </div>
+
+    <div class=" layui-form-item">
+        <label class="layui-form-label">合集类型</label>
+        <div class="layui-input-inline">
+            <select name="ddstate" id="ddState" lay-filter="aihao">
+                <option value="false" selected="selected">游戏模式</option>
+                <option value="true">壳子模式</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">游戏合集名称</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddname128u" name="ddname128u" autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">游戏合集新增</label>
+        <div class="layui-input-block">
+            <select multiple lay-search lay-search="" name="gameBox" id="gameBox" lay-filter="aihao">
+                <option value="" selected="selected">--请选择--</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">人工排序（以#分隔)</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddarrange512a" name="ddarrange512a" autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="front-submit" id="front-submit" value="确认">
+    </div>
+</form>
+</body>
+</html>

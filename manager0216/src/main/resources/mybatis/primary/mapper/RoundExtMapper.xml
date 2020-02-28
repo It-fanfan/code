@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.RoundExtMapper">
+    <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.RoundExt">
+        <id column="ddCode" property="ddcode" jdbcType="VARCHAR"/>
+
+        <result column="ddGroup" property="ddgroup" jdbcType="BIT"/>
+        <result column="ddName" property="ddname" jdbcType="VARCHAR"/>
+        <result column="ddPriority" property="ddpriority" jdbcType="INTEGER"/>
+        <result column="ddState" property="ddstate" jdbcType="BIT"/>
+        <result column="ddTime" property="ddtime" jdbcType="BIGINT"/>
+        <result column="ddReward" property="ddreward" jdbcType="VARCHAR"/>
+        <result column="tip" property="tip" jdbcType="VARCHAR"/>
+        <result column="ddDesc" property="dddesc" jdbcType="VARCHAR"/>
+        <result column="insertTime" property="inserttime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ddCode, ddGroup, ddName, ddPriority, ddState, ddTime, ddReward, tip, ddDesc, insertTime
+  </sql>
+    <select id="selectByddCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from round_ext
+        where ddCode = #{ddcode,jdbcType=VARCHAR}
+    </select>
+    <select id="selectByddCodeG" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from round_ext
+        where ddCode = #{ddcode,jdbcType=VARCHAR} and ddGroup =TRUE
+    </select>
+    <select id="selectByddCodeS" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from round_ext
+        where ddCode = #{ddcode,jdbcType=VARCHAR} and ddGroup =FALSE
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_ext
+    </select>
+    <select id="selectByTimes" resultType="com.fish.dao.primary.model.RoundExt" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from round_ext
+        where DATE(insertTime) between '${start}' and '${end}'
+    </select>
+    <select id="selectAllS" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_ext where ddGroup = FALSE
+    </select>
+    <select id="selectAllG" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from round_ext where ddGroup = TRUE
+    </select>
+
+    <select id="selectSMaxId" resultType="java.lang.Integer">
+        SELECT
+        COUNT(*)
+        FROM round_ext
+        WHERE ddGroup = FALSE
+  </select>
+    <select id="selectGMaxId" resultType="java.lang.Integer">
+       SELECT
+        COUNT(*)
+        FROM round_ext
+        WHERE ddGroup = TRUE
+  </select>
+
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from round_ext
+    where ddCode = #{ddcode,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.fish.dao.primary.model.RoundExt">
+    insert into round_ext (ddCode,ddGroup, ddName,
+      ddPriority, ddState, ddTime, 
+      ddReward, tip, ddDesc, 
+      insertTime)
+    values (#{ddcode,jdbcType=VARCHAR}, #{ddgroup,jdbcType=BIT}, #{ddname,jdbcType=VARCHAR},
+      #{ddpriority,jdbcType=INTEGER}, #{ddstate,jdbcType=BIT}, #{ddtime,jdbcType=BIGINT}, 
+      #{ddreward,jdbcType=VARCHAR}, #{tip,jdbcType=VARCHAR}, #{dddesc,jdbcType=VARCHAR}, 
+      #{inserttime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fish.dao.primary.model.RoundExt">
+        insert into round_ext
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ddcode != null">
+                ddCode,
+            </if>
+
+            <if test="ddgroup != null">
+                ddGroup,
+            </if>
+            <if test="ddname != null">
+                ddName,
+            </if>
+            <if test="ddpriority != null">
+                ddPriority,
+            </if>
+            <if test="ddstate != null">
+                ddState,
+            </if>
+            <if test="ddtime != null">
+                ddTime,
+            </if>
+            <if test="ddreward != null">
+                ddReward,
+            </if>
+            <if test="tip != null">
+                tip,
+            </if>
+            <if test="dddesc != null">
+                ddDesc,
+            </if>
+            <if test="inserttime != null">
+                insertTime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ddcode != null">
+                #{ddcode,jdbcType=VARCHAR},
+            </if>
+
+            <if test="ddgroup != null">
+                #{ddgroup,jdbcType=BIT},
+            </if>
+            <if test="ddname != null">
+                #{ddname,jdbcType=VARCHAR},
+            </if>
+            <if test="ddpriority != null">
+                #{ddpriority,jdbcType=INTEGER},
+            </if>
+            <if test="ddstate != null">
+                #{ddstate,jdbcType=BIT},
+            </if>
+            <if test="ddtime != null">
+                #{ddtime,jdbcType=BIGINT},
+            </if>
+            <if test="ddreward != null">
+                #{ddreward,jdbcType=VARCHAR},
+            </if>
+            <if test="tip != null">
+                #{tip,jdbcType=VARCHAR},
+            </if>
+            <if test="dddesc != null">
+                #{dddesc,jdbcType=VARCHAR},
+            </if>
+            <if test="inserttime != null">
+                #{inserttime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.primary.model.RoundExt">
+        update round_ext
+        <set>
+
+            <if test="ddgroup != null">
+                ddGroup = #{ddgroup,jdbcType=BIT},
+            </if>
+            <if test="ddname != null">
+                ddName = #{ddname,jdbcType=VARCHAR},
+            </if>
+            <if test="ddpriority != null">
+                ddPriority = #{ddpriority,jdbcType=INTEGER},
+            </if>
+            <if test="ddstate != null">
+                ddState = #{ddstate,jdbcType=BIT},
+            </if>
+            <if test="ddtime != null">
+                ddTime = #{ddtime,jdbcType=BIGINT},
+            </if>
+            <if test="ddreward != null">
+                ddReward = #{ddreward,jdbcType=VARCHAR},
+            </if>
+            <if test="tip != null">
+                tip = #{tip,jdbcType=VARCHAR},
+            </if>
+            <if test="dddesc != null">
+                ddDesc = #{dddesc,jdbcType=VARCHAR},
+            </if>
+            <if test="inserttime != null">
+                insertTime = #{inserttime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ddCode = #{ddcode,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fish.dao.primary.model.RoundExt">
+    update round_ext
+    set
+      ddGroup = #{ddgroup,jdbcType=BIT},
+      ddName = #{ddname,jdbcType=VARCHAR},
+      ddPriority = #{ddpriority,jdbcType=INTEGER},
+      ddState = #{ddstate,jdbcType=BIT},
+      ddTime = #{ddtime,jdbcType=BIGINT},
+      ddReward = #{ddreward,jdbcType=VARCHAR},
+      tip = #{tip,jdbcType=VARCHAR},
+      ddDesc = #{dddesc,jdbcType=VARCHAR},
+      insertTime = #{inserttime,jdbcType=TIMESTAMP}
+    where ddCode = #{ddcode,jdbcType=VARCHAR}
+  </update>
+</mapper>

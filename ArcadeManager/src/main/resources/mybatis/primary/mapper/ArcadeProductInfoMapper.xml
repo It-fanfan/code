@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.ArcadeProductInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.ArcadeProductInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="or_name" property="orName" jdbcType="VARCHAR" />
+    <result column="program_type" property="programType" jdbcType="VARCHAR" />
+    <result column="game_type" property="gameType" jdbcType="VARCHAR" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="or_id" property="orId" jdbcType="VARCHAR" />
+    <result column="appsec" property="appsec" jdbcType="VARCHAR" />
+    <result column="add_id" property="addId" jdbcType="VARCHAR" />
+    <result column="pay_key" property="payKey" jdbcType="VARCHAR" />
+    <result column="merchant_number" property="merchantNumber" jdbcType="VARCHAR" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="code_manager" property="codeManager" jdbcType="VARCHAR" />
+    <result column="belong_company" property="belongCompany" jdbcType="VARCHAR" />
+    <result column="clear_company" property="clearCompany" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="link_address" property="linkAddress" jdbcType="VARCHAR" />
+    <result column="formal_collection" property="formalCollection" jdbcType="VARCHAR" />
+    <result column="prove_version_num" property="proveVersionNum" jdbcType="VARCHAR" />
+    <result column="prove_content" property="proveContent" jdbcType="VARCHAR" />
+    <result column="remarks" property="remarks" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, product_name, or_name, program_type, game_type, app_id, or_id, appsec, add_id, 
+    pay_key, merchant_number, account, password, code_manager, belong_company, clear_company, 
+    create_time, update_time, link_address, formal_collection, prove_version_num, prove_content, 
+    remarks
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from arcade_productinfo
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from arcade_productinfo
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from arcade_productinfo
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.primary.model.ArcadeProductInfo" >
+    insert into arcade_productinfo (id, product_name, or_name, 
+      program_type, game_type, app_id, 
+      or_id, appsec, add_id, 
+      pay_key, merchant_number, account, 
+      password, code_manager, belong_company, 
+      clear_company, create_time, update_time, 
+      link_address, formal_collection, prove_version_num, 
+      prove_content, remarks)
+    values (#{id,jdbcType=BIGINT}, #{productName,jdbcType=VARCHAR}, #{orName,jdbcType=VARCHAR}, 
+      #{programType,jdbcType=VARCHAR}, #{gameType,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR}, 
+      #{orId,jdbcType=VARCHAR}, #{appsec,jdbcType=VARCHAR}, #{addId,jdbcType=VARCHAR}, 
+      #{payKey,jdbcType=VARCHAR}, #{merchantNumber,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{codeManager,jdbcType=VARCHAR}, #{belongCompany,jdbcType=VARCHAR}, 
+      #{clearCompany,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{linkAddress,jdbcType=VARCHAR}, #{formalCollection,jdbcType=VARCHAR}, #{proveVersionNum,jdbcType=VARCHAR}, 
+      #{proveContent,jdbcType=VARCHAR}, #{remarks,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.primary.model.ArcadeProductInfo" >
+    insert into arcade_productinfo
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="orName != null" >
+        or_name,
+      </if>
+      <if test="programType != null" >
+        program_type,
+      </if>
+      <if test="gameType != null" >
+        game_type,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="orId != null" >
+        or_id,
+      </if>
+      <if test="appsec != null" >
+        appsec,
+      </if>
+      <if test="addId != null" >
+        add_id,
+      </if>
+      <if test="payKey != null" >
+        pay_key,
+      </if>
+      <if test="merchantNumber != null" >
+        merchant_number,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="codeManager != null" >
+        code_manager,
+      </if>
+      <if test="belongCompany != null" >
+        belong_company,
+      </if>
+      <if test="clearCompany != null" >
+        clear_company,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="linkAddress != null" >
+        link_address,
+      </if>
+      <if test="formalCollection != null" >
+        formal_collection,
+      </if>
+      <if test="proveVersionNum != null" >
+        prove_version_num,
+      </if>
+      <if test="proveContent != null" >
+        prove_content,
+      </if>
+      <if test="remarks != null" >
+        remarks,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="orName != null" >
+        #{orName,jdbcType=VARCHAR},
+      </if>
+      <if test="programType != null" >
+        #{programType,jdbcType=VARCHAR},
+      </if>
+      <if test="gameType != null" >
+        #{gameType,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="orId != null" >
+        #{orId,jdbcType=VARCHAR},
+      </if>
+      <if test="appsec != null" >
+        #{appsec,jdbcType=VARCHAR},
+      </if>
+      <if test="addId != null" >
+        #{addId,jdbcType=VARCHAR},
+      </if>
+      <if test="payKey != null" >
+        #{payKey,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantNumber != null" >
+        #{merchantNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="codeManager != null" >
+        #{codeManager,jdbcType=VARCHAR},
+      </if>
+      <if test="belongCompany != null" >
+        #{belongCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="clearCompany != null" >
+        #{clearCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkAddress != null" >
+        #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="formalCollection != null" >
+        #{formalCollection,jdbcType=VARCHAR},
+      </if>
+      <if test="proveVersionNum != null" >
+        #{proveVersionNum,jdbcType=VARCHAR},
+      </if>
+      <if test="proveContent != null" >
+        #{proveContent,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        #{remarks,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.primary.model.ArcadeProductInfo" >
+    update arcade_productinfo
+    <set >
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="orName != null" >
+        or_name = #{orName,jdbcType=VARCHAR},
+      </if>
+      <if test="programType != null" >
+        program_type = #{programType,jdbcType=VARCHAR},
+      </if>
+      <if test="gameType != null" >
+        game_type = #{gameType,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="orId != null" >
+        or_id = #{orId,jdbcType=VARCHAR},
+      </if>
+      <if test="appsec != null" >
+        appsec = #{appsec,jdbcType=VARCHAR},
+      </if>
+      <if test="addId != null" >
+        add_id = #{addId,jdbcType=VARCHAR},
+      </if>
+      <if test="payKey != null" >
+        pay_key = #{payKey,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantNumber != null" >
+        merchant_number = #{merchantNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="codeManager != null" >
+        code_manager = #{codeManager,jdbcType=VARCHAR},
+      </if>
+      <if test="belongCompany != null" >
+        belong_company = #{belongCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="clearCompany != null" >
+        clear_company = #{clearCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="linkAddress != null" >
+        link_address = #{linkAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="formalCollection != null" >
+        formal_collection = #{formalCollection,jdbcType=VARCHAR},
+      </if>
+      <if test="proveVersionNum != null" >
+        prove_version_num = #{proveVersionNum,jdbcType=VARCHAR},
+      </if>
+      <if test="proveContent != null" >
+        prove_content = #{proveContent,jdbcType=VARCHAR},
+      </if>
+      <if test="remarks != null" >
+        remarks = #{remarks,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.primary.model.ArcadeProductInfo" >
+    update arcade_productinfo
+    set product_name = #{productName,jdbcType=VARCHAR},
+      or_name = #{orName,jdbcType=VARCHAR},
+      program_type = #{programType,jdbcType=VARCHAR},
+      game_type = #{gameType,jdbcType=VARCHAR},
+      app_id = #{appId,jdbcType=VARCHAR},
+      or_id = #{orId,jdbcType=VARCHAR},
+      appsec = #{appsec,jdbcType=VARCHAR},
+      add_id = #{addId,jdbcType=VARCHAR},
+      pay_key = #{payKey,jdbcType=VARCHAR},
+      merchant_number = #{merchantNumber,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      code_manager = #{codeManager,jdbcType=VARCHAR},
+      belong_company = #{belongCompany,jdbcType=VARCHAR},
+      clear_company = #{clearCompany,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      link_address = #{linkAddress,jdbcType=VARCHAR},
+      formal_collection = #{formalCollection,jdbcType=VARCHAR},
+      prove_version_num = #{proveVersionNum,jdbcType=VARCHAR},
+      prove_content = #{proveContent,jdbcType=VARCHAR},
+      remarks = #{remarks,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

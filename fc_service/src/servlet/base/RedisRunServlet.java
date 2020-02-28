@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
+<<<<<<< HEAD
 /**
  * @author xuwei
  */
@@ -22,6 +23,19 @@ public class RedisRunServlet extends CmServletMain {
         String type = requestPackage.getString("redis-type");
         switch (type) {
             case "remove": {
+=======
+@WebServlet(urlPatterns = "/redis/run")
+public class RedisRunServlet extends CmServletMain
+{
+    protected JSONObject handle(CmDbSqlResource sqlResource, HttpServletRequest requestObject, JSONObject requestPackage)
+    {
+        JSONObject result = new JSONObject();
+        String type = requestPackage.getString("redis-type");
+        switch (type)
+        {
+            case "remove":
+            {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 //获取清理表格
                 JSONArray tables = requestPackage.getJSONArray("tables");
                 //获取清理redis key
@@ -30,20 +44,35 @@ public class RedisRunServlet extends CmServletMain {
                 String key = requestPackage.getString("key");
                 //获取主键值
                 String value = requestPackage.getString("value");
+<<<<<<< HEAD
                 for (int i = 0; i < tables.size(); i++) {
+=======
+                for (int i = 0; i < tables.size(); i++)
+                {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                     String SQL = "delete from " + tables.getString(i) + " where " + key + "= \"" + value + "\"";
                     CmDbSqlResource.instance().execSQLCMDInfo(SQL);
                 }
                 //进行移除redis
                 String[] keys = new String[redisKey.size()];
+<<<<<<< HEAD
                 for (int i = 0; i < redisKey.size(); i++) {
+=======
+                for (int i = 0; i < redisKey.size(); i++)
+                {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                     keys[i] = redisKey.getString(i);
                 }
                 RedisUtils.del(keys);
                 result.put("message", "成功清理" + value + "相关数据:redis:" + redisKey.toJSONString() + ",表:" + tables.toJSONString());
             }
             break;
+<<<<<<< HEAD
             case "add": {
+=======
+            case "add":
+            {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 //新增用户值
                 String uid = requestPackage.getString("uid");
                 int addValue = requestPackage.getIntValue("addCoin");
@@ -57,18 +86,31 @@ public class RedisRunServlet extends CmServletMain {
                 result.put("message", "当前玩家金币数:" + current);
             }
             break;
+<<<<<<< HEAD
             case "cmd": {
                 //新增用户值
                 String uid = requestPackage.getString("uid");
                 JSONObject cmd = requestPackage.getJSONObject("cmd");
                 for (Map.Entry<String, Object> entry : cmd.entrySet()) {
+=======
+            case "cmd":
+            {
+                //新增用户值
+                String uid = requestPackage.getString("uid");
+                JSONObject cmd = requestPackage.getJSONObject("cmd");
+                for (Map.Entry<String, Object> entry : cmd.entrySet())
+                {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                     UserService.setCache(uid, entry.getKey(), entry.getValue().toString());
                 }
                 result.put("message", "执行命令结束!");
             }
             break;
+<<<<<<< HEAD
             default:
                 break;
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         }
 
         result.put("result", "success");

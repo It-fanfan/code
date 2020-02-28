@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="chs">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/modules/select.css" media="all">
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/modules/operation.js"></script>
+    <script src="../layuiadmin/modules/multiSelect.js"></script>
+    <script></script>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <!-- 搜索表单 -->
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                    <form class="layui-form-item" id="search-form">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">时间范围</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="times" placeholder=" - ">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit="" lay-filter="front-search">
+                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 数据表格 -->
+                <div class="layui-card-body">
+                    <table class="layui-hide" lay-filter="table-page" id="table-page"></table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/html" id="toolbar">
+    <div class="layui-table-tool-temp">
+        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-1"></i></div>
+        <div class="layui-inline" lay-event="update"><i class="layui-icon layui-icon-edit"></i></div>
+        <div class="layui-inline" lay-event="delete"><i class="layui-icon layui-icon-delete"></i></div>
+    </div>
+</script>
+<script>
+    var operatorurl = '../manage/gameday';
+
+    layui.use(['table', 'laydate', 'form', 'layer'], function () {
+        var table = layui.table,
+            form = layui.form,
+            layer = layui.layer,
+            $ = layui.jquery,
+            laydate = layui.laydate;
+
+
+        table.render({
+            elem: '#table-page',
+            url: operatorurl + '?datagrid=data',
+            cols: [[
+                {type: 'checkbox'},
+
+                {field: 'ddname128u', width: 120, title: '比赛日名称', sort: true},
+                {field: 'gameDateSurvey', width: 120, title: '比赛日概况', sort: true}
+            ]],
+            page: true,
+            toolbar: '#toolbar',
+            defaultToolbar: ['filter', 'exports']
+        });
+
+        laydate.render({
+            elem: '#times',
+            range: true
+        });
+    })
+
+</script>
+
+<!-- 表单元素 -->
+<form id="form_table" class="layui-form layui-hide" lay-filter="form_table" style="padding: 20px 0 0 0;">
+
+    <div class="layui-form-item layui-hide">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline">
+            <input type="text" id="id" name="id" autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">游戏合集名称</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddname128u" name="ddname128u" autocomplete="off" lay-verify="required"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div> <label class="layui-form-label">第 1 场比赛</label></div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">比赛时长 (小时)</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddhour0" name="ddhour0"  autocomplete="off" lay-verify="required"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">冠军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="one1" name="one1"  autocomplete="off" lay-verify="required"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">亚军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="one2" name="one2"  autocomplete="off" lay-verify="required"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">季军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="one3" name="one3"  autocomplete="off" lay-verify="required"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">4-9 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="one4" name="one4"  autocomplete="off" lay-verify="required"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">10-39 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="one5" name="one5"  autocomplete="off" lay-verify="required"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">40-100 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="one6" name="one6"  autocomplete="off" lay-verify="required"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+
+    <div> <label class="layui-form-label">第 2 场比赛</label></div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">比赛时长 (小时)</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddhour1" name="ddhour1"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">冠军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="two1" name="two1"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">亚军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="two2" name="two2"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">季军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="two3" name="two3"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">4-9 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="two4" name="two4"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">10-39 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="two5" name="two5"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">40-100 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="two6" name="two6"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+
+    <div> <label class="layui-form-label">第 3 场比赛</label></div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">比赛时长 (小时)</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddhour2" name="ddhour2"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">冠军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="three1" name="three1"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">亚军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="three2" name="three2"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">季军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="three3" name="three3"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">4-9 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="three4" name="three4"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">10-39 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="three5" name="three5"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">40-100 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="three6" name="three6"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+
+    <div> <label class="layui-form-label">第 4 场比赛</label></div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">比赛时长 (小时)</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddhour3" name="ddhour3"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">冠军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="four1" name="four1"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">亚军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="four2" name="four2"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">季军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="four3" name="four3"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">4-9 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="four4" name="four4"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">10-39 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="four5" name="four5"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">40-100 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="four6" name="four6"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+
+    <div> <label class="layui-form-label">第 5 场比赛</label></div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">比赛时长 (小时)</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddhour4" name="ddhour4"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">冠军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="five1" name="five1"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">亚军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="five2" name="five2"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">季军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="five3" name="five3"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">4-9 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="five4" name="five4"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">10-39 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="five5" name="five5"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">40-100 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="five6" name="five6"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+
+    <div> <label class="layui-form-label">第 6 场比赛</label></div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">比赛时长 (小时)</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddhour5" name="ddhour5"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">冠军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="six1" name="six1"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">亚军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="six2" name="six2"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">季军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="six3" name="six3"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">4-9 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="six4" name="six4"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">10-39 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="six5" name="six5"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">40-100 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="six6" name="six6"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+
+    <div> <label class="layui-form-label">第 7 场比赛</label></div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">比赛时长 (小时)</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddhour6" name="ddhour6"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">冠军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="seven1" name="seven1"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">亚军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="seven2" name="seven2"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">季军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="seven3" name="seven3"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">4-9 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="seven4" name="seven4"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">10-39 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="seven5" name="seven5"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">40-100 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="seven6" name="seven6"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div> <label class="layui-form-label">第 8 场比赛</label></div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">比赛时长 (小时)</label>
+        <div class="layui-input-inline">
+            <input type="text" id="ddhour7" name="ddhour7"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">冠军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="eight1" name="eight1"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">亚军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="eight2" name="seight2"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">季军奖金 (元)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="eight3" name="eight3"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">4-9 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="eight4" name="eight4"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">10-39 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="eight5" name="eight5"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">40-100 名奖励 (金币)：</label>
+        <div class="layui-input-inline">
+            <input type="text" id="eight6" name="eight6"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="front-submit" id="front-submit" value="确认">
+    </div>
+</form>
+</body>
+</html>

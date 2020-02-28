@@ -48,7 +48,10 @@ public class CmLoginServletWeb extends CmServletMain implements CmLogin
      * @param requestPackage 请求的包体
      * @return 响应的包体
      */
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     protected JSONObject handle(CmDbSqlResource sqlResource, HttpServletRequest requestObject, JSONObject requestPackage)
     {
         String uid = (String) requestPackage.get("uid");

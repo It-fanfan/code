@@ -6,7 +6,10 @@ import db.CmDbSqlResource;
 import pipe.CmPipeServiceDemon;
 import pipe.CmPipeSocket;
 import servlet.CmServletMain;
+<<<<<<< HEAD
 import tool.db.RedisUtils;
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +18,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Vector;
 
+<<<<<<< HEAD
 /**
  * @author xuwei
  */
@@ -75,11 +79,44 @@ public class CmServletQueryOnline extends CmServletMain
     }
 
     @Override
+=======
+@WebServlet(urlPatterns = "/query/online")
+public class CmServletQueryOnline extends CmServletMain
+{
+    protected JSONObject handle(CmDbSqlResource sqlResource, HttpServletRequest requestObject, JSONObject requestPackage)
+    {
+        return queryOnline();
+    }
+
+    private JSONObject queryOnline()
+    {
+        JSONObject result = new JSONObject();
+        result.put("result", "success");
+        JSONArray server = new JSONArray();
+        Vector<CmPipeSocket> sockets = CmPipeServiceDemon.getSockets();
+        sockets.forEach(socket ->
+        {
+            String k = socket.getSocketKey();
+            JSONArray v = socket.getPkRoom();
+            JSONObject object = new JSONObject();
+            object.put("ip", k);
+            object.put("data", v);
+            server.add(object);
+        });
+        result.put("server", server);
+        return result;
+    }
+
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException
     {
         PrintWriter out = response.getWriter();
         response.setContentType("text/html");
+<<<<<<< HEAD
         out.println(queryOnline(request.getParameter("type"), request.getParameter("roomSeq")).toJSONString());
+=======
+        out.println(queryOnline().toJSONString());
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         out.flush();
         out.close();
     }

@@ -22,7 +22,12 @@ import static tool.CmTool.createNonceStr;
 /**
  * 支付服務
  */
+<<<<<<< HEAD
 public class PayService {
+=======
+public class PayService
+{
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     private static final Logger LOG = LoggerFactory.getLogger(PayService.class);
     private static final Logger PAY = LoggerFactory.getLogger("MoneyLog");
     // 签名类型
@@ -33,7 +38,12 @@ public class PayService {
 
     private PeDbWxConfig config;
 
+<<<<<<< HEAD
     public PayService(String appId) {
+=======
+    public PayService(String appId)
+    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         this.config = PeDbWxConfig.getConfigFast(appId);
     }
 
@@ -42,7 +52,12 @@ public class PayService {
      *
      * @param signMap 参数
      */
+<<<<<<< HEAD
     private Map<String, String> signResponse(Map<String, String> signMap) {
+=======
+    private Map<String, String> signResponse(Map<String, String> signMap)
+    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         // 支付参数和sign
         Map<String, String> result = new HashMap<>();
 
@@ -70,18 +85,29 @@ public class PayService {
      * @param request 请求参数
      * @return 返回参数结果
      */
+<<<<<<< HEAD
     public JSONObject prePay(JSONObject request) {
+=======
+    public JSONObject prePay(JSONObject request)
+    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         JSONObject response = new JSONObject();
         //查找商品
         int goodsId = request.getInteger("goodsId");
         PeDbGoodsValue goods = PeDbGoodsValue.getGoodsFast(goodsId);
         //查找用户openid
         String ddUid = request.getString("uid");
+<<<<<<< HEAD
         if (goods == null) {
+=======
+        if (goods == null)
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             response.put("result", "goods is empty!");
             return response;
         }
 
+<<<<<<< HEAD
         try {
             // 预支付请求,按照分保存
             int totalFee = new BigDecimal(100).multiply(goods.ddPrice).intValue();
@@ -89,12 +115,28 @@ public class PayService {
             JSONObject create = prePayOrderCreate(totalFee, openId, goods.ddName, ddUid + "#" + goodsId);
             System.out.println("create=" + create);
             if (create.getString("result").equals("success")) {
+=======
+        try
+        {
+            // 预支付请求,按照分保存
+            int total_fee = new BigDecimal(100).multiply(goods.ddPrice).intValue();
+            String openId = UserService.getOpenId(ddUid, config.ddAppId);
+            JSONObject create = prePayOrderCreate(total_fee, openId, goods.ddName, ddUid + "#" + goodsId);
+            System.out.println("create=" + create);
+            if (create.getString("result").equals("success"))
+            {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 //进行保存数据库
                 PeDbOrder order = PeDbOrder.createOrder(create.getString("orderid"), ddUid, openId, config.ddAppId, goodsId, "weChat", config.ddMchId, goods.ddPrice);
                 order.insertObject(CmDbSqlResource.instance());
             }
             return create;
+<<<<<<< HEAD
         } catch (Exception e) {
+=======
+        } catch (Exception e)
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             LOG.error(Log4j.getExceptionInfo(e));
         }
         return response;
@@ -107,7 +149,12 @@ public class PayService {
      * @param key 查询参数
      * @return 是否匹配
      */
+<<<<<<< HEAD
     private static boolean existResult(Map<String, String> map, String key) {
+=======
+    private static boolean existResult(Map<String, String> map, String key)
+    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         String resultCode = map.get(key);
         return "success".equalsIgnoreCase(resultCode);
     }
@@ -121,18 +168,33 @@ public class PayService {
      * @param attach    携带参数
      * @return 预订单支付结果
      */
+<<<<<<< HEAD
     private JSONObject prePayOrderCreate(int total_fee, String openid, String body, String attach) {
+=======
+    private JSONObject prePayOrderCreate(int total_fee, String openid, String body, String attach)
+    {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         JSONObject response = new JSONObject();
 
         // 产生预支付订单(统一下单)
         String partnerTradeNo = CmTool.getOnceRandomOrderNo();
         Map<String, String> orderMap = wxUnifiedorder(openid, config, partnerTradeNo, body, total_fee, attach);
         LOG.debug("orderMap=" + JSONObject.toJSONString(orderMap));
+<<<<<<< HEAD
         if (null == orderMap) {
             response.put("result", "failed-paymap");
             return response;
         }
         if (!existResult(orderMap, "result_code")) {
+=======
+        if (null == orderMap)
+        {
+            response.put("result", "failed-paymap");
+            return response;
+        }
+        if (!existResult(orderMap, "result_code"))
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             response.put("result", "failed-payparam");
             return response;
         }
@@ -161,8 +223,15 @@ public class PayService {
      * @param attach       param
      * @return 结果
      */
+<<<<<<< HEAD
     private static Map<String, String> wxUnifiedorder(String openid, PeDbWxConfig config, String out_trade_no, String body, int total_fee, String attach) {
         try {
+=======
+    private static Map<String, String> wxUnifiedorder(String openid, PeDbWxConfig config, String out_trade_no, String body, int total_fee, String attach)
+    {
+        try
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             Map<String, String> signMap = new HashMap<>();
 
             signMap.put("openid", openid);
@@ -183,7 +252,12 @@ public class PayService {
             System.out.println(signMap + "," + CmTool.getJSONByFastJSON(config) + "," + result + "," + p12 + "," + p12Password);
             XMLHandler handler = XMLHandler.parse(result);
             return handler.getXmlMap();
+<<<<<<< HEAD
         } catch (Exception e) {
+=======
+        } catch (Exception e)
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             LOG.error(Log4j.getExceptionInfo(e));
         }
 
@@ -195,6 +269,7 @@ public class PayService {
      *
      * @param orderId 订单号
      */
+<<<<<<< HEAD
     private Map<String, String> searchPayOrder(String orderId) {
         // 查询订单在数据库中是否存在
 
@@ -216,6 +291,32 @@ public class PayService {
             XMLHandler parse = XMLHandler.parse(searchResultXml);
             return parse.getXmlMap();
         } catch (Exception e) {
+=======
+    private Map<String, String> searchPayOrder(String orderId)
+    {
+        // 查询订单在数据库中是否存在
+
+        // 封装查询订单参数
+        Map<String, String> searchOrder_map = new HashMap<>();
+        searchOrder_map.put("appid", config.ddAppId);
+        searchOrder_map.put("mch_id", config.ddMchId);
+        searchOrder_map.put("out_trade_no", orderId);
+        searchOrder_map.put("nonce_str", createNonceStr());
+        searchOrder_map.put("sign_type", SIGN_TYPE);
+
+        SignatureAlgorithm signatureAlgorithm = new SignatureAlgorithm(config.ddKey, searchOrder_map);
+        String searchOrderXml = signatureAlgorithm.getSignXml();
+
+        try
+        {
+            // 从微信平台里查询支付订单
+            String searchResultXml = CmTool.sendHttps(searchOrderXml, QUERY_URL, CmProjectConfig.getWxP12FilePath(config.ddP12), config.ddP12Password);
+            LOG.debug("查询订单结果:" + searchResultXml);
+            XMLHandler parse = XMLHandler.parse(searchResultXml);
+            return parse.getXmlMap();
+        } catch (Exception e)
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             LOG.error(Log4j.getExceptionInfo(e));
         }
         return null;
@@ -227,6 +328,7 @@ public class PayService {
      * @param orderMap 订单回调内容
      * @return 结果
      */
+<<<<<<< HEAD
     private boolean orderIsSuccess(Map<String, String> orderMap) {
         String resultCode = "result_code", returnCode = "return_code", tradeState = "trade_state";
         boolean result = existResult(orderMap, resultCode) && existResult(orderMap, returnCode);
@@ -234,6 +336,11 @@ public class PayService {
             return existResult(orderMap, tradeState);
         }
         return result;
+=======
+    private boolean orderIsSuccess(Map<String, String> orderMap)
+    {
+        return existResult(orderMap, "result_code") && existResult(orderMap, "return_code") && existResult(orderMap, "trade_state");
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     }
 
     /**
@@ -241,6 +348,7 @@ public class PayService {
      *
      * @param request 请求参数
      */
+<<<<<<< HEAD
     public JSONObject wxClientCallback(JSONObject request) {
         JSONObject response = new JSONObject();
         try {
@@ -252,6 +360,23 @@ public class PayService {
                 return response;
             }
             if (order.ddTrans == null) {
+=======
+    public JSONObject wxClientCallback(JSONObject request)
+    {
+        JSONObject response = new JSONObject();
+        try
+        {
+            String orderid = request.getString("orderid");
+            //检测数据表，该单是否已经处理
+            PeDbOrder order = PeDbOrder.gainObject(orderid);
+            if (order == null)
+            {
+                response.put("result", "order is empty");
+                return response;
+            }
+            if (order.ddTrans == null)
+            {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 //未处理，进行访问查单
                 // 查询微信订单
                 Map<String, String> searchPayOrder = searchPayOrder(orderid);
@@ -259,7 +384,12 @@ public class PayService {
             }
             response.put("result", "success");
 
+<<<<<<< HEAD
         } catch (Exception e) {
+=======
+        } catch (Exception e)
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             LOG.error(Log4j.getExceptionInfo(e));
         }
         return response;
@@ -272,8 +402,15 @@ public class PayService {
      * @param order          订单信息
      * @throws Exception 异常
      */
+<<<<<<< HEAD
     private void resultCallback(Map<String, String> searchPayOrder, PeDbOrder order) throws Exception {
         if (searchPayOrder != null) {
+=======
+    private void resultCallback(Map<String, String> searchPayOrder, PeDbOrder order) throws Exception
+    {
+        if (searchPayOrder != null)
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             boolean status = orderIsSuccess(searchPayOrder);
             order.ddState = status ? 1 : 2;
             order.ddTrans = new Timestamp(System.currentTimeMillis());
@@ -281,6 +418,7 @@ public class PayService {
             order.ddError = searchPayOrder.get("err_code") + "#" + searchPayOrder.get("err_code_des");
             order.update();
             //支付成功
+<<<<<<< HEAD
             if (status) {
                 PeDbGoodsValue goods = PeDbGoodsValue.getGoodsFast(order.ddGId);
                 if (goods != null) {
@@ -297,6 +435,26 @@ public class PayService {
                     int total = 0;
                     if (goods.ddFrist) {
                         if (!pay.containsKey(goodKey) || (total = pay.getInteger(goodKey)) <= 0) {
+=======
+            if (status)
+            {
+                PeDbGoodsValue goods = PeDbGoodsValue.getGoodsFast(order.ddGId);
+                if (goods != null)
+                {
+                    int value = goods.ddValue;
+                    String payJson = UserService.getStr(order.ddUid, "payInfo");
+                    JSONObject pay = null;
+                    if (payJson != null)
+                        pay = JSONObject.parseObject(payJson);
+                    if (pay == null)
+                        pay = new JSONObject();
+                    String goodKey = String.valueOf(goods.ddId);
+                    int total = 0;
+                    if (goods.ddFrist)
+                    {
+                        if (!pay.containsKey(goodKey) || (total = pay.getInteger(goodKey)) <= 0)
+                        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                             value *= 2;
                         }
                     }
@@ -321,6 +479,7 @@ public class PayService {
      *
      * @param notice 微信异步通知
      */
+<<<<<<< HEAD
     public void wxAnsynCallBack(Map<String, String> notice) {
         String orderId = notice.get("out_trade_no");
         PeDbOrder order = PeDbOrder.gainObject(orderId);
@@ -328,6 +487,19 @@ public class PayService {
             try {
                 resultCallback(notice, order);
             } catch (Exception e) {
+=======
+    public void wxAnsynCallBack(Map<String, String> notice)
+    {
+        String orderId = notice.get("out_trade_no");
+        PeDbOrder order = PeDbOrder.gainObject(orderId);
+        if (order != null && order.ddTrans == null)
+        {
+            try
+            {
+                resultCallback(notice, order);
+            } catch (Exception e)
+            {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 LOG.error(Log4j.getExceptionInfo(e));
             }
         }
@@ -339,8 +511,15 @@ public class PayService {
      * @param xmlmap json map
      * @return bool
      */
+<<<<<<< HEAD
     public static boolean existPayResult(Map<String, String> xmlmap) {
         if (xmlmap == null) {
+=======
+    public static boolean existPayResult(Map<String, String> xmlmap)
+    {
+        if (xmlmap == null)
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             return false;
         }
         return existResult(xmlmap, "return_code") && existResult(xmlmap, "result_code");
@@ -349,6 +528,7 @@ public class PayService {
     /**
      * 创建一笔提现订单
      *
+<<<<<<< HEAD
      * @param uid   用户编号
      * @param rmb   提现金额
      * @param appId 商户平台
@@ -359,21 +539,42 @@ public class PayService {
         PeDbRecharge element = new PeDbRecharge();
         element.ddStatus = 0;
         element.ddAppId = appId;
+=======
+     * @param jsonObject 用户信息
+     */
+    public static PeDbRecharge createRecharge(JSONObject jsonObject) throws Exception
+    {
+        String uid = jsonObject.getString("uid");
+        BigDecimal rmb = jsonObject.getBigDecimal("rmb");
+        PeDbRecharge element = new PeDbRecharge();
+        element.ddStatus = 0;
+        element.ddAppId = jsonObject.getString("appId");
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         element.ddId = CmTool.getOnceRandomOrderNo();
         element.ddRmb = rmb;
         element.ddTimes = new Timestamp(System.currentTimeMillis());
         element.ddUid = uid;
         PeDbWxConfig wxConfig = PeDbWxConfig.getConfigFast(element.ddAppId);
+<<<<<<< HEAD
         if (wxConfig != null && wxConfig.ddMchId != null) {
             element.ddRechargeAppId = element.ddAppId;
             element.ddRechargeOpenId = UserService.getOpenId(uid, element.ddAppId);
         } else {
+=======
+        if (wxConfig != null && wxConfig.ddMchId != null)
+        {
+            element.ddRechargeAppId = element.ddAppId;
+            element.ddRechargeOpenId = UserService.getOpenId(uid, element.ddAppId);
+        } else
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             element.ddStatus = 1;
         }
         element.insertObject(CmDbSqlResource.instance());
         return element;
     }
 
+<<<<<<< HEAD
     /**
      * 创建一笔提现订单
      *
@@ -385,6 +586,8 @@ public class PayService {
         return createRecharge(uid, rmb, jsonObject.getString("appId"));
     }
 
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 
     //    /**
     //     * 进行订单提现
@@ -414,6 +617,7 @@ public class PayService {
      * @param desc     提现描述
      * @return 提现结果
      */
+<<<<<<< HEAD
     private Map<String, String> recharge(String orderid, int amount, PeDbWxConfig wxConfig, String openid, String desc, String ip) {
         Map<String, String> signMap = new HashMap<>();
         signMap.put("mch_appid", wxConfig.ddAppId);
@@ -421,12 +625,22 @@ public class PayService {
         if (!WxConfig.DEVICE_INFO.isEmpty()) {
             signMap.put("device_info", WxConfig.DEVICE_INFO);
         }
+=======
+    private Map<String, String> recharge(String orderid, int amount, PeDbWxConfig wxConfig, String openid, String desc, String ip)
+    {
+        Map<String, String> signMap = new HashMap<>();
+        signMap.put("mch_appid", wxConfig.ddAppId);
+        signMap.put("mchid", wxConfig.ddMchId);
+        if (!WxConfig.DEVICE_INFO.isEmpty())
+            signMap.put("device_info", WxConfig.DEVICE_INFO);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         signMap.put("nonce_str", createNonceStr());
         signMap.put("partner_trade_no", orderid);
         signMap.put("openid", openid);
         signMap.put("check_name", WxConfig.CHECK_NAME.name());
         signMap.put("re_user_name", "default");
         signMap.put("amount", String.valueOf(amount));
+<<<<<<< HEAD
         if (desc != null) {
             signMap.put("desc", desc);
         } else {
@@ -436,11 +650,27 @@ public class PayService {
         SignatureAlgorithm algorithm = new SignatureAlgorithm(wxConfig.ddKey, signMap);
         String xml = algorithm.getSignXml();
         try {
+=======
+        if (desc != null)
+            signMap.put("desc", desc);
+        else
+            signMap.put("desc", WxConfig.DESC);
+        signMap.put("spbill_create_ip", ip);
+        SignatureAlgorithm algorithm = new SignatureAlgorithm(wxConfig.ddKey, signMap);
+        String xml = algorithm.getSignXml();
+        try
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             String reuslt = CmTool.sendHttps(xml, WxConfig.TRANSFERS_URL, wxConfig.ddP12, wxConfig.ddP12Password);
             System.out.println(reuslt);
             XMLHandler handler = XMLHandler.parse(reuslt);
             return handler.getXmlMap();
+<<<<<<< HEAD
         } catch (Exception e) {
+=======
+        } catch (Exception e)
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             LOG.error(Log4j.getExceptionInfo(e));
         }
         return null;

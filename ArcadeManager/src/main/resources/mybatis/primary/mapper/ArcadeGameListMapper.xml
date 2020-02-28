@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.ArcadeGameListMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.ArcadeGameList" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="game_code" property="gameCode" jdbcType="VARCHAR" />
+    <result column="game_name" property="gameName" jdbcType="VARCHAR" />
+    <result column="singal_gold" property="singalGold" jdbcType="BIGINT" />
+    <result column="team_glod" property="teamGlod" jdbcType="BIGINT" />
+    <result column="player_limit" property="playerLimit" jdbcType="VARCHAR" />
+    <result column="role_number" property="roleNumber" jdbcType="BIGINT" />
+    <result column="key_scheme" property="keyScheme" jdbcType="VARCHAR" />
+    <result column="engine_scheme" property="engineScheme" jdbcType="VARCHAR" />
+    <result column="screen_scheme" property="screenScheme" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, status, game_code, game_name, singal_gold, team_glod, player_limit, role_number, 
+    key_scheme, engine_scheme, screen_scheme, create_time, update_time
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from arcade_gamelist
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from arcade_gamelist
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from arcade_gamelist
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.primary.model.ArcadeGameList" >
+    insert into arcade_gamelist (id, status, game_code, 
+      game_name, singal_gold, team_glod, 
+      player_limit, role_number, key_scheme, 
+      engine_scheme, screen_scheme, create_time, 
+      update_time)
+    values (#{id,jdbcType=BIGINT}, #{status,jdbcType=BIT}, #{gameCode,jdbcType=VARCHAR}, 
+      #{gameName,jdbcType=VARCHAR}, #{singalGold,jdbcType=BIGINT}, #{teamGlod,jdbcType=BIGINT}, 
+      #{playerLimit,jdbcType=VARCHAR}, #{roleNumber,jdbcType=BIGINT}, #{keyScheme,jdbcType=VARCHAR}, 
+      #{engineScheme,jdbcType=VARCHAR}, #{screenScheme,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.primary.model.ArcadeGameList" >
+    insert into arcade_gamelist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="gameCode != null" >
+        game_code,
+      </if>
+      <if test="gameName != null" >
+        game_name,
+      </if>
+      <if test="singalGold != null" >
+        singal_gold,
+      </if>
+      <if test="teamGlod != null" >
+        team_glod,
+      </if>
+      <if test="playerLimit != null" >
+        player_limit,
+      </if>
+      <if test="roleNumber != null" >
+        role_number,
+      </if>
+      <if test="keyScheme != null" >
+        key_scheme,
+      </if>
+      <if test="engineScheme != null" >
+        engine_scheme,
+      </if>
+      <if test="screenScheme != null" >
+        screen_scheme,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="gameCode != null" >
+        #{gameCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gameName != null" >
+        #{gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="singalGold != null" >
+        #{singalGold,jdbcType=BIGINT},
+      </if>
+      <if test="teamGlod != null" >
+        #{teamGlod,jdbcType=BIGINT},
+      </if>
+      <if test="playerLimit != null" >
+        #{playerLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="roleNumber != null" >
+        #{roleNumber,jdbcType=BIGINT},
+      </if>
+      <if test="keyScheme != null" >
+        #{keyScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="engineScheme != null" >
+        #{engineScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="screenScheme != null" >
+        #{screenScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.primary.model.ArcadeGameList" >
+    update arcade_gamelist
+    <set >
+      <if test="status != null" >
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="gameCode != null" >
+        game_code = #{gameCode,jdbcType=VARCHAR},
+      </if>
+      <if test="gameName != null" >
+        game_name = #{gameName,jdbcType=VARCHAR},
+      </if>
+      <if test="singalGold != null" >
+        singal_gold = #{singalGold,jdbcType=BIGINT},
+      </if>
+      <if test="teamGlod != null" >
+        team_glod = #{teamGlod,jdbcType=BIGINT},
+      </if>
+      <if test="playerLimit != null" >
+        player_limit = #{playerLimit,jdbcType=VARCHAR},
+      </if>
+      <if test="roleNumber != null" >
+        role_number = #{roleNumber,jdbcType=BIGINT},
+      </if>
+      <if test="keyScheme != null" >
+        key_scheme = #{keyScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="engineScheme != null" >
+        engine_scheme = #{engineScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="screenScheme != null" >
+        screen_scheme = #{screenScheme,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.primary.model.ArcadeGameList" >
+    update arcade_gamelist
+    set status = #{status,jdbcType=BIT},
+      game_code = #{gameCode,jdbcType=VARCHAR},
+      game_name = #{gameName,jdbcType=VARCHAR},
+      singal_gold = #{singalGold,jdbcType=BIGINT},
+      team_glod = #{teamGlod,jdbcType=BIGINT},
+      player_limit = #{playerLimit,jdbcType=VARCHAR},
+      role_number = #{roleNumber,jdbcType=BIGINT},
+      key_scheme = #{keyScheme,jdbcType=VARCHAR},
+      engine_scheme = #{engineScheme,jdbcType=VARCHAR},
+      screen_scheme = #{screenScheme,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

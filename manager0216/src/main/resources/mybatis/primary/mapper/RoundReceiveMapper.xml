@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.RoundReceiveMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.RoundReceive" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ddUid" property="dduid" jdbcType="VARCHAR" />
+    <result column="ddMCode" property="ddmcode" jdbcType="INTEGER" />
+    <result column="ddGroup" property="ddgroup" jdbcType="BIT" />
+    <result column="ddMIndex" property="ddmindex" jdbcType="INTEGER" />
+    <result column="ddGCode" property="ddgcode" jdbcType="INTEGER" />
+    <result column="ddMStart" property="ddmstart" jdbcType="TIMESTAMP" />
+    <result column="ddMEnd" property="ddmend" jdbcType="TIMESTAMP" />
+    <result column="ddMark" property="ddmark" jdbcType="BIGINT" />
+    <result column="ddRanking" property="ddranking" jdbcType="INTEGER" />
+    <result column="ddType" property="ddtype" jdbcType="VARCHAR" />
+    <result column="ddTotal" property="ddtotal" jdbcType="INTEGER" />
+    <result column="ddTime" property="ddtime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ddUid, ddMCode, ddGroup, ddMIndex, ddGCode, ddMStart, ddMEnd, ddMark, ddRanking, 
+    ddType, ddTotal, ddTime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from round_receive
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from round_receive
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.primary.model.RoundReceive" >
+    insert into round_receive (id, ddUid, ddMCode, 
+      ddGroup, ddMIndex, ddGCode, 
+      ddMStart, ddMEnd, ddMark, 
+      ddRanking, ddType, ddTotal, 
+      ddTime)
+    values (#{id,jdbcType=BIGINT}, #{dduid,jdbcType=VARCHAR}, #{ddmcode,jdbcType=INTEGER}, 
+      #{ddgroup,jdbcType=BIT}, #{ddmindex,jdbcType=INTEGER}, #{ddgcode,jdbcType=INTEGER}, 
+      #{ddmstart,jdbcType=TIMESTAMP}, #{ddmend,jdbcType=TIMESTAMP}, #{ddmark,jdbcType=BIGINT}, 
+      #{ddranking,jdbcType=INTEGER}, #{ddtype,jdbcType=VARCHAR}, #{ddtotal,jdbcType=INTEGER}, 
+      #{ddtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.primary.model.RoundReceive" >
+    insert into round_receive
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dduid != null" >
+        ddUid,
+      </if>
+      <if test="ddmcode != null" >
+        ddMCode,
+      </if>
+      <if test="ddgroup != null" >
+        ddGroup,
+      </if>
+      <if test="ddmindex != null" >
+        ddMIndex,
+      </if>
+      <if test="ddgcode != null" >
+        ddGCode,
+      </if>
+      <if test="ddmstart != null" >
+        ddMStart,
+      </if>
+      <if test="ddmend != null" >
+        ddMEnd,
+      </if>
+      <if test="ddmark != null" >
+        ddMark,
+      </if>
+      <if test="ddranking != null" >
+        ddRanking,
+      </if>
+      <if test="ddtype != null" >
+        ddType,
+      </if>
+      <if test="ddtotal != null" >
+        ddTotal,
+      </if>
+      <if test="ddtime != null" >
+        ddTime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="dduid != null" >
+        #{dduid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddmcode != null" >
+        #{ddmcode,jdbcType=INTEGER},
+      </if>
+      <if test="ddgroup != null" >
+        #{ddgroup,jdbcType=BIT},
+      </if>
+      <if test="ddmindex != null" >
+        #{ddmindex,jdbcType=INTEGER},
+      </if>
+      <if test="ddgcode != null" >
+        #{ddgcode,jdbcType=INTEGER},
+      </if>
+      <if test="ddmstart != null" >
+        #{ddmstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddmend != null" >
+        #{ddmend,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddmark != null" >
+        #{ddmark,jdbcType=BIGINT},
+      </if>
+      <if test="ddranking != null" >
+        #{ddranking,jdbcType=INTEGER},
+      </if>
+      <if test="ddtype != null" >
+        #{ddtype,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtotal != null" >
+        #{ddtotal,jdbcType=INTEGER},
+      </if>
+      <if test="ddtime != null" >
+        #{ddtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.primary.model.RoundReceive" >
+    update round_receive
+    <set >
+      <if test="dduid != null" >
+        ddUid = #{dduid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddmcode != null" >
+        ddMCode = #{ddmcode,jdbcType=INTEGER},
+      </if>
+      <if test="ddgroup != null" >
+        ddGroup = #{ddgroup,jdbcType=BIT},
+      </if>
+      <if test="ddmindex != null" >
+        ddMIndex = #{ddmindex,jdbcType=INTEGER},
+      </if>
+      <if test="ddgcode != null" >
+        ddGCode = #{ddgcode,jdbcType=INTEGER},
+      </if>
+      <if test="ddmstart != null" >
+        ddMStart = #{ddmstart,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddmend != null" >
+        ddMEnd = #{ddmend,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ddmark != null" >
+        ddMark = #{ddmark,jdbcType=BIGINT},
+      </if>
+      <if test="ddranking != null" >
+        ddRanking = #{ddranking,jdbcType=INTEGER},
+      </if>
+      <if test="ddtype != null" >
+        ddType = #{ddtype,jdbcType=VARCHAR},
+      </if>
+      <if test="ddtotal != null" >
+        ddTotal = #{ddtotal,jdbcType=INTEGER},
+      </if>
+      <if test="ddtime != null" >
+        ddTime = #{ddtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.primary.model.RoundReceive" >
+    update round_receive
+    set ddUid = #{dduid,jdbcType=VARCHAR},
+      ddMCode = #{ddmcode,jdbcType=INTEGER},
+      ddGroup = #{ddgroup,jdbcType=BIT},
+      ddMIndex = #{ddmindex,jdbcType=INTEGER},
+      ddGCode = #{ddgcode,jdbcType=INTEGER},
+      ddMStart = #{ddmstart,jdbcType=TIMESTAMP},
+      ddMEnd = #{ddmend,jdbcType=TIMESTAMP},
+      ddMark = #{ddmark,jdbcType=BIGINT},
+      ddRanking = #{ddranking,jdbcType=INTEGER},
+      ddType = #{ddtype,jdbcType=VARCHAR},
+      ddTotal = #{ddtotal,jdbcType=INTEGER},
+      ddTime = #{ddtime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from round_receive
+  </select>
+  <select id="selectSearchTime" resultType="com.fish.dao.primary.model.RoundReceive">
+    select
+    <include refid="Base_Column_List" />
+    from round_receive where DATE(ddtime) between '${start}' and '${end}'
+  </select>
+  <select id="selectBySearchData" resultMap="BaseResultMap" parameterType="string">
+       ${_parameter}
+  </select>
+
+</mapper>

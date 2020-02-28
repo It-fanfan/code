@@ -59,5 +59,9 @@
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="library" name="libs" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Tomcat 9.0.22" level="application_server_libraries" />
+<<<<<<< HEAD
+=======
+    <orderEntry type="library" name="Java EE 6-Java EE 6" level="project" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
   </component>
 </module>

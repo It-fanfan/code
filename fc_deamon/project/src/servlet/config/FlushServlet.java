@@ -17,19 +17,26 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+<<<<<<< HEAD
 /**
  * @author xuwei
  */
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 @WebServlet(urlPatterns = "/flush/logic")
 public class FlushServlet extends CmServletMain
 {
     private Map<String, Class<?>> classMap;
 
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     protected JSONObject handle(CmDbSqlResource sqlResource, HttpServletRequest requestObject, JSONObject content)
     {
         String className = content.getString("name");
         JSONObject result = new JSONObject();
+<<<<<<< HEAD
         if (classMap == null || className == null)
         {
             result.put("result", "fail");
@@ -38,6 +45,9 @@ public class FlushServlet extends CmServletMain
         }
         String configStr = "config";
         if (className.equals(configStr))
+=======
+        if ("config".equals(className))
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         {
             //进行刷新配置文件，并且进行刷新权限文件
             ReadConfig.init();
@@ -46,6 +56,15 @@ public class FlushServlet extends CmServletMain
             result.put("msg", JSONObject.toJSONString(PeDbWeight.instance()));
             return result;
         }
+<<<<<<< HEAD
+=======
+        if (classMap == null)
+        {
+            result.put("result", "fail");
+            result.put("msg", "通知业务逻辑服出现错误，请技术人员进行排查!");
+            return result;
+        }
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         Class<?> element = classMap.get(className);
         if (element == null)
         {

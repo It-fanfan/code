@@ -18,12 +18,16 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * 赛场保存一场记录
+<<<<<<< HEAD
  *
  * @author xuwei
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
  */
 public class RoundSave implements Runnable
 {
     private static final Logger LOG = LoggerFactory.getLogger(RoundSave.class);
+<<<<<<< HEAD
     /**
      * 赛场状态
      */
@@ -31,6 +35,11 @@ public class RoundSave implements Runnable
     /**
      * 一场赛场记录
      */
+=======
+    //赛场状态
+    private static final String ROUND_REDIS_KEY = "round-status";
+    //一场赛场记录
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     private String matchKey;
 
     RoundSave(String matchKey)
@@ -52,6 +61,7 @@ public class RoundSave implements Runnable
         info.put("result", result);
         LOG.debug("matchInfo:" + info.toJSONString());
         //进行移除redis
+<<<<<<< HEAD
         String overFlag = "over";
         if (status.equals(overFlag))
         {
@@ -60,6 +70,13 @@ public class RoundSave implements Runnable
             {
                 saveHistoryRecord(info, result);
             }
+=======
+        if (status.equals("over"))
+        {
+            //进行保存历史场次
+            if (result > 0)
+                saveHistoryRecord(info, result);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             if (result <= 0)
             {
                 RedisUtils.hdel(ROUND_REDIS_KEY, field);
@@ -103,6 +120,7 @@ public class RoundSave implements Runnable
         String json = RedisUtils.hget(ROUND_REDIS_KEY, matchKey);
         JSONObject info = null;
         if (json != null)
+<<<<<<< HEAD
         {
             info = JSONObject.parseObject(json);
         }
@@ -110,6 +128,11 @@ public class RoundSave implements Runnable
         {
             info = new JSONObject();
         }
+=======
+            info = JSONObject.parseObject(json);
+        if (info == null)
+            info = new JSONObject();
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         return info;
     }
 
@@ -118,7 +141,11 @@ public class RoundSave implements Runnable
      *
      * @param matches 游戏赛场内容
      */
+<<<<<<< HEAD
     static void updateNowRoundRecord(Map<Integer, JSONObject> matches)
+=======
+    static void updateNowRoundRecord(Map<Integer, JSONObject> matches, boolean isMatch)
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     {
         matches.forEach((k, v) ->
         {
@@ -133,7 +160,11 @@ public class RoundSave implements Runnable
             {
                 data = new JSONObject();
             }
+<<<<<<< HEAD
             data.put(String.valueOf(false), v.getString("matchKey"));
+=======
+            data.put(String.valueOf(isMatch), v.getString("matchKey"));
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             RedisUtils.hset(ROUND_REDIS_KEY, field, data.toJSONString());
         });
     }
@@ -147,8 +178,12 @@ public class RoundSave implements Runnable
         String status = matchInfo.getString("status");
         long submit = matchInfo.getLong("submit");
         //是否达到结算时间
+<<<<<<< HEAD
         String runFlag = "running";
         if (current >= submit && status.equals(runFlag))
+=======
+        if (current >= submit && status.equals("running"))
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         {
             //标志该赛制正在结算
             updateStatus(matchInfo, 0, "finish");
@@ -162,9 +197,13 @@ public class RoundSave implements Runnable
             }
             PeDbRoundExt roundExt = PeDbRoundExt.getRoundFast(matchInfo.getString("round"));
             if (roundExt == null)
+<<<<<<< HEAD
             {
                 return;
             }
+=======
+                return;
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             JSONObject reward = roundExt.getRoundReward();
             //排名和分数
             JSONArray array = new JSONArray();
@@ -172,7 +211,42 @@ public class RoundSave implements Runnable
             Vector<String> uids = new Vector<>();
             for (Tuple tuple : sets)
             {
+<<<<<<< HEAD
                 setUserNode(reward, array, atomic, uids, tuple);
+=======
+                JSONObject user = new JSONObject();
+                //当前分数
+                long mark = BigDecimal.valueOf(tuple.getScore()).longValue();
+                //用户uid
+                String uid = tuple.getElement();
+                //排名次数
+                int index = atomic.incrementAndGet();
+                user.put("mark", mark);
+                user.put("uid", uid);
+                user.put("index", index);
+                if (reward.containsKey(String.valueOf(index)))
+                {
+                    JSONObject info = reward.getJSONObject(String.valueOf(index));
+                    String type = info.getString("type");
+                    int value = info.getInteger("value");
+                    switch (type)
+                    {
+                        case "rmb":
+                        {
+                            value *= 100;
+                        }
+                        break;
+                    }
+                    user.put("type", type);
+                    user.put("value", value);
+                } else
+                {
+                    user.put("type", "none");
+                    user.put("value", 0);
+                }
+                array.add(user);
+                uids.add(uid);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             }
             //用户昵称头像
             String[] userId = new String[uids.size()];
@@ -224,6 +298,7 @@ public class RoundSave implements Runnable
     }
 
     /**
+<<<<<<< HEAD
      * 設置用戶節點
      * @param reward 奖励数据
      * @param array 数组
@@ -270,6 +345,8 @@ public class RoundSave implements Runnable
     }
 
     /**
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
      * 获取用户集合信息
      *
      * @param userId 用户编号
@@ -278,9 +355,13 @@ public class RoundSave implements Runnable
     private static List<String> getUserCollects(String... userId)
     {
         if (userId.length <= 0)
+<<<<<<< HEAD
         {
             return null;
         }
+=======
+            return null;
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         String key = getUserCollectsKey();
         return RedisUtils.hmget(key, userId);
     }

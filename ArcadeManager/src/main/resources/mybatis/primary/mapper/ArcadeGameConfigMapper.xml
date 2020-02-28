@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.ArcadeGameConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.ArcadeGameConfig" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="config_date" property="configDate" jdbcType="DATE" />
+    <result column="product_name" property="productName" jdbcType="VARCHAR" />
+    <result column="or_name" property="orName" jdbcType="VARCHAR" />
+    <result column="program_type" property="programType" jdbcType="VARCHAR" />
+    <result column="game_type" property="gameType" jdbcType="VARCHAR" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="session" property="session" jdbcType="VARCHAR" />
+    <result column="award_show" property="awardShow" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, config_date,product_name,or_name,program_type,game_type,app_id,session,award_show
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from arcade_gameconfig
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from arcade_gameconfig
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from arcade_gameconfig
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.primary.model.ArcadeGameConfig" >
+    insert into arcade_gameconfig (id, config_date, product_name,
+      or_name, program_type, game_type, 
+      app_id, session, award_show, 
+      create_time, update_time)
+    values (#{id,jdbcType=BIGINT}, #{configDate,jdbcType=DATE}, #{productName,jdbcType=VARCHAR},
+      #{orName,jdbcType=VARCHAR}, #{programType,jdbcType=VARCHAR}, #{gameType,jdbcType=VARCHAR}, 
+      #{appId,jdbcType=VARCHAR}, #{session,jdbcType=VARCHAR}, #{awardShow,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.primary.model.ArcadeGameConfig" >
+    insert into arcade_gameconfig
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="configDate != null" >
+        config_date,
+      </if>
+      <if test="productName != null" >
+        product_name,
+      </if>
+      <if test="orName != null" >
+        or_name,
+      </if>
+      <if test="programType != null" >
+        program_type,
+      </if>
+      <if test="gameType != null" >
+        game_type,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="session != null" >
+        session,
+      </if>
+      <if test="awardShow != null" >
+        award_show,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="configDate != null" >
+        #{configDate,jdbcType=DATE},
+      </if>
+      <if test="productName != null" >
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="orName != null" >
+        #{orName,jdbcType=VARCHAR},
+      </if>
+      <if test="programType != null" >
+        #{programType,jdbcType=VARCHAR},
+      </if>
+      <if test="gameType != null" >
+        #{gameType,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="session != null" >
+        #{session,jdbcType=VARCHAR},
+      </if>
+      <if test="awardShow != null" >
+        #{awardShow,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.primary.model.ArcadeGameConfig" >
+    update arcade_gameconfig
+    <set >
+      <if test="configDate != null" >
+        config_date = #{configDate,jdbcType=DATE},
+      </if>
+      <if test="productName != null" >
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="orName != null" >
+        or_name = #{orName,jdbcType=VARCHAR},
+      </if>
+      <if test="programType != null" >
+        program_type = #{programType,jdbcType=VARCHAR},
+      </if>
+      <if test="gameType != null" >
+        game_type = #{gameType,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="session != null" >
+        session = #{session,jdbcType=VARCHAR},
+      </if>
+      <if test="awardShow != null" >
+        award_show = #{awardShow,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.primary.model.ArcadeGameConfig" >
+    update arcade_gameconfig
+    set config_date = #{configDate,jdbcType=DATE},
+      product_name = #{productName,jdbcType=VARCHAR},
+      or_name = #{orName,jdbcType=VARCHAR},
+      program_type = #{programType,jdbcType=VARCHAR},
+      game_type = #{gameType,jdbcType=VARCHAR},
+      app_id = #{appId,jdbcType=VARCHAR},
+      session = #{session,jdbcType=VARCHAR},
+      award_show = #{awardShow,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

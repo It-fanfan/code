@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.ProductInfoMapper" >
+    <resultMap id="ProductResultMap" type="com.fish.dao.primary.model.ProductInfo" >
+        <result column="productName" property="productName" jdbcType="VARCHAR" />
+        <result column="platform" property="platform" jdbcType="VARCHAR" />
+        <result column="appId" property="appId" jdbcType="VARCHAR" />
+        <result column="paramOne" property="paramOne" jdbcType="VARCHAR" />
+        <result column="paramTwo" property="paramTwo" jdbcType="VARCHAR" />
+        <result column="loginId" property="loginId" jdbcType="VARCHAR" />
+        <result column="loginPassword" property="loginPassword" jdbcType="VARCHAR" />
+        <result column="admin" property="admin" jdbcType="VARCHAR" />
+        <result column="adminInfo" property="adminInfo" jdbcType="VARCHAR" />
+        <result column="settleCompany" property="settleCompany" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Product_Column_List" >
+    productName, platform, appId, paramOne, paramTwo, loginId, loginPassword,
+    admin, adminInfo, settleCompany
+  </sql>
+    <delete id="deleteProductInfo" parameterType="com.fish.dao.primary.model.ProductInfo">
+         delete from product_info
+    where productName = #{productName,jdbcType=VARCHAR} and appId = #{appId,jdbcType=VARCHAR}
+    </delete>
+
+    <select id="selectAll" resultMap="ProductResultMap">
+        select
+        <include refid="Product_Column_List" />
+        from product_info
+    </select>
+    <select id="selectPlatForm" resultType="java.lang.String">
+        select
+        product_info.platform
+        from product_info
+    </select>
+
+    <insert id="insert" parameterType="com.fish.dao.primary.model.ProductInfo" >
+    insert into product_info (productName, platform, appId, paramOne, paramTwo, loginId, loginPassword,
+    admin, adminInfo, settleCompany)
+    values (#{productName,jdbcType=VARCHAR}, #{platform,jdbcType=VARCHAR}, #{appId,jdbcType=VARCHAR},
+      #{paramOne,jdbcType=VARCHAR}, #{paramTwo,jdbcType=VARCHAR}, #{loginId,jdbcType=VARCHAR},
+      #{loginPassword,jdbcType=VARCHAR}, #{admin,jdbcType=VARCHAR}, #{adminInfo,jdbcType=VARCHAR},
+      #{settleCompany,jdbcType=VARCHAR})
+  </insert>
+
+    <update id="updateProductInfo" parameterType="com.fish.dao.primary.model.ProductInfo" >
+        update product_info
+        <set >
+            <if test="productName != null" >
+                productname = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="platform != null" >
+                platform = #{platform,jdbcType=VARCHAR},
+            </if>
+            <if test="appId != null" >
+                appId = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="paramOne != null" >
+                paramOne = #{paramOne,jdbcType=VARCHAR},
+            </if>
+            <if test="paramTwo != null" >
+                paramTwo = #{paramTwo,jdbcType=VARCHAR},
+            </if>
+            <if test="loginId != null" >
+                loginId = #{loginId,jdbcType=VARCHAR},
+            </if>
+            <if test="loginPassword != null" >
+                loginPassword = #{loginPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="admin != null" >
+                admin = #{admin,jdbcType=VARCHAR},
+            </if>
+            <if test="adminInfo != null" >
+                adminInfo = #{adminInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="settleCompany != null" >
+                settleCompany = #{settleCompany,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where productName = #{productName,jdbcType=VARCHAR} and platform = #{platform,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

@@ -1,6 +1,7 @@
 <component name="libraryTable">
   <library name="libs">
     <CLASSES>
+<<<<<<< HEAD
       <root url="jar://$PROJECT_DIR$/WebRoot/libs/bcprov-jdk16-1.46.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/libs/commons-beanutils-1.9.3.jar!/" />
       <root url="jar://$PROJECT_DIR$/WebRoot/libs/commons-codec-1.4.jar!/" />
@@ -37,5 +38,12 @@
     </CLASSES>
     <JAVADOC />
     <SOURCES />
+=======
+      <root url="file://$PROJECT_DIR$/WebRoot/libs" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/WebRoot/libs" recursive="false" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
   </library>
 </component>

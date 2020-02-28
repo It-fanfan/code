@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="chs">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/modules/operation.js"></script>
+    <script src="../layuiadmin/xm-select.js"></script>
+    <script></script>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <!-- 搜索表单 -->
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                    <form class="layui-form-item" id="search-form">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">时间范围</label>
+                            <div class="layui-input-inline">
+                                <input type="text" class="layui-input" id="times1" placeholder=" - ">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn layuiadmin-btn-useradmin" lay-submit="" lay-filter="game-search">
+                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 数据表格 -->
+                <div class="layui-card-body">
+                    <table class="layui-hide" lay-filter="table-game" id="table-game"></table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script type="text/html" id="toolbar">
+    <div class="layui-table-tool-temp">
+        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-1"></i></div>
+        <div class="layui-inline" lay-event="update"><i class="layui-icon layui-icon-edit"></i></div>
+        <div class="layui-inline" lay-event="delete"><i class="layui-icon layui-icon-delete"></i></div>
+    </div>
+</script>
+<script>
+    var operatorurl = '../manage/productformat';
+    layui.use(['table', 'laydate', 'form', 'layer'], function () {
+        var table = layui.table,
+            form = layui.form,
+            layer = layui.layer,
+            laydate = layui.laydate;
+        var $ = layui.$;
+        let codesArr = [];
+        var gameCodes = [];
+
+        var codeSelect = xmSelect.render({
+            el: '#ddcode',
+            name: 'codeSelect',
+            language: 'zn',
+            toolbar: {show: true},
+            data: [],
+            radio: true,
+            clickClose: true,
+            autoRow: true,
+            paging: true,
+            pageSize: 5,
+            delay: 500,
+            filterable: true,
+            filterDone: function (val, list) {
+                console.log(`搜索完毕, 搜索关键词: ${val}, 过滤数据: ${list.length}个`)
+            },
+        });
+        var gameCodeSelect = xmSelect.render({
+            el: '#gameCode',
+            name: 'gameCodeSelect',
+            language: 'zn',
+            toolbar: {show: true},
+            data: [],
+            radio: true,
+            clickClose: true,
+            autoRow: true,
+            paging: true,
+            pageSize: 5,
+            delay: 500,
+            filterable: true,
+            filterDone: function (val, list) {
+                console.log(`搜索完毕, 搜索关键词: ${val}, 过滤数据: ${list.length}个`)
+            },
+        });
+        $(() => {
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: '../manage/productformat/rounds',
+                success: (res) => {
+
+                    res.forEach(function (val, index, arr) {
+                        let context = {name: val.ddcode, value: val.ddcode,selected: false};
+                        codesArr.push(context);
+                    });
+                    codeSelect.update(
+                        {
+                            data: codesArr,
+                            autoRow: true,
+                        }
+                    );
+                },
+                error: function () {
+                    alert("查询失败")
+                }
+            }),
+                $.ajax({
+                    type: "get",
+                    dataType: "json",
+                    url: '../manage/games/selectBox',
+                    success: (res) => {
+                        res.forEach(function (val, index, arr) {
+                            gameCodes.push(val);
+                        });
+                        let data = [];
+                        for (let i = 0; i < gameCodes.length; i++) {
+                            let val = gameCodes[i];
+                            let context = {name: val.title, value: val.value, selected: false};
+                            data.push(context);
+                        }
+                        gameCodeSelect.update(
+                            {
+                                data: data,
+                                autoRow: true,
+                            }
+                        );
+                    },
+                    error: function () {
+                        alert("查询失败")
+                    }
+                });
+        });
+
+        //监听排序事件
+        table.on('sort(table-game)', function (obj) { //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+            table.reload('table-game', {
+                initSort: obj, //记录初始排序，如果不设的话，将无法标记表头的排序状态。
+                where: { //请求参数（注意：这里面的参数可任意定义，并非下面固定的格式）
+                    sort: obj.field, //排序字段
+                    order: obj.type //排序方式
+                },
+            });
+        });
+        table.on('toolbar(table-game)', function (obj) {
+            var checkStatus = table.checkStatus(obj.config.id);
+            var l = checkStatus.data.length;
+            var row = checkStatus.data[0];
+
+            switch (obj.event) {
+                case 'add':
+                    add();
+                    break;
+                case 'delete':
+                    if (l == 0) {
+                        layer.msg('请选择一行');
+                    } else if (l > 1) {
+                        layer.msg('只能删除一行哦');
+                    } else {
+                        deleteRow(row);
+                    }
+                    break;
+                case 'update':
+                    if (l == 0) {
+                        layer.msg('请选择一行');
+                    } else if (l > 1) {
+                        layer.msg('只能选择一行');
+                    } else {
+                        layer.msg('编辑');
+                        var gameData = row.gameCode;
+
+                         console.log('我是gameCode:', gameData);
+                        let data = [];
+                        for (let i = 0; i < gameCodes.length; i++) {
+                            let val = gameCodes[i];
+                             console.log('val的值 :', val.value);
+                            console.log('val的title :', val.title);
+
+                            var gameResult =(gameData == val.value);
+                            console.log(" === gameResult --："+gameResult+"-"+typeof (gameResult))
+                            let context = {
+                                name: val.title,
+                                value: val.value,
+                                 selected: gameResult
+                            };
+                            data.push(context);
+                        }
+                        var direct = row.ddcode;
+                        console.log('我是ddcode :', direct);
+                        console.log('typeof -- :', typeof (row));
+                        var a = JSON.stringify(row);
+                        let codeData = [];
+                        for (let i = 0; i < codesArr.length; i++) {
+                            let a = codesArr[i];
+                            console.log('codesArr的值 :', a.value);
+                            var split = a.value.split("-");
+                            console.log(split[0]+"---"+split[1]);
+                            var codeResult =(direct == split[0]);
+                            console.log(" === codeResult --："+codeResult+"-"+typeof (codeResult))
+                            let context = {
+                                name: a.value,
+                                value: a.value,
+                                selected: codeResult
+                            };
+                            codeData.push(context);
+                        }
+                        codeSelect.update(
+                            {
+                                data: codeData,
+                                autoRow: true,
+                            }
+                        );
+                        gameCodeSelect.update(
+                            {
+                                data: data,
+                                autoRow: true,
+                            }
+                        );
+
+                        update();
+                    }
+                    break;
+
+            }
+            // 修改
+            function update() {
+                $('#form_table').removeClass('layui-hide').addClass('layui-show');
+                layui.layer.open({
+                    type: 1,
+                    title: '编辑',
+                    content: $('#form_table'),
+                    maxmin: true,
+                    shade: 0,
+                    area: ['auto', '450px'],
+                    btn: ['确定', '取消'],
+
+                    success: (layero, index) => {
+                        // id
+                        let checkStatus = table.checkStatus('table-game');
+                        let data = UIConfig.formatData(checkStatus.data[0]);
+                        console.log('update',data);
+                        form.val("form_table", data);
+
+                    },
+                    yes: (index, layero) => {
+                        // 提交监听
+                        form.on('submit(front-submit)', function (data) {
+                            var field = UIConfig.sumbitFormatData(data); //获取提交的字段
+                            var url = operatorurl + "/edit";
+                            $.ajax({
+                                url: url,
+                                data: field,
+                                contentType: "application/json; charset=utf-8",
+                                type: 'post',
+                                dataType: "json",
+                                success: function (result) {
+                                    UIConfig.postMsg(result)
+                                    if (result.successed) {
+                                        layer.close(index);
+                                    }
+                                }
+                            });
+                        });
+
+                        $('#front-submit').trigger('click');
+                    },
+                    end: () => {
+
+                        $("#form_table")[0].reset();
+                        $('#form_table').removeClass('layui-show').addClass('layui-hide');
+                        table.reload('table-game');
+                        return false;
+                    }
+                });
+            }
+
+            // 新增
+            function add() {
+                // 表单元素
+                $('#form_table').removeClass('layui-hide').addClass('layui-show');
+                layui.layer.open({
+                    type: 1,
+                    content: $('#form_table'),
+                    title: '添加',
+                    maxmin: true,
+                    area: ['auto', '450px'],
+                    btn: ['确定', '取消'],
+                    success: function (layero, index) {
+                        var checkStatus = table.checkStatus('#table-game');
+                        let data = UIConfig.formatData(checkStatus.data[0]);
+                        form.val("form_table", data);
+                    },
+                    yes: function (index, layero) {
+                        // 提交监听
+                        form.on('submit(front-submit)', data => {
+                            var field = UIConfig.sumbitFormatData(data); //获取提交的字段
+                            var url = operatorurl + "/new";
+                            $.ajax({
+                                url: url,
+                                data: field,
+                                contentType: "application/json; charset=utf-8",
+                                type: 'post',
+                                dataType: "json",
+                                success: function (result) {
+                                    UIConfig.postMsg(result)
+                                    if (result.successed) {
+                                        layer.close(index);
+                                    }
+                                }
+                            });
+
+                        });
+
+                        $('#front-submit').trigger('click');
+                    },
+                    end: function () {
+                        $("#form_table")[0].reset();
+                        $('#form_table').removeClass('layui-show').addClass('layui-hide')
+                        return false;
+                    }
+                });
+            }
+
+            // 删除行
+            function deleteRow(row) {
+                layer.confirm('真的删除行么', function (index) {
+                    //向服务端发送删除指令
+                    var url = operatorurl + "/delete";
+                    $.ajax({
+                        url: url,
+                        data: JSON.stringify(row),
+                        contentType: "application/json; charset=utf-8",
+                        type: 'post',
+                        dataType: "json",
+                        success: function (result) {
+                            UIConfig.postMsg(result)
+                            if (result.successed) {
+                                layer.close(index);
+                            }
+                        }
+                    });
+                });
+            }
+        });
+        table.render({
+            elem: '#table-game',
+            autoSort: false,
+            url: operatorurl + '?datagrid=data',
+            cols: [[
+                {type: 'checkbox'},
+                {field: 'id', width: 120, title: '序号', sort: true},
+                {field: 'times', width: 120, title: '配置日期', sort: true},
+                {field: 'validTime', width: 120, title: '生效日期', sort: true},
+                {field: 'ddstate', width: 120, title: '状态', sort: true, templet: (d) => {
+                        if (d.ddstate == true)
+                            return "开启";
+                        return "关闭";
+                    }},
+                {field: 'gameCode', width: 120, title: '游戏ID', sort: true},
+                {field: 'gameName', width: 120, title: '游戏名称', sort: true},
+                {field: 'ddcode', width: 120, title: '赛制编号', sort: true},
+                {field: 'ddname', width: 120, title: '赛制名称', sort: true},
+                {field: 'ddpriority', width: 120, title: '赛制优先级', sort: true},
+                {field: 'totalField', width: 120, title: '场次', sort: true},
+                {field: 'sessionDetail', width: 120, title: '场次详情', sort: true},
+                {field: 'gameDateSurvey', width: 120, title: '奖励说明', sort: true},
+
+                {field: 'session', width: 120, title: '比赛结果查询', sort: true}
+            ]],
+            page: true,
+            limit: 20,
+            toolbar: '#toolbar',
+            defaultToolbar: ['filter', 'exports']
+        });
+
+        laydate.render({
+            elem: '#times',
+            format: 'yyyy/MM/dd'
+        });
+        laydate.render({
+            elem: '#validTime',
+            range: true
+        });
+        laydate.render({
+            elem: '#createTime',
+            format: 'yyyy/MM/dd HH:mm'
+        });
+        laydate.render({
+            elem: '#startTime',
+            range: true
+        });
+
+    })
+
+</script>
+
+<!-- 表单元素 -->
+<form id="form_table" class="layui-form layui-hide" lay-filter="form_table" style="padding: 20px 0 0 0;">
+
+    <div class="layui-form-item layui-hide">
+        <label class="layui-form-label">id</label>
+        <div class="layui-input-inline">
+            <input type="text" id="id" name="id"  autocomplete="off"
+                   class="layui-input layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">配置日期</label>
+        <div class="layui-input-inline">
+            <input type="text" id="times" name="times"  autocomplete="off"
+                   class="layui-input layui-input" placeholder="请输入">
+        </div>
+    </div>
+
+    <div class="layui-form-item ">
+        <label class="layui-form-label">生效日期</label>
+        <div class="layui-input-block">
+            <input type="text" id="validTime" name="validTime"
+                   class="layui-input" placeholder="请输入">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">游戏ID</label>
+        <div class="layui-input-block">
+            <div id="gameCode" name="gameCode" lay-filter="gameCode"></div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">赛制编号</label>
+        <div class="layui-input-block">
+            <div id="ddcode" name="ddcode" lay-filter="ddcode"></div>
+        </div>
+    </div>
+    <div class=" layui-form-item">
+        <label class="layui-form-label">状态</label>
+        <div class="layui-input-inline">
+            <input type="checkbox" name="ddstate" lay-skin="switch">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline">
+
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label"></label>
+        <div class="layui-input-inline">
+
+        </div>
+    </div>
+    <div class="layui-form-item layui-hide">
+        <input type="button" lay-submit lay-filter="front-submit" id="front-submit" value="确认">
+    </div>
+</form>
+</body>
+</html>

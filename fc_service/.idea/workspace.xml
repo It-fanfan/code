@@ -7,7 +7,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1a00aa4-6bf8-46b0-91dc-d62be59c5463" name="Default Changelist" comment="" />
+<<<<<<< HEAD
     <ignored path="$PROJECT_DIR$/WebRoot/WEB-INF/classes/" />
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,6 +50,7 @@
   <component name="FavoritesManager">
     <favorites_list name="persieService" />
   </component>
+<<<<<<< HEAD
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
@@ -151,6 +155,8 @@
       </file>
     </leaf>
   </component>
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -159,6 +165,7 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="FindInProjectRecents">
     <findStrings>
       <find>fromString</find>
@@ -253,6 +260,8 @@
       </list>
     </option>
   </component>
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -267,6 +276,7 @@
       </MavenGeneralSettings>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="MavenProjectNavigator">
     <treeState>
       <expand />
@@ -421,16 +431,30 @@
       </pane>
     </panes>
   </component>
+=======
+  <component name="MavenRunner">
+    <option name="jreName" value="1.8" />
+  </component>
+  <component name="ProjectId" id="1WbzrSra15yUtTXtZmkrTEKupZy" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
   <component name="PropertiesComponent">
     <property name="DatabaseDriversLRU" value="mysql" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1572969051705" />
     <property name="database.console.LAST_STATE" value="false" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../P18001_FishGame/review/10623/code/manager" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Project" />
+=======
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <property name="project.structure.proportion" value="0.1534196" />
     <property name="project.structure.side.proportion" value="0.24754634" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
@@ -463,7 +487,11 @@
     </option>
   </component>
   <component name="RunManager">
+<<<<<<< HEAD
     <configuration name="Tomcat9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.22" ALTERNATIVE_JRE_ENABLED="false">
+=======
+    <configuration name="Tomcat9" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.28" ALTERNATIVE_JRE_ENABLED="false">
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
       <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=UTF-8" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -475,7 +503,10 @@
       </deployment>
       <server-settings>
         <option name="BASE_DIRECTORY_NAME" value="Unnamed_persieService" />
+<<<<<<< HEAD
         <option name="HTTP_PORT" value="8080" />
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         <option name="JNDI_PORT" value="1097" />
       </server-settings>
       <predefined_log_file enabled="true" id="Tomcat" />
@@ -595,6 +626,7 @@
       <workItem from="1572834379798" duration="5885000" />
       <workItem from="1572922477212" duration="11539000" />
       <workItem from="1573028111057" duration="1529000" />
+<<<<<<< HEAD
     </task>
     <servers />
   </component>
@@ -681,6 +713,12 @@
       <window_info anchor="right" id="Theme Preview" order="9" />
     </layout-to-restore>
   </component>
+=======
+      <workItem from="1579433298669" duration="11590000" />
+    </task>
+    <servers />
+  </component>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
@@ -693,6 +731,7 @@
           <properties field="ddTip" class="db.PeDbRecharge" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>
+<<<<<<< HEAD
       </breakpoints>
     </breakpoint-manager>
   </component>
@@ -1156,4 +1195,24 @@
       </state>
     </states>
   </component>
+=======
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/pipe/PeConfigGames.java</url>
+          <line>148</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/db/PeDbGame.java</url>
+          <line>220</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/db/PeDbGame.java</url>
+          <line>234</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 </project>

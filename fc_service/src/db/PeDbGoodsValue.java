@@ -75,8 +75,11 @@ public class PeDbGoodsValue extends PeDbObject implements Serializable
                     cache.removeIf(c -> c.ddGoodsType.equals("coin") || c.ddGoodsType.equals("recharge"));
                 }
                 break;
+<<<<<<< HEAD
                 default:
                     break;
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             }
         }
         return cache;

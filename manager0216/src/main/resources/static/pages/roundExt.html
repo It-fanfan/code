@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="chs">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta content="webkit" name="renderer">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0"
+          name="viewport">
+    <link href="../layuiadmin/layui/css/layui.css" media="all" rel="stylesheet">
+    <link href="../layuiadmin/style/admin.css" media="all" rel="stylesheet">
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/modules/operation.js"></script>
+    <script src="../layuiadmin/xm-select.js"></script>
+    <script></script>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <!-- 搜索表单 -->
+                <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+                    <form class="layui-form-item" id="search-form">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">配置时间</label>
+                            <div class="layui-input-inline">
+                                <input class="layui-input" id="times" name="times" placeholder=" - " type="text">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">赛制名称</label>
+                            <div class="layui-input-block">
+                                <div class="layui-input-inline" style="width: 12rem;"
+                                     id="roundcode" name="roundSelect" lay-filter="roundcode" autocomplete="off"></div>
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button class="layui-btn layuiadmin-btn-useradmin" lay-filter="front-search" lay-submit="">
+                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- 数据表格 -->
+                <div class="layui-card-body">
+                    <table class="layui-hide" id="table-page" lay-filter="table-page"></table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script id="toolbar" type="text/html">
+    <div class="layui-table-tool-temp">
+        <div class="layui-inline" lay-event="add"><i class="layui-icon layui-icon-add-1"></i></div>
+        <div class="layui-inline" lay-event="update"><i class="layui-icon layui-icon-edit"></i></div>
+        <div class="layui-inline" lay-event="delete"><i class="layui-icon layui-icon-delete"></i></div>
+    </div>
+</script>
+<script>
+    var operatorurl = '../manage/roundext';
+    layui.use(['table', 'laydate', 'form', 'layer'], function () {
+        var table = layui.table,
+            form = layui.form,
+            layer = layui.layer,
+            laydate = layui.laydate;
+        var $ = layui.$;
+        let codesArr = [];
+        var codeSelect = xmSelect.render({
+            el: '#roundcode',
+            name: 'roundSelect',
+            language: 'zn',
+            toolbar: {show: true},
+            data: [],
+            radio: true,
+            clickClose: true,
+            autoRow: true,
+            paging: true,
+            pageSize: 5,
+            delay: 500,
+            filterable: true,
+            filterDone: function (val, list) {
+                console.log(`搜索完毕, 搜索关键词: ${val}, 过滤数据: ${list.length}个`)
+            },
+        });
+        $.ajax({
+            type: "get",
+            dataType: "json",
+            url: '../manage/roundmatch/roundall',
+            success: (res) => {
+
+                res.forEach(function (val, index, arr) {
+                    let context = {name: val.ddcode, value: val.ddcode, selected: false};
+                    codesArr.push(context);
+                });
+                codeSelect.update(
+                    {
+                        data: codesArr,
+                        autoRow: true,
+                    }
+                );
+            },
+            error: function () {
+                alert("查询失败")
+            }
+        }),
+            table.render({
+                elem: '#table-page',
+                url: operatorurl + '?datagrid=data',
+                cols: [[
+                    {type: 'checkbox'},
+                    {field: 'inserttime', width: '14%', title: '配置时间', sort: true},
+                    {field: 'ddcode', width: 120, title: '赛制编号', sort: true},
+                    {field: 'ddname', width: 120, title: '赛制名称', sort: true},
+                    {
+                        field: 'ddpriority', width: 120, title: '优先级', sort: true,
+                        templet: (d) => {
+                            if (d.ddpriority == 1) {
+                                return "高";
+                            } else if (d.ddpriority == 2) {
+                                return "中";
+                            } else if (d.ddpriority == 3) {
+                                return "低";
+                            } else {
+                                return "关闭";
+                            }
+                        }
+                    },
+                    {field: 'tip', width: 120, title: '赛制时长', sort: true},
+                    {
+                        field: 'ddgroup', width: 120, title: '赛制类型', sort: true,
+                        templet: (d) => {
+                            if (d.ddgroup == true) {
+                                return "小程序";
+                            } else {
+                                return "小游戏";
+                            }
+                        }
+                    },
+                    {field: 'ddreward', width: 760, title: '赛场奖励', sort: true}
+
+                ]],
+                page: true,
+                toolbar: '#toolbar',
+                defaultToolbar: ['filter', 'exports']
+            });
+
+        laydate.render({
+            elem: '#times',
+            range: true
+        });
+        laydate.render({
+            elem: '#inserttime',
+            format: 'yyyy/MM/dd HH:mm:ss'
+        });
+
+        $('#front-submit').on('click', function () {
+            let content = $('#ddreward').val();
+            console.log("content:" + content)
+            if (typeof content == 'string') {
+                try {
+                    var obj=JSON.parse(content);
+                    if(typeof obj != 'object' && !obj ){
+                        alert("请检查赛场奖励JSON格式")
+                        return false;
+                    }
+                }catch(e) {
+                    alert("请检查赛场奖励JSON格式")
+                    return false;
+                }
+            }
+        });
+
+    })
+
+</script>
+
+<!-- 表单元素 -->
+<form class="layui-form layui-hide" id="form_table" lay-filter="form_table" style="padding: 20px 0 0 0;width: 400px;height: 450px;">
+
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">赛场编号</label>
+        <div class="layui-input-inline">
+            <input autocomplete="off" class="layui-input layui-disabled" id="ddcode" name="ddcode"
+                   type="text" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">赛制名称</label>
+        <div class="layui-input-inline">
+            <input autocomplete="off" class="layui-input layui-input" id="ddname" lay-verify="required" name="ddname"
+                   type="text">
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">优先级</label>
+        <div class="layui-input-inline">
+            <select name="ddpriority" id="ddpriority">
+                <option value=1>高</option>
+                <option value=2>中</option>
+                <option value=3>低</option>
+            </select>
+        </div>
+    </div>
+
+    <!--    <div class="layui-form-item ">-->
+    <!--        <label class="layui-form-label">赛场状态</label>-->
+    <!--        <div class="layui-input-inline">-->
+    <!--            <input type="checkbox" name="ddstate" lay-skin="switch" checked="checked">-->
+    <!--        </div>-->
+    <!--    </div>-->
+    <div class="layui-form-item ">
+        <label class="layui-form-label">原时长</label>
+        <div class="layui-input-inline">
+            <input autocomplete="off" class="layui-input layui-disabled" id="tip" name="tip"
+                   type="text" disabled>
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">赛制时长</label>
+        <div class="layui-input-inline">
+            <input autocomplete="off" class="layui-input layui-input" id="roundLength" name="roundLength"
+                   type="text">
+            <span>格式:1s,1m,1h,1d</span>
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">赛制类型</label>
+        <div class="layui-input-inline">
+            <select class="layui-select" id="ddgroup" name="ddgroup">
+                <option value=true>小程序</option>
+                <option value=false>小游戏</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item ">
+        <label class="layui-form-label">赛场奖励</label>
+        <textarea id="ddreward" name="ddreward" required lay-verify="required" placeholder="请按照格式输入"
+                  class="layui-textarea"></textarea>
+        <span>格式:["名次#名次#类型#数值"]</span><br>
+        <span>["1#1#rmb#30","2#2#rmb#10"]</span>
+    </div>
+
+
+    <div class="layui-form-item layui-hide">
+        <input id="front-submit" lay-filter="front-submit" lay-submit type="button" value="确认">
+    </div>
+</form>
+</body>
+</html>

@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+/**
+ *
+ */
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 package pipe;
 
 import config.ReadConfig;
@@ -20,10 +26,23 @@ public class CmPipeDeamon extends Thread
 {
     private static final Logger LOG = LoggerFactory.getLogger(CmPipeDeamon.class);
 
+<<<<<<< HEAD
     /**
      * 定义 CmPipeDeamon 对象
      */
     private static CmPipeDeamon pipeDeamon = null;
+=======
+    //
+    // 定义 CmPipeDeamon 对象
+    //
+    public static CmPipeDeamon pipeDeamon = null;
+
+    //
+    // 定义是否正在运行
+    //
+    public boolean isRunning = true;
+
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 
     /**
      * 初始化的方法

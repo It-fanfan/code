@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.ProductEarnMapper">
+    <resultMap id="EarnResultMap" type="com.fish.dao.primary.model.ProductEarn">
+        <id column="new_day" property="newDay" jdbcType="DATE"/>
+        <result column="app_id" property="appId" jdbcType="VARCHAR"/>
+        <result column="enter_count" property="enterCount" jdbcType="BIGINT"/>
+        <result column="online_avg" property="onlineAvg" jdbcType="VARCHAR"/>
+        <result column="pay_usercount" property="payUserCount" jdbcType="BIGINT"/>
+        <result column="ad_revenue" property="adRevenue" jdbcType="DECIMAL"/>
+        <result column="in_revenue" property="inRevenue" jdbcType="DECIMAL"/>
+        <result column="in_arpu" property="inArpu" jdbcType="DECIMAL"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        new_day, app_id, enter_count,online_avg,pay_usercount,ad_revenue,in_revenue,in_arpu
+    </sql>
+    <select id="selectAll" resultMap="EarnResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from product_earn
+    </select>
+
+    <select id="selectInNumbers" resultMap="EarnResultMap">
+      SELECT
+         DATE_FORMAT(times, '%Y-%m-%d') as new_day,
+         a.appid as app_id,
+         COUNT(*) as enter_count
+        FROM
+          product_profile a
+        WHERE (a.kind = "login" OR a.kind = "play" OR a.kind ="pay")
+        GROUP BY new_day ,
+          app_id
+    </select>
+    <select id="selectPayUser" resultMap="EarnResultMap">
+      SELECT
+          DATE_FORMAT(times, '%Y-%m-%d') AS new_day,
+          a.appid as app_id ,
+          COUNT(DISTINCT a.`userId`) as pay_usercount
+        FROM
+          product_profile a
+        WHERE
+           a.`kind` = 'pay'
+        GROUP BY new_day,
+          app_id
+    </select>
+    <select id="selectInCost" resultMap="EarnResultMap">
+      SELECT
+          DATE_FORMAT(times, '%Y-%m-%d') AS new_day,
+          a.appid AS app_id,
+          SUM(cost) AS in_revenue
+        FROM
+          product_profile a
+        WHERE a.kind = "pay"
+        GROUP BY new_day,
+          app_id
+    </select>
+    <select id="selectOnlineAvg" resultMap="EarnResultMap">
+      SELECT
+        s.days AS new_day,s.appId AS app_id,SUM(online) AS online_avg
+        FROM (
+        SELECT DATE(times) AS days,userId,appId,TIMESTAMPDIFF(SECOND,MIN(times),MAX(times)) AS online
+        FROM `product_profile`
+        GROUP BY userId,appId,days
+        ) s
+        GROUP BY new_day,app_id
+    </select>
+
+    <insert id="insertEarnData"  parameterType="com.fish.dao.primary.model.ProductEarn">
+        insert into product_earn
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="newDay != null">
+                new_day,
+            </if>
+            <if test="appId != null">
+                app_id,
+            </if>
+            <if test="enterCount != null">
+                enter_count,
+            </if>
+            <if test="onlineAvg != null">
+                online_avg,
+            </if>
+            <if test="payUserCount != null">
+                pay_usercount,
+            </if>
+            <if test="adRevenue != null">
+                ad_revenue,
+            </if>
+            <if test="inRevenue != null">
+                in_revenue,
+            </if>
+            <if test="inArpu != null">
+                in_arpu,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="newDay != null">
+                #{newDay,jdbcType=DATE},
+            </if>
+            <if test="appId != null">
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="enterCount != null">
+                #{enterCount,jdbcType=BIGINT},
+            </if>
+            <if test="onlineAvg != null">
+                #{onlineAvg,jdbcType=BIGINT},
+            </if>
+            <if test="payUserCount != null">
+                #{payUserCount,jdbcType=BIGINT},
+            </if>
+            <if test="adRevenue != null">
+                #{adRevenue,jdbcType=BIGINT},
+            </if>
+            <if test="inRevenue != null">
+                #{inRevenue,jdbcType=BIGINT},
+            </if>
+            <if test="inArpu != null">
+                #{inArpu,jdbcType=BIGINT},
+            </if>
+        </trim>
+        ON DUPLICATE KEY UPDATE
+        <trim prefix="" suffix="" suffixOverrides=",">
+        <if test="enterCount != null">
+            enter_count=values(enter_count),
+        </if>
+        <if test="onlineAvg != null">
+            online_avg=values(online_avg),
+        </if>
+        <if test="payUserCount != null">
+            pay_usercount=values(pay_usercount),
+        </if>
+        <if test="adRevenue != null">
+            ad_revenue=values(ad_revenue),
+        </if>
+        <if test="inRevenue != null">
+            in_revenue=values(in_revenue),
+        </if>
+        <if test="inArpu != null">
+            in_arpu=values(in_arpu),
+        </if>
+    </trim>
+    </insert>
+</mapper>

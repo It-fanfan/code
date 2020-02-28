@@ -11,6 +11,7 @@ import java.io.File;
 public class CmProjectConfig
 {
 
+<<<<<<< HEAD
     /**
      * /*定义项目根目录
      */
@@ -18,6 +19,17 @@ public class CmProjectConfig
 
     /**
      * 初始化系统配置文件信息
+=======
+    //
+    // 定义项目根目录
+    //
+    public static String projectPath = null;
+
+    /**
+     * 初始化系统配置文件信息
+     *
+     * @param arg
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
      */
     public static void initConfig(ServletContextEvent arg)
     {

@@ -23,13 +23,17 @@ import java.util.Objects;
 import java.util.Vector;
 import java.util.concurrent.atomic.AtomicInteger;
 
+<<<<<<< HEAD
 /**
  * @author xuwei
  */
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 public class CmPipeServiceDemon implements Runnable
 {
     private static final Logger LOG = LoggerFactory.getLogger(CmPipeServiceDemon.class);
 
+<<<<<<< HEAD
     /**
      * 套接字信息
      */
@@ -38,6 +42,14 @@ public class CmPipeServiceDemon implements Runnable
     /**
      * 链接socket交互
      */
+=======
+    //
+    // 套接字信息
+    //
+    private ServerSocket server = null;
+
+    //链接socket交互
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     private static Vector<CmPipeSocket> sockets = new Vector<>();
 
     public static Vector<CmPipeSocket> getSockets()
@@ -45,10 +57,15 @@ public class CmPipeServiceDemon implements Runnable
         return sockets;
     }
 
+<<<<<<< HEAD
     /**
      * 缓存数据
      */
     public static final String REDIS_KEY = "match-service";
+=======
+    //缓存数据
+    private static final String REDIS_KEY = "match-service";
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 
     /**
      * 构造一个 CmPipeClient
@@ -64,6 +81,7 @@ public class CmPipeServiceDemon implements Runnable
         }
     }
 
+<<<<<<< HEAD
     /**
      * 更新房间数据
      *
@@ -90,12 +108,18 @@ public class CmPipeServiceDemon implements Runnable
         }
     }
 
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     @Override
     public void run()
     {
         try
         {
+<<<<<<< HEAD
             while (true)
+=======
+            do
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             {
                 Socket socket = server.accept();
                 //2、调用accept()方法开始监听，等待客户端的连接
@@ -104,7 +128,11 @@ public class CmPipeServiceDemon implements Runnable
                 CmPipeSocket pipeSocket = new CmPipeSocket(socket);
                 sockets.add(pipeSocket);
                 pipeSocket.start();
+<<<<<<< HEAD
             }
+=======
+            } while (true);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 
         } catch (Exception e)
         {
@@ -133,9 +161,13 @@ public class CmPipeServiceDemon implements Runnable
         String configStr = RedisUtils.hget(REDIS_KEY, "config");
         JSONObject config = new JSONObject();
         if (configStr != null)
+<<<<<<< HEAD
         {
             config = JSONObject.parseObject(configStr);
         }
+=======
+            config = JSONObject.parseObject(configStr);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 
         JSONObject aresCache = new JSONObject();
         //地区分布
@@ -149,9 +181,13 @@ public class CmPipeServiceDemon implements Runnable
             int ares = service.getInteger("ares");
             JSONObject aresData = aresCache.getJSONObject(String.valueOf(ares));
             if (aresData == null)
+<<<<<<< HEAD
             {
                 aresData = new JSONObject();
             }
+=======
+                aresData = new JSONObject();
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             //获取当前匹配服务容纳量
             int weight = service.getInteger("weight");
             JSONArray pkServices = socket.getPkRoom();
@@ -162,7 +198,10 @@ public class CmPipeServiceDemon implements Runnable
                 continue;
             }
             //获取当前区域匹配服的承载量
+<<<<<<< HEAD
             match.put("checkType", service.getString("checkType"));
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             aresData.put(key, match);
             aresCache.put(String.valueOf(ares), aresData);
         }
@@ -174,9 +213,13 @@ public class CmPipeServiceDemon implements Runnable
         updateMatchOnline();
     }
 
+<<<<<<< HEAD
     /**
      * 获取赛场在线人数信息
      */
+=======
+    //获取赛场在线人数信息
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     private static void updateMatchOnline()
     {
         JSONObject online = new JSONObject();
@@ -186,9 +229,13 @@ public class CmPipeServiceDemon implements Runnable
         {
             JSONArray pkServices = socket.getPkRoom();
             if (pkServices == null)
+<<<<<<< HEAD
             {
                 continue;
             }
+=======
+                continue;
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             for (int i = 0; i < pkServices.size(); i++)
             {
                 JSONObject pkService = pkServices.getJSONObject(i);
@@ -196,20 +243,29 @@ public class CmPipeServiceDemon implements Runnable
                 for (int j = 0; j < buzyRooms.size(); j++)
                 {
                     JSONObject room = buzyRooms.getJSONObject(j);
+<<<<<<< HEAD
                     if (room.getInteger("gameCode") <= 0)
                     {
                         continue;
                     }
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                     int userCount = room.getInteger("userCount");
                     String matchKey = room.getString("matchKey");
                     Integer count = online.getInteger(matchKey);
                     if (count == null)
+<<<<<<< HEAD
                     {
                         count = userCount;
                     } else
                     {
                         count += userCount;
                     }
+=======
+                        count = userCount;
+                    else
+                        count += userCount;
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                     online.put(matchKey, count);
                 }
             }
@@ -218,6 +274,7 @@ public class CmPipeServiceDemon implements Runnable
     }
 
     /**
+<<<<<<< HEAD
      * 进行保存房间到redis中
      *
      * @param room 房间数据
@@ -331,6 +388,8 @@ public class CmPipeServiceDemon implements Runnable
     }
 
     /**
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
      * 获取当前配置服相关参数
      */
     private static JSONObject getMatchInfo(String key, JSONObject service, JSONArray pkServices, JSONObject config)
@@ -342,6 +401,7 @@ public class CmPipeServiceDemon implements Runnable
         //获取当前匹配服能够容纳房间数据
         JSONArray pkRooms = new JSONArray();
         if (pkServices != null)
+<<<<<<< HEAD
         {
             for (int i = 0; i < pkServices.size(); i++)
             {
@@ -351,6 +411,13 @@ public class CmPipeServiceDemon implements Runnable
                 Boolean pause = config.containsKey(addr) && config.getBoolean(addr);
                 //最大分配用户数
                 int maxPlayer;
+=======
+            for (int i = 0; i < pkServices.size(); i++)
+            {
+                JSONObject pkService = pkServices.getJSONObject(i);
+                String addr = pkService.getString("addr");
+                Boolean pause = config.containsKey(addr) && config.getBoolean(addr);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 //空闲房间数
                 int idle = pkService.getInteger("idleCount");
                 //繁忙房间数
@@ -359,6 +426,7 @@ public class CmPipeServiceDemon implements Runnable
                 int allow = pkService.getInteger("allow");
                 //总房间数
                 int roomSize = buzy + idle;
+<<<<<<< HEAD
                 if (pkService.containsKey("maxPlayer"))
                 {
                     maxPlayer = pkService.getInteger("maxPlayer");
@@ -367,6 +435,8 @@ public class CmPipeServiceDemon implements Runnable
                     maxPlayer = roomSize;
                 }
                 int online = getOnlineUser(pkService);
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 //关停状态，不进行计算该服务器房间
                 if (!pause)
                 {
@@ -388,11 +458,16 @@ public class CmPipeServiceDemon implements Runnable
                 room.put("weight", pkService.getInteger("weight"));
                 room.put("buzySize", buzy);
                 room.put("roomSize", roomSize);
+<<<<<<< HEAD
                 room.put("maxPlayer", maxPlayer);
                 room.put("online", online);
                 pkRooms.add(room);
             }
         }
+=======
+                pkRooms.add(room);
+            }
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         match.put("pkRoom", pkRooms);
         return match;
     }
@@ -406,15 +481,23 @@ public class CmPipeServiceDemon implements Runnable
     {
         //进行判断是否为总量驱动
         boolean warningFlag = Boolean.valueOf(Objects.toString(ReadConfig.get("warning-flag"), "false"));
+<<<<<<< HEAD
         //预警检测
         String checkType = Objects.toString(ReadConfig.get("warning-check"), "room");
         //进行计算是否达到阀值高峰期
         //每个区域pk和through服房间数是否达到80%
         JSONArray logic = new JSONArray();
+=======
+        //进行计算是否达到阀值高峰期
+        //每个区域pk和through服房间数是否达到80%
+        AtomicInteger pk_total = new AtomicInteger(), pk_buzyRoom = new AtomicInteger();
+        AtomicInteger through_total = new AtomicInteger(), through_buzyRoom = new AtomicInteger();
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         for (Map.Entry<String, Object> set : aresCache.entrySet())
         {
             //地区内容
             String ares = set.getKey();
+<<<<<<< HEAD
             JSONObject context = (JSONObject) set.getValue();
             //检测判断
             JSONArray temp = new JSONArray();
@@ -583,6 +666,76 @@ public class CmPipeServiceDemon implements Runnable
             }
             default:
                 return "默认服";
+=======
+            //当前地区pk房间数信息，through房间数信息
+            int pk = 0, through = 0, buzyPk = 0, buzyThrough = 0;
+            JSONObject context = (JSONObject) set.getValue();
+            for (Map.Entry<String, Object> match : context.entrySet())
+            {
+                JSONObject value = (JSONObject) match.getValue();
+                if (value.containsKey("pk"))
+                    pk += value.getInteger("pk");
+                if (value.containsKey("buzy-pk"))
+                    buzyPk += value.getInteger("buzy-pk");
+                if (value.containsKey("through"))
+                    through += value.getInteger("through");
+                if (value.containsKey("buzy-through"))
+                    buzyThrough += value.getInteger("buzy-through");
+            }
+
+            if (warningFlag)
+            {
+                pk_total.addAndGet(pk);
+                pk_buzyRoom.addAndGet(buzyPk);
+                through_total.addAndGet(through);
+                through_buzyRoom.addAndGet(buzyThrough);
+                continue;
+            }
+            warning(ares, buzyPk, pk, buzyThrough, through);
+        }
+        if (warningFlag)
+            warning("总地域", pk_buzyRoom.get(), pk_total.get(), through_buzyRoom.get(), through_total.get());
+    }
+
+
+    /**
+     * 警告判斷
+     *
+     * @param ares        地區
+     * @param buzyPk      PK繁忙
+     * @param pk          PK縂房間
+     * @param buzyThrough 闯关繁忙
+     * @param through     闯关总房间
+     */
+    private static void warning(String ares, int buzyPk, int pk, int buzyThrough, int through)
+    {
+        PeDbWeight peDbWeight = PeDbWeight.instance();
+        //pk服充裕，进行关停游戏服务器
+        BigDecimal pkRate = CmTool.div(buzyPk, pk, 2);
+        //进行扩容报警
+        if (buzyPk > 0 && pkRate.compareTo(peDbWeight.getMaxLimit()) >= 0)
+        {
+            warningMaxNotice(peDbWeight, ares, pkRate, peDbWeight.getMaxLimit(), buzyPk, pk, "pk服");
+        }
+        //闯关服扩容报警
+        BigDecimal throughRate = CmTool.div(buzyThrough, through, 2);
+        if (buzyThrough > 0 && throughRate.compareTo(peDbWeight.getMaxLimit()) >= 0)
+        {
+            warningMaxNotice(peDbWeight, ares, throughRate, peDbWeight.getMaxLimit(), buzyThrough, through, "闯关服");
+        }
+        boolean warningFlag = Boolean.valueOf(Objects.toString(ReadConfig.get("min-flag"), "false"));
+        if (warningFlag)
+            return;
+        //pk服缩容警告
+        if (buzyPk <= 0 || pkRate.compareTo(peDbWeight.getMinLimit()) <= 0)
+        {
+            warningMinNotice(peDbWeight, ares, pkRate, peDbWeight.getMinLimit(), buzyPk, pk, 1);
+        }
+        //闯关服缩容警告
+        if (buzyThrough <= 0 || throughRate.compareTo(peDbWeight.getMinLimit()) <= 0)
+        {
+            warningMinNotice(peDbWeight, ares, throughRate, peDbWeight.getMinLimit(), buzyThrough, through, 0);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         }
     }
 
@@ -595,6 +748,7 @@ public class CmPipeServiceDemon implements Runnable
      * @param min        下限配置
      * @param buzy       当前使用房间数
      * @param total      总房间数
+<<<<<<< HEAD
      * @param type       服务器通配
      */
     private static void warningMinNotice(PeDbWeight peDbWeight, String ares, BigDecimal rate, BigDecimal min, int buzy, int total, String type)
@@ -614,12 +768,35 @@ public class CmPipeServiceDemon implements Runnable
         String normalContent = MessageFormat.format("{0}{1}占用率为{2},可以下架服务器了", serviceName, name, per);
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String grayContent = MessageFormat.format("总{0}数{1},使用数{2},报警时间:{3}", name, total, buzy, format.format(new Date()));
+=======
+     * @param allow      服务器通配
+     */
+    private static void warningMinNotice(PeDbWeight peDbWeight, String ares, BigDecimal rate, BigDecimal min, int buzy, int total, int allow)
+    {
+        String highTip = peDbWeight.ares.getString(ares);
+        if (highTip == null)
+            highTip = ares;
+        String minPer = min.multiply(BigDecimal.valueOf(100)) + "%";
+        String per = rate.multiply(BigDecimal.valueOf(100)) + "%";
+        String serviceName = "常规服";
+        if (allow == 0)
+            serviceName = "闯关服";
+        else if (allow == 1)
+            serviceName = "PK服";
+        String title = MessageFormat.format("街机服务器缩容通知-{0},{1}", serviceName, highTip);
+        String highContent = MessageFormat.format("{0}房间低于{1}设置阀值,目前{2}", highTip, minPer, per);
+
+        String normalContent = MessageFormat.format("{0}房间占用率为{1},可以下架服务器了", serviceName, per);
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String grayContent = MessageFormat.format("总房间数{0},使用房间数{1},报警时间:{2}", total, buzy, format.format(new Date()));
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         peDbWeight.sendNotice(title, highContent, normalContent, grayContent);
     }
 
     /**
      * 警告通知
      *
+<<<<<<< HEAD
      * @param peDbWeight 权重配置
      * @param ares       区域信息
      * @param rate       扩容rate
@@ -642,6 +819,26 @@ public class CmPipeServiceDemon implements Runnable
         String normalContent = MessageFormat.format("{0}{1}空间已经占用达到{2},请及时扩容保障正常游戏", serviceName, name, per);
         DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         String grayContent = MessageFormat.format("当前总{0}数{1},已经使用数{2},报警时间:{3}", name, total, buzy, format.format(new Date()));
+=======
+     * @param peDbWeight  权重配置
+     * @param ares        区域信息
+     * @param rate        扩容rate
+     * @param max         阀值通知
+     * @param serviceName 服务名称
+     */
+    private static void warningMaxNotice(PeDbWeight peDbWeight, String ares, BigDecimal rate, BigDecimal max, int buzy, int total, String serviceName)
+    {
+        String highTip = peDbWeight.ares.getString(ares);
+        if (highTip == null)
+            highTip = ares;
+        String maxPer = max.multiply(BigDecimal.valueOf(100)) + "%";
+        String per = rate.multiply(BigDecimal.valueOf(100)) + "%";
+        String title = MessageFormat.format("街机服务器扩容通知-{0},{1}", serviceName, highTip);
+        String highContent = MessageFormat.format("{0}房间高于{1}设置阀值,目前{2}", highTip, maxPer, per);
+        String normalContent = MessageFormat.format("{0}房间空间已经占用达到{1},请及时扩容保障正常游戏", serviceName, per);
+        DateFormat format = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        String grayContent = MessageFormat.format("当前总房间数{0},已经使用房间数{1},报警时间:{2}", total, buzy, format.format(new Date()));
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         peDbWeight.sendNotice(title, highContent, normalContent, grayContent);
     }
 

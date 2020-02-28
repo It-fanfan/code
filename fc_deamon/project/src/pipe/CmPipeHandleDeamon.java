@@ -13,7 +13,11 @@ import java.util.Vector;
 /**
  * @author feng
  */
+<<<<<<< HEAD
 class CmPipeHandleDeamon
+=======
+public class CmPipeHandleDeamon
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 {
 
     private static Logger LOG = LoggerFactory.getLogger(CmPipeHandleDeamon.class);
@@ -21,7 +25,11 @@ class CmPipeHandleDeamon
     /**
      * 处理管道命令的方法
      */
+<<<<<<< HEAD
     static void handle(JSONObject object, CmPipeSocket socket)
+=======
+    public static void handle(JSONObject object, CmPipeSocket socket)
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     {
         try
         {
@@ -37,6 +45,7 @@ class CmPipeHandleDeamon
                     socket.setPkRoom(array);
                 }
                 break;
+<<<<<<< HEAD
                 //更新房间数据
                 case "pkRoom":
                 {
@@ -44,6 +53,8 @@ class CmPipeHandleDeamon
                     socket.updatePkRoom(roomInfo);
                 }
                 break;
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 case "pkInit":
                 {
                     socket.setPkService(object);
@@ -66,8 +77,11 @@ class CmPipeHandleDeamon
                     socket.sendMessage(send);
                 }
                 break;
+<<<<<<< HEAD
                 default:
                     break;
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             }
             LOG.debug("获取数据:" + object.toJSONString());
         } catch (Exception e)

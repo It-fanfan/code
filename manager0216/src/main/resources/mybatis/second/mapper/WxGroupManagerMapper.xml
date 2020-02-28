@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fish.dao.second.mapper.WxGroupManagerMapper">
+    <resultMap id="BaseResultMap" type="com.fish.dao.second.model.WxGroupManager">
+        <id column="ddId" jdbcType="VARCHAR" property="ddId"/>
+       <!-- <result column="cd_id" javaType="VARCHAR" property="cdId"/>
+        <result column="wx_group_name" jdbcType="VARCHAR" property="wxGroupName"/>
+        <result column="wx_group_manager" jdbcType="VARCHAR" property="wxGroupManager"/>
+        <result column="wx_number" jdbcType="VARCHAR" property="wxNumber"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>-->
+
+        <!-- config_confirm 部分 -->
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="ddStatus" jdbcType="VARCHAR" property="ddStatus"/>
+        <result column="ddYes" jdbcType="VARCHAR" property="ddYes"/>
+        <result column="ddNo" jdbcType="VARCHAR" property="ddNo"/>
+        <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+         ddId, `describe`, ddStatus, ddYes, ddNo, updateTime
+         cdId, wxGroupName, wxGroupManager, wxNumber, createTime
+        from  configConfirm, wxGroupManager
+    </select>
+
+    <select id="selectAllConfigSQL" resultType="com.fish.dao.second.model.WxGroupManager">
+        ${_parameter}
+    </select>
+
+    <update id="updateWxGroupManager" parameterType="com.fish.dao.second.model.WxGroupManager">
+        update wx_group_manager
+        <set>
+            <if test="wxGroupName != null">
+                wxGroupName = #{wxGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="wxGroupManager != null">
+                wxGroupManager = #{wxGroupManager,jdbcType=VARCHAR},
+            </if>
+            <if test="wxNumber != null">
+                wxNumber = #{wxNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                createTime = #{createTime,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateConfigConfirm" parameterType="com.fish.dao.second.model.WxGroupManager">
+        update config_confirm
+        <set>
+            <if test="describe != null">
+                `describe` = #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="ddYes != null">
+                ddYes = #{ddYes,jdbcType=VARCHAR},
+            </if>
+            <if test="ddNo != null">
+                ddNo = #{ddNo,jdbcType=VARCHAR},
+            </if>
+            <if test="ddStatus != null">
+                ddStatus = #{ddStatus,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ddId = #{ddId,jdbcType=VARCHAR}
+    </update>
+   <!-- <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.second.model.WxGroupManager">
+        update wx_group_manager
+        <set>
+            <if test="wxGroupName != null">
+                wx_group_name = #{wxGroupName,jdbcType=VARCHAR},
+            </if>
+            <if test="wxGroupManager != null">
+                wx_group_manager = #{wxGroupManager,jdbcType=VARCHAR},
+            </if>
+            <if test="wxNumber != null">
+                wx_number = #{wxNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=VARCHAR},
+            </if>
+            <if test="wxGroupDescribe != null">
+                wx_group_describe = #{wxGroupDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="wxGroupQrcode != null">
+                wx_group_qrcode = #{wxGroupQrcode,jdbcType=VARCHAR},
+            </if>
+            <if test="wxCostomerQrcode != null">
+                wx_costomer_qrcode = #{wxCostomerQrcode,jdbcType=VARCHAR},
+            </if>
+            <if test="lastUploadTime != null">
+                last_upload_time = #{lastUploadTime,jdbcType=INTEGER},
+            </if>
+            <if test="wxQrcodeStatus != null">
+                wx_qrcode_status = #{wxQrcodeStatus,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=VARCHAR}
+    </update>-->
+    <!--<update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.second.model.WxGroupManager">
+    update wx_group_manager
+    set wx_group_name = #{wxGroupName,jdbcType=VARCHAR},
+      wx_group_manager = #{wxGroupManager,jdbcType=VARCHAR},
+      wx_number = #{wxNumber,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      wx_group_describe = #{wxGroupDescribe,jdbcType=VARCHAR},
+      wx_group_qrcode = #{wxGroupQrcode,jdbcType=VARCHAR},
+      wx_costomer_qrcode = #{wxCostomerQrcode,jdbcType=VARCHAR},
+      last_upload_time = #{lastUploadTime,jdbcType=VARCHAR},
+      wx_qrcode_status = #{wxQrcodeStatus,jdbcType=VARCHAR},
+      operate_time = #{operateTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>-->
+</mapper>

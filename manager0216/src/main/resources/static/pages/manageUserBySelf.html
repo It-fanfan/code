@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="chs">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <link rel="stylesheet" href="../layuiadmin/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../layuiadmin/style/admin.css" media="all">
+    <script src="../layuiadmin/layui/layui.js"></script>
+    <script src="../layuiadmin/modules/operation.js"></script>
+    <script></script>
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <!-- 数据表格 -->
+                <!-- 表单元素 -->
+                <form id="form_table" class="layui-form" lay-filter="form_table"
+                      style="padding: 20px 0 0 0;width: 400px;height: 350px;">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">用户名</label>
+                        <div class="layui-input-inline ">
+                            <input type="text" id="userName" name="userName" autocomplete="off" class="layui-input"
+                                   disabled>
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <label class="layui-form-label">昵称</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="nickName" name="nickName" autocomplete="off" class="layui-input"
+                                   placeholder="为空则不会修改">
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <label class="layui-form-label">旧密码</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="oldPassword" name="oldPassword" class="layui-input"
+                                   autocomplete="off" placeholder="为空不会修改密码">
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <label class="layui-form-label">新密码</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="newPassword" name="newPassword" class="layui-input"
+                                   autocomplete="off" placeholder="为空不会修改密码">
+                        </div>
+                    </div>
+                    <div class="layui-form-item ">
+                        <label class="layui-form-label">确认新密码</label>
+                        <div class="layui-input-inline">
+                            <input type="text" id="oldPasswordConfirm" name="oldPasswordConfirm" class="layui-input"
+                                   autocomplete="off"
+                                   placeholder="为空不会修改密码">
+                        </div>
+                    </div>
+                    <div class="layui-form-item" style="text-align:center;">
+                        <input type="button" class="layui-btn" lay-submit lay-filter="front-submit" id="front-submit"
+                               value="确认"
+                               style="text-align:center;">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<script>
+    layui.use(['form'], function () {
+        const $ = layui.$;
+
+        $.get("../userLog/getUserInfo", (ps) => {
+            layui.form.val("form_table", ps);
+        });
+
+        // 提交监听
+        layui.form.on('submit(front-submit)', function (data) {
+            const field = UIConfig.sumbitFormatData(data); //获取提交的字段
+            console.log('submit field:', field);
+            if (field.newPassword && field.oldPasswordConfirm) {
+                if (!field.oldPassword) {
+                    UIConfig.warnMsg('修改密码时请输入旧密码！');
+                    return false;
+                }
+                if (field.newPassword != field.oldPasswordConfirm) {
+                    UIConfig.warnMsg('两次输入的新密码不一样，请重新输入！');
+                    return false;
+                }
+            }
+
+            $.ajax({
+                url: '../manage/manageUser/updateByUser',
+                data: field,
+                contentType: "application/json; charset=utf-8",
+                type: 'post',
+                dataType: "json",
+                success: function (result) {
+                    UIConfig.postMsg(result);
+                    if (result.successed) {
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 500);
+                    }
+                }
+            });
+        });
+    })
+</script>
+
+</body>
+</html>

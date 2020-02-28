@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fish.dao.primary.mapper.ArcadeGamesMapper">
+    <resultMap id="BaseResultMap" type="com.fish.dao.primary.model.ArcadeGames">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="ddCode" property="ddcode" jdbcType="INTEGER"/>
+        <result column="ddName" property="ddname" jdbcType="VARCHAR"/>
+
+        <result column="ddSingleCoin" property="ddsinglecoin" jdbcType="INTEGER"/>
+        <result column="ddMultiCoin" property="ddmulticoin" jdbcType="INTEGER"/>
+        <result column="ddMaxPlayer" property="ddmaxplayer" jdbcType="INTEGER"/>
+        <result column="ddIsPk" property="ddispk" jdbcType="INTEGER"/>
+        <result column="ddAvailable" property="ddavailable" jdbcType="INTEGER"/>
+        <result column="ddTitle" property="ddtitle" jdbcType="VARCHAR"/>
+
+        <result column="ddRoleCount" property="ddrolecount" jdbcType="INTEGER"/>
+        <result column="ddRocker" property="ddrocker" jdbcType="INTEGER"/>
+        <result column="ddEngine" property="ddengine" jdbcType="INTEGER"/>
+        <result column="ddResolution" property="ddresolution" jdbcType="INTEGER"/>
+
+        <result column="ddAutoSelect" property="ddautoselect" jdbcType="BIT"/>
+        <result column="ddFriendUrl" property="ddfriendurl" jdbcType="VARCHAR"/>
+        <result column="ddShareRes" property="ddshareres" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, ddCode, ddName, ddSingleCoin, ddMultiCoin, ddMaxPlayer, ddIsPk, ddAvailable,
+    ddTitle, ddRoleCount,
+    ddRocker, ddEngine, ddResolution, ddAutoSelect, ddFriendUrl,ddShareRes
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from games
+        where ddCode = #{ddcode,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultType="com.fish.dao.primary.model.ArcadeGames">
+        select
+        <include refid="Base_Column_List"/>
+        from games
+    </select>
+    <select id="selectByGameName" resultType="com.fish.dao.primary.model.ArcadeGames">
+        select
+        <include refid="Base_Column_List"/>
+        from games where ddName = #{ddname,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from games
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.fish.dao.primary.model.ArcadeGames">
+    insert into games (id, ddCode, ddName,
+      ddSingleCoin, ddMultiCoin, ddMaxPlayer, 
+      ddIsPk, ddAvailable,  ddTitle,
+       ddRoleCount,
+       ddRocker, ddEngine, ddResolution,
+      ddAutoSelect, ddFriendUrl,ddShareRes)
+    values (#{id,jdbcType=INTEGER}, #{ddcode,jdbcType=INTEGER}, #{ddname,jdbcType=VARCHAR},
+      #{ddsinglecoin,jdbcType=INTEGER}, #{ddmulticoin,jdbcType=INTEGER}, #{ddmaxplayer,jdbcType=INTEGER}, 
+      #{ddispk,jdbcType=INTEGER}, #{ddavailable,jdbcType=INTEGER},  #{ddtitle,jdbcType=VARCHAR},
+
+      #{ddrolecount,jdbcType=INTEGER}, #{ddrocker,jdbcType=INTEGER},
+      #{ddengine,jdbcType=INTEGER}, #{ddresolution,jdbcType=INTEGER},
+      #{ddautoselect,jdbcType=BIT}, #{ddfriendurl,jdbcType=VARCHAR},#{ddshareres,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fish.dao.primary.model.ArcadeGames">
+        insert into games
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="ddcode != null">
+                ddCode,
+            </if>
+
+            <if test="ddname != null">
+                ddName,
+            </if>
+            <if test="ddsinglecoin != null">
+                ddSingleCoin,
+            </if>
+            <if test="ddmulticoin != null">
+                ddMultiCoin,
+            </if>
+            <if test="ddmaxplayer != null">
+                ddMaxPlayer,
+            </if>
+            <if test="ddispk != null">
+                ddIsPk,
+            </if>
+            <if test="ddavailable != null">
+                ddAvailable,
+            </if>
+            <if test="ddtitle != null">
+                ddTitle,
+            </if>
+
+
+
+
+            <if test="ddrolecount != null">
+                ddRoleCount,
+            </if>
+            <if test="ddrocker != null">
+                ddRocker,
+            </if>
+            <if test="ddengine != null">
+                ddEngine,
+            </if>
+            <if test="ddresolution != null">
+                ddResolution,
+            </if>
+
+            <if test="ddautoselect != null">
+                ddAutoSelect,
+            </if>
+            <if test="ddfriendurl != null">
+                ddFriendUrl,
+            </if>
+            <if test="ddshareres != null">
+                ddShareRes,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="ddcode != null">
+                #{ddcode,jdbcType=INTEGER},
+            </if>
+
+            <if test="ddname != null">
+                #{ddname,jdbcType=VARCHAR},
+            </if>
+            <if test="ddsinglecoin != null">
+                #{ddsinglecoin,jdbcType=INTEGER},
+            </if>
+            <if test="ddmulticoin != null">
+                #{ddmulticoin,jdbcType=INTEGER},
+            </if>
+            <if test="ddmaxplayer != null">
+                #{ddmaxplayer,jdbcType=INTEGER},
+            </if>
+            <if test="ddispk != null">
+                #{ddispk,jdbcType=INTEGER},
+            </if>
+            <if test="ddavailable != null">
+                #{ddavailable,jdbcType=INTEGER},
+            </if>
+            <if test="ddtitle != null">
+                #{ddtitle,jdbcType=VARCHAR},
+            </if>
+
+
+
+
+
+            <if test="ddrolecount != null">
+                #{ddrolecount,jdbcType=INTEGER},
+            </if>
+            <if test="ddrocker != null">
+                #{ddrocker,jdbcType=INTEGER},
+            </if>
+            <if test="ddengine != null">
+                #{ddengine,jdbcType=INTEGER},
+            </if>
+            <if test="ddresolution != null">
+                #{ddresolution,jdbcType=INTEGER},
+            </if>
+
+            <if test="ddautoselect != null">
+                #{ddautoselect,jdbcType=BIT},
+            </if>
+            <if test="ddfriendurl != null">
+                #{ddfriendurl,jdbcType=VARCHAR},
+            </if>
+            <if test="ddShareRes != null">
+                #{ddshareres,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.primary.model.ArcadeGames">
+        update games
+        <set>
+            <if test="ddcode != null">
+                ddCode = #{ddcode,jdbcType=INTEGER},
+            </if>
+            <if test="ddname != null">
+                ddName= #{ddname,jdbcType=VARCHAR},
+            </if>
+
+            <if test="ddsinglecoin != null">
+                ddSingleCoin = #{ddsinglecoin,jdbcType=INTEGER},
+            </if>
+            <if test="ddmulticoin != null">
+                ddMultiCoin = #{ddmulticoin,jdbcType=INTEGER},
+            </if>
+            <if test="ddmaxplayer != null">
+                ddMaxPlayer = #{ddmaxplayer,jdbcType=INTEGER},
+            </if>
+            <if test="ddispk != null">
+                ddIsPk = #{ddispk,jdbcType=INTEGER},
+            </if>
+            <if test="ddavailable != null">
+                ddAvailable = #{ddavailable,jdbcType=INTEGER},
+            </if>
+
+            <if test="ddtitle != null">
+                ddTitle = #{ddtitle,jdbcType=VARCHAR},
+            </if>
+
+
+
+
+            <if test="ddrolecount != null">
+                ddRoleCount = #{ddrolecount,jdbcType=INTEGER},
+            </if>
+            <if test="ddrocker != null">
+                ddRocker = #{ddrocker,jdbcType=INTEGER},
+            </if>
+            <if test="ddengine != null">
+                ddEngine = #{ddengine,jdbcType=INTEGER},
+            </if>
+            <if test="ddresolution != null">
+                ddResolution = #{ddresolution,jdbcType=INTEGER},
+            </if>
+
+            <if test="ddautoselect != null">
+                ddAutoSelect = #{ddautoselect,jdbcType=BIT},
+            </if>
+            <if test="ddfriendurl != null">
+                ddFriendUrl = #{ddfriendurl,jdbcType=VARCHAR},
+            </if>
+            <if test="ddshareres != null">
+                ddShareRes = #{ddshareres,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fish.dao.primary.model.ArcadeGames">
+    update games
+    set ddCode = #{ddcode,jdbcType=INTEGER},
+
+       ddName = #{ddname,jdbcType=VARCHAR},
+      ddSingleCoin = #{ddsinglecoin,jdbcType=INTEGER},
+      ddMultiCoin = #{ddmulticoin,jdbcType=INTEGER},
+      ddMaxPlayer = #{ddmaxplayer,jdbcType=INTEGER},
+      ddIsPk = #{ddispk,jdbcType=INTEGER},
+      ddAvailable = #{ddavailable,jdbcType=INTEGER},
+       ddTitle = #{ddtitle,jdbcType=VARCHAR},
+
+
+
+
+      ddRoleCount = #{ddrolecount,jdbcType=INTEGER},
+      ddRocker = #{ddrocker,jdbcType=INTEGER},
+      ddEngine = #{ddengine,jdbcType=INTEGER},
+      ddResolution = #{ddresolution,jdbcType=INTEGER},
+
+      ddAutoSelect = #{ddautoselect,jdbcType=BIT},
+      ddFriendUrl = #{ddfriendurl,jdbcType=VARCHAR},
+    ddShareRes = #{ddshareres,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <update id="updateGameBySelective">
+        update games
+        <set>
+            <if test="ddcode != null">
+                ddCode = #{ddcode,jdbcType=INTEGER},
+            </if>
+            <if test="ddname != null">
+                ddName = #{ddname,jdbcType=VARCHAR},
+            </if>
+            <if test="ddshareres != null">
+                ddShareRes = #{ddshareres,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateSQL" parameterType="java.lang.String" >
+        ${_parameter}
+    </update>
+    <insert id="insertGameInfo" parameterType="com.fish.dao.primary.model.ArcadeGames">
+        insert into games
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="ddcode != null">
+                ddCode,
+            </if>
+
+            <if test="ddname != null">
+                ddName,
+            </if>
+            <if test="ddsinglecoin != null">
+                ddSingleCoin,
+            </if>
+            <if test="ddmulticoin != null">
+                ddMultiCoin,
+            </if>
+            <if test="ddmaxplayer != null">
+                ddMaxPlayer,
+            </if>
+            <if test="ddispk != null">
+                ddIsPk,
+            </if>
+            <if test="ddavailable != null">
+                ddAvailable,
+            </if>
+
+            <if test="ddtitle != null">
+                ddTitle,
+            </if>
+
+
+
+
+            <if test="ddrolecount != null">
+                ddRoleCount,
+            </if>
+            <if test="ddrocker != null">
+                ddRocker,
+            </if>
+            <if test="ddengine != null">
+                ddEngine,
+            </if>
+            <if test="ddresolution != null">
+                ddResolution,
+            </if>
+
+            <if test="ddautoselect != null">
+                ddAutoSelect,
+            </if>
+            <if test="ddfriendurl != null">
+                ddFriendUrl,
+            </if>
+            <if test="ddshareres != null">
+                ddShareRes,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="ddcode != null">
+                #{ddcode,jdbcType=INTEGER},
+            </if>
+
+            <if test="ddname != null">
+                #{ddname,jdbcType=VARCHAR},
+            </if>
+            <if test="ddsinglecoin != null">
+                #{ddsinglecoin,jdbcType=INTEGER},
+            </if>
+            <if test="ddmulticoin != null">
+                #{ddmulticoin,jdbcType=INTEGER},
+            </if>
+            <if test="ddmaxplayer != null">
+                #{ddmaxplayer,jdbcType=INTEGER},
+            </if>
+            <if test="ddispk != null">
+                #{ddispk,jdbcType=INTEGER},
+            </if>
+            <if test="ddavailable != null">
+                #{ddavailable,jdbcType=INTEGER},
+            </if>
+            <if test="ddtitle != null">
+                #{ddtitle,jdbcType=VARCHAR},
+            </if>
+
+
+
+
+            <if test="ddrolecount != null">
+                #{ddrolecount,jdbcType=INTEGER},
+            </if>
+            <if test="ddrocker != null">
+                #{ddrocker,jdbcType=INTEGER},
+            </if>
+            <if test="ddengine != null">
+                #{ddengine,jdbcType=INTEGER},
+            </if>
+            <if test="ddresolution != null">
+                #{ddresolution,jdbcType=INTEGER},
+            </if>
+
+            <if test="ddautoselect != null">
+                #{ddautoselect,jdbcType=BIT},
+            </if>
+            <if test="ddfriendurl != null">
+                #{ddfriendurl,jdbcType=VARCHAR},
+            </if>
+            <if test="ddshareres != null">
+                #{ddshareres,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

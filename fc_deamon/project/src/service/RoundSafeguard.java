@@ -22,8 +22,11 @@ import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * 赛场维护 1/5s,5s中一次轮询
+<<<<<<< HEAD
  *
  * @author xuwei
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
  */
 public class RoundSafeguard implements Runnable
 {
@@ -35,9 +38,13 @@ public class RoundSafeguard implements Runnable
         this.executor = executor;
     }
 
+<<<<<<< HEAD
     /**
      * 赛场记录编号
      */
+=======
+    //赛场记录编号
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     private volatile Set<String> records;
 
     public void init()
@@ -93,7 +100,11 @@ public class RoundSafeguard implements Runnable
                 }));
                 temp.await();
                 //更新赛场信息
+<<<<<<< HEAD
                 RoundSave.updateNowRoundRecord(games);
+=======
+                RoundSave.updateNowRoundRecord(games, false);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 
             } catch (Exception e)
             {
@@ -116,9 +127,13 @@ public class RoundSafeguard implements Runnable
             roundGroupMap.forEach((k, v) -> CmServletListener.scheduler.execute(() ->
             {
                 if (v.ddState)
+<<<<<<< HEAD
                 {
                     updateRoundRecord(null, now, k, v.ddRound, v.ddGame, v.ddName, v.ddEnd, v.ddStart, true);
                 }
+=======
+                    updateRoundRecord(null, now, k, v.ddRound, v.ddGame, v.ddName, v.ddEnd, v.ddStart, true);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 temp.countDown();
             }));
         });
@@ -143,6 +158,7 @@ public class RoundSafeguard implements Runnable
         PeDbRoundExt roundExt = PeDbRoundExt.getRoundFast(ddRound);
         //检测赛场是否结束
         if (ddEnd.getTime() < now || roundExt == null || now < ddStart.getTime())
+<<<<<<< HEAD
         {
             return;
         }
@@ -152,6 +168,13 @@ public class RoundSafeguard implements Runnable
         {
             return;
         }
+=======
+            return;
+        //获取索引
+        PeDbGame game = PeDbGame.getGameFast(ddGame);
+        if (game == null)
+            return;
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         JSONObject data = getMatchIndex(game.ddIsPk == 1, now, ddStart, ddEnd, roundExt);
         int index = data.getInteger("index");
         String matchKey = RoundSave.getField(k, isGroup, index);
@@ -179,9 +202,13 @@ public class RoundSafeguard implements Runnable
             instance = RoundSave.getRoundInfo(matchKey);
         }
         if (games == null)
+<<<<<<< HEAD
         {
             return;
         }
+=======
+            return;
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         //获取当前游戏优先级
         int priority = roundExt.ddPriority;
         if (!games.containsKey(ddGame))

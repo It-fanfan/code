@@ -9,7 +9,10 @@
     <list default="true" id="6c493a53-bdbd-4913-bbf8-3a64df0d7092" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/WebRoot/WEB-INF/classes/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+<<<<<<< HEAD
     <option name="TRACKING_ENABLED" value="true" />
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,47 +60,141 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
       <file leaf-file-name="config.properties" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/config/config.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="247">
               <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/service/UserService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="460">
+              <caret line="97" column="39" selection-start-line="97" selection-start-column="39" selection-end-line="97" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/config/config.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="13" selection-start-line="13" selection-end-line="13" selection-end-column="44" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="CmServletReward.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/servlet/welfare/CmServletReward.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="228">
               <caret line="14" selection-start-line="14" selection-end-line="14" />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/servlet/welfare/CmServletReward.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
             </state>
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/service/WelfareService.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="118">
+              <caret line="107" column="49" lean-forward="true" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="CmServletDoRanking.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/servlet/ranking/CmServletDoRanking.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="228">
               <caret line="14" selection-start-line="14" selection-end-line="14" />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/servlet/ranking/CmServletDoRanking.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1995">
+              <caret line="120" column="38" selection-start-line="120" selection-start-column="28" selection-end-line="120" selection-end-column="38" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="alibaba.properties" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/config/alibaba.properties">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="95">
               <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/servlet/ranking/CmServletRanking.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1843">
+              <caret line="114" column="31" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="31" />
             </state>
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/config/alibaba.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="95">
+              <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="CmPipeDeamon.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/pipe/CmPipeDeamon.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1254">
               <caret line="77" selection-start-line="77" selection-end-line="77" />
+=======
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pipe/CmPipePatchDeamon.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1349">
+              <caret line="86" column="55" selection-start-line="86" selection-start-column="55" selection-end-line="86" selection-end-column="55" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/db/PeDbGameSet.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1767">
+              <caret line="103" column="54" selection-start-line="103" selection-start-column="54" selection-end-line="103" selection-end-column="54" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/pipe/CmPipeDeamon.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1900">
+              <caret line="111" column="12" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             </state>
           </provider>
         </entry>
@@ -208,18 +305,24 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
   <component name="JsFlowSettings">
     <service-enabled>true</service-enabled>
     <exe-path />
     <other-services-enabled>true</other-services-enabled>
     <auto-save>true</auto-save>
   </component>
+<<<<<<< HEAD
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
     <option name="FILTER_WARNINGS" value="false" />
@@ -237,6 +340,7 @@
   <component name="MavenRunner">
     <option name="jreName" value="1.8" />
   </component>
+<<<<<<< HEAD
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
@@ -244,12 +348,20 @@
     <option name="x" value="82" />
     <option name="width" value="852" />
     <option name="height" value="861" />
+=======
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="83" />
+    <option name="y" value="1" />
+    <option name="width" value="852" />
+    <option name="height" value="860" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+<<<<<<< HEAD
       <pane id="PackagesPane">
         <subPane>
           <expand>
@@ -262,6 +374,9 @@
         </subPane>
       </pane>
       <pane id="AndroidView" />
+=======
+      <pane id="Scope" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -334,7 +449,21 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< HEAD
       <pane id="Scope" />
+=======
+      <pane id="PackagesPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="persieDeamon" type="58d84e3e:PackageViewProjectNode" />
+              <item name="persieDeamon" type="616d4139:PackageViewModuleNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -349,7 +478,11 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+<<<<<<< HEAD
     <property name="project.structure.last.edited" value="Libraries" />
+=======
+    <property name="project.structure.last.edited" value="Artifacts" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <property name="project.structure.proportion" value="0.15234375" />
     <property name="project.structure.side.proportion" value="0.24754634" />
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
@@ -377,7 +510,11 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.7">
+=======
+  <component name="RunManager" selected="Tomcat Server.Tomcat 9.0.22">
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <configuration name="WelfareService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="service.WelfareService" />
       <module name="persieDeamon" />
@@ -387,8 +524,16 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+<<<<<<< HEAD
     </configuration>
     <configuration name="Tomcat 9.0.7" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.7" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+=======
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Tomcat 9.0.22" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.22" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
       <option name="COMMON_VM_ARGUMENTS" value="-Dfile.encoding=UTF-8" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
@@ -402,11 +547,19 @@
         <option name="BASE_DIRECTORY_NAME" value="Unnamed_persieDeamon" />
         <option name="HTTP_PORT" value="8081" />
       </server-settings>
+<<<<<<< HEAD
       <predefined_log_file id="Tomcat" enabled="true" />
       <predefined_log_file id="Tomcat Catalina" enabled="true" />
       <predefined_log_file id="Tomcat Manager" enabled="false" />
       <predefined_log_file id="Tomcat Host Manager" enabled="false" />
       <log_file alias="Tomcat Localhost Access Log" path="%IDEA_RUN:CATALINA_BASE%/logs/localhost_access_log.*" />
+=======
+      <log_file alias="Tomcat Localhost Access Log" path="%IDEA_RUN:CATALINA_BASE%/logs/localhost_access_log.*" />
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
       <RunnerSettings RunnerId="Debug">
         <option name="DEBUG_PORT" value="23293" />
       </RunnerSettings>
@@ -455,15 +608,25 @@
           <option name="PROGRAM_PARAMETERS" value="" />
         </SHUTDOWN>
       </ConfigurationWrapper>
+<<<<<<< HEAD
       <method>
+=======
+      <method v="2">
+        <option name="Make" enabled="true" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         <option name="BuildArtifacts" enabled="true">
           <artifact name="persieDeamon" />
         </option>
       </method>
     </configuration>
     <list>
+<<<<<<< HEAD
       <item itemvalue="Tomcat Server.Tomcat 9.0.7" />
       <item itemvalue="Application.WelfareService" />
+=======
+      <item itemvalue="Application.WelfareService" />
+      <item itemvalue="Tomcat Server.Tomcat 9.0.22" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     </list>
     <recent_temporary>
       <list>
@@ -471,9 +634,14 @@
       </list>
     </recent_temporary>
   </component>
+<<<<<<< HEAD
   <component name="SvnConfiguration" cleanupOnStartRun="true">
     <configuration>C:\Users\xuwei\AppData\Roaming\Subversion</configuration>
     <supportedVersion>125</supportedVersion>
+=======
+  <component name="SvnConfiguration">
+    <configuration />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -526,11 +694,15 @@
       <workItem from="1572922388737" duration="10456000" />
       <workItem from="1573007438675" duration="5396000" />
       <workItem from="1573093293822" duration="5316000" />
+<<<<<<< HEAD
       <workItem from="1581992000768" duration="133000" />
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
+<<<<<<< HEAD
     <option name="totallyTimeSpent" value="208331000" />
   </component>
   <component name="ToolWindowManager">
@@ -573,14 +745,61 @@
       <window_info anchor="right" id="Maven" order="3" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" visible="true" weight="0.14255014" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.37634408" />
+=======
+    <option name="totallyTimeSpent" value="208198000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.84707904" visible="true" weight="0.1726361" />
+      <window_info id="Structure" order="1" sideWeight="0.4422188" side_tool="true" weight="0.20845272" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.2876344" side_tool="true" weight="0.20272206" />
+      <window_info id="Web" order="7" sideWeight="0.15292096" side_tool="true" visible="true" weight="0.1726361" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.37634408" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.23252688" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.57258064" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Spring" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" />
+      <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="10" side_tool="true" visible="true" weight="0.21774194" />
+      <window_info anchor="bottom" id="Application Servers" order="11" weight="0.41666666" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.055107526" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" />
+      <window_info anchor="bottom" id="Database Changes" order="14" />
+      <window_info anchor="bottom" id="Version Control" order="15" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Duplicate detector" order="16" weight="0.35215053" />
+      <window_info anchor="bottom" id="Database Console" order="17" weight="0.3454301" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" visible="true" weight="0.14255014" />
+      <window_info anchor="right" id="Maven" order="3" />
+      <window_info anchor="right" id="Palette" order="4" />
+      <window_info anchor="right" id="Capture Analysis" order="5" />
+      <window_info anchor="right" id="Maven Projects" order="6" />
+      <window_info anchor="right" id="Database" order="7" weight="0.20989506" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+<<<<<<< HEAD
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
   <component name="editorHistoryManager">
     <entry file="jar://$PROJECT_DIR$/WebRoot/libs/jedis-2.9.0.jar!/redis/clients/jedis/Jedis.class">
       <provider selected="true" editor-type-id="text-editor">
@@ -596,7 +815,26 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/service/MatchRankingService.java" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/service/MatchRankingService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6004">
+          <caret line="342" selection-start-line="342" selection-end-line="342" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3191#3192#0" expanded="true" />
+            <element signature="e#3246#3247#0" expanded="true" />
+            <element signature="e#6624#6625#0" expanded="true" />
+            <element signature="e#6669#6670#0" expanded="true" />
+            <element signature="e#8658#8659#0" expanded="true" />
+            <element signature="e#8698#8699#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <entry file="file://$PROJECT_DIR$/src/tool/db/RedisUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16150">
@@ -604,11 +842,55 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/db/PeDbConfig.java" />
     <entry file="file://$PROJECT_DIR$/src/db/PeDbConfigCommon.java" />
     <entry file="file://$PROJECT_DIR$/src/db/PeDbManager.java" />
     <entry file="file://$PROJECT_DIR$/src/db/PeDbRound.java" />
     <entry file="file://$PROJECT_DIR$/src/db/PeDbServer.java" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/db/PeDbConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/PeDbConfigCommon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="475">
+          <caret line="39" column="27" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/PeDbManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="19" column="13" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/PeDbRound.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2360">
+          <caret line="200" column="5" selection-start-line="200" selection-start-column="5" selection-end-line="200" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/PeDbServer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="627">
+          <caret line="43" column="15" selection-start-line="43" selection-start-column="15" selection-end-line="43" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <entry file="file://$PROJECT_DIR$/WebRoot/login.jsp">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -651,9 +933,27 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/WebRoot/module_config.html">
+<<<<<<< HEAD
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="jar://E:/Tomcat/Tomcat9/Tomcat9.0.22/lib/servlet-api.jar!/javax/servlet/ServletContext.class" />
+=======
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#style#0;n#textarea#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://E:/Tomcat/Tomcat9/Tomcat9.0.22/lib/servlet-api.jar!/javax/servlet/ServletContext.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="65" column="11" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <entry file="file://$PROJECT_DIR$/src/servlet/CmServletMain.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1938">
@@ -685,8 +985,25 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/servlet/config/CmServletConfig.java" />
     <entry file="file://$PROJECT_DIR$/src/config/CmGlobalConfig.java" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/servlet/config/CmServletConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3230">
+          <caret line="184" selection-start-line="184" selection-end-line="184" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/config/CmGlobalConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="40" column="60" selection-start-line="40" selection-start-column="60" selection-end-line="40" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <entry file="file://$PROJECT_DIR$/src/config/CmProjectConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
@@ -704,8 +1021,28 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/pipe/CmPipeClientDeamon.java" />
     <entry file="file://$PROJECT_DIR$/src/db/PeRankingRecord.java" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/pipe/CmPipeClientDeamon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-294">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/PeRankingRecord.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1045">
+          <caret line="60" column="46" selection-start-line="60" selection-start-column="46" selection-end-line="60" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <entry file="file://$PROJECT_DIR$/src/db/PeDbObject.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="11324">
@@ -718,7 +1055,20 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/db/PeCurrentMatch.java" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/db/PeCurrentMatch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="9" column="46" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="9" selection-end-column="46" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <entry file="file://$PROJECT_DIR$/src/servlet/CmServletListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="523">
@@ -745,8 +1095,28 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/src/service/MatchRewardService.java" />
     <entry file="file://$PROJECT_DIR$/src/db/PeDbNotification.java" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/service/MatchRewardService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="87" column="74" selection-start-line="87" selection-start-column="74" selection-end-line="87" selection-end-column="74" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/PeDbNotification.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="662">
+          <caret line="52" column="71" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="71" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     <entry file="file://$PROJECT_DIR$/src/pipe/CmPipeHandleDeamon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
@@ -796,6 +1166,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/servlet/ranking/CmServletDoRanking.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="228">
           <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
@@ -815,11 +1186,54 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1254">
           <caret line="77" selection-start-line="77" selection-end-line="77" />
+=======
+        <state relative-caret-position="1995">
+          <caret line="120" column="38" selection-start-line="120" selection-start-column="28" selection-end-line="120" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/servlet/ranking/CmServletRanking.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1843">
+          <caret line="114" column="31" selection-start-line="114" selection-start-column="31" selection-end-line="114" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/alibaba.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="28" selection-start-line="5" selection-start-column="28" selection-end-line="5" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pipe/CmPipePatchDeamon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1349">
+          <caret line="86" column="55" selection-start-line="86" selection-start-column="55" selection-end-line="86" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/db/PeDbGameSet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1767">
+          <caret line="103" column="54" selection-start-line="103" selection-start-column="54" selection-end-line="103" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pipe/CmPipeDeamon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1900">
+          <caret line="111" column="12" selection-start-line="111" selection-start-column="12" selection-end-line="111" selection-end-column="12" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/servlet/welfare/CmServletReward.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="228">
           <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
@@ -831,6 +1245,37 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="247">
           <caret line="10" column="7" lean-forward="true" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
+=======
+        <state relative-caret-position="418">
+          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/WelfareService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="107" column="49" lean-forward="true" selection-start-line="107" selection-start-column="49" selection-end-line="107" selection-end-column="49" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="97" column="39" selection-start-line="97" selection-start-column="39" selection-end-line="97" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/config.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" selection-start-line="13" selection-end-line="13" selection-end-column="44" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         </state>
       </provider>
     </entry>
@@ -893,7 +1338,10 @@
             <option name="proportions">
               <list>
                 <option value="0.24754634" />
+<<<<<<< HEAD
                 <option value="0.6" />
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
               </list>
             </option>
           </splitter-proportions>

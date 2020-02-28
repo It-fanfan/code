@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fish.dao.second.mapper.WxConfigMapper">
+  <resultMap id="BaseResultMap" type="com.fish.dao.second.model.WxConfig">
+    <id column="ddAppId" jdbcType="VARCHAR" property="ddappid" />
+    <result column="ddAppSecret" jdbcType="VARCHAR" property="ddappsecret" />
+    <result column="ddMchId" jdbcType="VARCHAR" property="ddmchid" />
+    <result column="ddP12Password" jdbcType="VARCHAR" property="ddp12password" />
+    <result column="ddKey" jdbcType="VARCHAR" property="ddkey" />
+    <result column="ddP12" jdbcType="VARCHAR" property="ddp12" />
+    <result column="ddToken" jdbcType="VARCHAR" property="ddtoken" />
+    <result column="ddAccessToken" jdbcType="VARCHAR" property="ddaccesstoken" />
+    <result column="ddExpiresIn" jdbcType="INTEGER" property="ddexpiresin" />
+    <result column="ddTokenTime" jdbcType="TIMESTAMP" property="ddtokentime" />
+    <result column="ddMediaId" jdbcType="VARCHAR" property="ddmediaid" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ddAppId, ddAppSecret, ddMchId, ddP12Password, ddKey, ddP12, ddToken, ddAccessToken,
+    ddExpiresIn, ddTokenTime, ddMediaId
+  </sql>
+  <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from wx_config
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from wx_config
+    where ddAppId = #{ddappid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wx_config
+    where ddAppId = #{ddappid,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.fish.dao.second.model.WxConfig">
+    insert into wx_config (ddAppId, ddAppSecret, ddMchId,
+      ddP12Password, ddKey, ddP12
+      )
+    values (#{ddappid,jdbcType=VARCHAR}, #{ddappsecret,jdbcType=VARCHAR}, #{ddmchid,jdbcType=VARCHAR},
+      #{ddp12password,jdbcType=VARCHAR}, #{ddkey,jdbcType=VARCHAR}, #{ddp12,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fish.dao.second.model.WxConfig">
+    insert into wx_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ddappid != null">
+        ddAppId,
+      </if>
+      <if test="ddappsecret != null">
+        ddAppSecret,
+      </if>
+      <if test="ddmchid != null">
+        ddMchId,
+      </if>
+      <if test="ddp12password != null">
+        ddP12Password,
+      </if>
+      <if test="ddkey != null">
+        ddKey,
+      </if>
+      <if test="ddp12 != null">
+        ddP12,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ddappid != null">
+        #{ddappid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddappsecret != null">
+        #{ddappsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="ddmchid != null">
+        #{ddmchid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddp12password != null">
+        #{ddp12password,jdbcType=VARCHAR},
+      </if>
+      <if test="ddkey != null">
+        #{ddkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ddp12 != null">
+        #{ddp12,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.second.model.WxConfig">
+    update wx_config
+    <set>
+      <if test="ddappsecret != null">
+        ddAppSecret = #{ddappsecret,jdbcType=VARCHAR},
+      </if>
+      <if test="ddmchid != null">
+        ddMchId = #{ddmchid,jdbcType=VARCHAR},
+      </if>
+      <if test="ddp12password != null">
+        ddP12Password = #{ddp12password,jdbcType=VARCHAR},
+      </if>
+      <if test="ddkey != null">
+        ddKey = #{ddkey,jdbcType=VARCHAR},
+      </if>
+      <if test="ddp12 != null">
+        ddP12 = #{ddp12,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ddAppId = #{ddappid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fish.dao.second.model.WxConfig">
+    update wx_config
+    set ddAppSecret = #{ddappsecret,jdbcType=VARCHAR},
+      ddMchId = #{ddmchid,jdbcType=VARCHAR},
+      ddP12Password = #{ddp12password,jdbcType=VARCHAR},
+      ddKey = #{ddkey,jdbcType=VARCHAR},
+      ddP12 = #{ddp12,jdbcType=VARCHAR}
+    where ddAppId = #{ddappid,jdbcType=VARCHAR}
+  </update>
+</mapper>

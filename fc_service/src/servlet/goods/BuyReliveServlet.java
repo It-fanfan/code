@@ -36,6 +36,7 @@ public class BuyReliveServlet extends CmServletMain implements Serializable
         JSONObject extra = new JSONObject();
         extra.put("type", "relive");
         //复活次数
+<<<<<<< HEAD
         if (content.containsKey("gameCode"))
         {
             extra.put("extra", String.valueOf(content.getInteger("gameCode")));
@@ -43,6 +44,9 @@ public class BuyReliveServlet extends CmServletMain implements Serializable
         {
             extra.put("extra", String.valueOf(relive));
         }
+=======
+        extra.put("extra", String.valueOf(relive));
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         extra.put("appId", content.getString("appId"));
         long state;
         if (userValue < coin || (state = UserService.addValue(ddUid, "coin", -coin, extra)) < 0)

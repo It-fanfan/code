@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fish.dao.second.mapper.WxConfigMapper">
+    <resultMap id="BaseResultMap" type="com.fish.dao.second.model.WxConfig">
+        <id column="ddAppId" jdbcType="VARCHAR" property="ddappid"/>
+        <result column="ddAppSecret" jdbcType="VARCHAR" property="ddappsecret"/>
+        <result column="product_name" jdbcType="VARCHAR" property="productName"/>
+        <result column="ddMchId" jdbcType="VARCHAR" property="ddmchid"/>
+        <result column="ddP12Password" jdbcType="VARCHAR" property="ddp12password"/>
+        <result column="ddKey" jdbcType="VARCHAR" property="ddkey"/>
+        <result column="ddP12" jdbcType="VARCHAR" property="ddp12"/>
+        <result column="ddShareRes" jdbcType="VARCHAR" property="ddshareres"/>
+        <result column="ddAppSkipRes" jdbcType="VARCHAR" property="ddappskipres"/>
+        <result column="program_type" jdbcType="INTEGER" property="programType"/>
+        <result column="origin_id" jdbcType="VARCHAR" property="originId"/>
+        <result column="origin_name" jdbcType="VARCHAR" property="originName"/>
+        <result column="add_id" jdbcType="VARCHAR" property="addId"/>
+        <result column="account" jdbcType="VARCHAR" property="account"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="code_manager" jdbcType="VARCHAR" property="codeManager"/>
+        <result column="manager_wechat" jdbcType="VARCHAR" property="managerWechat"/>
+        <result column="belong_company" jdbcType="VARCHAR" property="belongCompany"/>
+        <result column="clear_company" jdbcType="VARCHAR" property="clearCompany"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    ddAppId, ddAppSecret, product_name, ddMchId, ddP12Password, ddKey, ddP12, ddShareRes, 
+    ddAppSkipRes, program_type, origin_id, origin_name, add_id, account, password, code_manager, 
+    manager_wechat, belong_company, clear_company, create_time
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wx_config
+        where ddAppId = #{ddappid,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from wx_config
+    where ddAppId = #{ddappid,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.fish.dao.second.model.WxConfig">
+    insert into wx_config (ddAppId, ddAppSecret, product_name, 
+      ddMchId, ddP12Password, ddKey, 
+      ddP12, ddShareRes, ddAppSkipRes, 
+      program_type, origin_id, origin_name, 
+      add_id, account, password, 
+      code_manager, manager_wechat, belong_company, 
+      clear_company, create_time)
+    values (#{ddappid,jdbcType=VARCHAR}, #{ddappsecret,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{ddmchid,jdbcType=VARCHAR}, #{ddp12password,jdbcType=VARCHAR}, #{ddkey,jdbcType=VARCHAR}, 
+      #{ddp12,jdbcType=VARCHAR}, #{ddshareres,jdbcType=VARCHAR}, #{ddappskipres,jdbcType=VARCHAR}, 
+      #{programType,jdbcType=INTEGER}, #{originId,jdbcType=VARCHAR}, #{originName,jdbcType=VARCHAR}, 
+      #{addId,jdbcType=VARCHAR}, #{account,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{codeManager,jdbcType=VARCHAR}, #{managerWechat,jdbcType=VARCHAR}, #{belongCompany,jdbcType=VARCHAR}, 
+      #{clearCompany,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.fish.dao.second.model.WxConfig">
+        insert into wx_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ddappid != null">
+                ddAppId,
+            </if>
+            <if test="ddappsecret != null">
+                ddAppSecret,
+            </if>
+            <if test="productName != null">
+                product_name,
+            </if>
+            <if test="ddmchid != null">
+                ddMchId,
+            </if>
+            <if test="ddp12password != null">
+                ddP12Password,
+            </if>
+            <if test="ddkey != null">
+                ddKey,
+            </if>
+            <if test="ddp12 != null">
+                ddP12,
+            </if>
+            <if test="ddshareres != null">
+                ddShareRes,
+            </if>
+            <if test="ddappskipres != null">
+                ddAppSkipRes,
+            </if>
+            <if test="programType != null">
+                program_type,
+            </if>
+            <if test="originId != null">
+                origin_id,
+            </if>
+            <if test="originName != null">
+                origin_name,
+            </if>
+            <if test="addId != null">
+                add_id,
+            </if>
+            <if test="account != null">
+                account,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="codeManager != null">
+                code_manager,
+            </if>
+            <if test="managerWechat != null">
+                manager_wechat,
+            </if>
+            <if test="belongCompany != null">
+                belong_company,
+            </if>
+            <if test="clearCompany != null">
+                clear_company,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ddappid != null">
+                #{ddappid,jdbcType=VARCHAR},
+            </if>
+            <if test="ddappsecret != null">
+                #{ddappsecret,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null">
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="ddmchid != null">
+                #{ddmchid,jdbcType=VARCHAR},
+            </if>
+            <if test="ddp12password != null">
+                #{ddp12password,jdbcType=VARCHAR},
+            </if>
+            <if test="ddkey != null">
+                #{ddkey,jdbcType=VARCHAR},
+            </if>
+            <if test="ddp12 != null">
+                #{ddp12,jdbcType=VARCHAR},
+            </if>
+            <if test="ddshareres != null">
+                #{ddshareres,jdbcType=VARCHAR},
+            </if>
+            <if test="ddappskipres != null">
+                #{ddappskipres,jdbcType=VARCHAR},
+            </if>
+            <if test="programType != null">
+                #{programType,jdbcType=INTEGER},
+            </if>
+            <if test="originId != null">
+                #{originId,jdbcType=VARCHAR},
+            </if>
+            <if test="originName != null">
+                #{originName,jdbcType=VARCHAR},
+            </if>
+            <if test="addId != null">
+                #{addId,jdbcType=VARCHAR},
+            </if>
+            <if test="account != null">
+                #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="codeManager != null">
+                #{codeManager,jdbcType=VARCHAR},
+            </if>
+            <if test="managerWechat != null">
+                #{managerWechat,jdbcType=VARCHAR},
+            </if>
+            <if test="belongCompany != null">
+                #{belongCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="clearCompany != null">
+                #{clearCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.fish.dao.second.model.WxConfig">
+        update wx_config
+        <set>
+            <if test="ddappsecret != null">
+                ddAppSecret = #{ddappsecret,jdbcType=VARCHAR},
+            </if>
+            <if test="productName != null">
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="ddmchid != null">
+                ddMchId = #{ddmchid,jdbcType=VARCHAR},
+            </if>
+            <if test="ddp12password != null">
+                ddP12Password = #{ddp12password,jdbcType=VARCHAR},
+            </if>
+            <if test="ddkey != null">
+                ddKey = #{ddkey,jdbcType=VARCHAR},
+            </if>
+            <if test="ddp12 != null">
+                ddP12 = #{ddp12,jdbcType=VARCHAR},
+            </if>
+            <if test="ddshareres != null">
+                ddShareRes = #{ddshareres,jdbcType=VARCHAR},
+            </if>
+            <if test="ddappskipres != null">
+                ddAppSkipRes = #{ddappskipres,jdbcType=VARCHAR},
+            </if>
+            <if test="programType != null">
+                program_type = #{programType,jdbcType=INTEGER},
+            </if>
+            <if test="originId != null">
+                origin_id = #{originId,jdbcType=VARCHAR},
+            </if>
+            <if test="originName != null">
+                origin_name = #{originName,jdbcType=VARCHAR},
+            </if>
+            <if test="addId != null">
+                add_id = #{addId,jdbcType=VARCHAR},
+            </if>
+            <if test="account != null">
+                account = #{account,jdbcType=VARCHAR},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="codeManager != null">
+                code_manager = #{codeManager,jdbcType=VARCHAR},
+            </if>
+            <if test="managerWechat != null">
+                manager_wechat = #{managerWechat,jdbcType=VARCHAR},
+            </if>
+            <if test="belongCompany != null">
+                belong_company = #{belongCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="clearCompany != null">
+                clear_company = #{clearCompany,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ddAppId = #{ddappid,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.fish.dao.second.model.WxConfig">
+    update wx_config
+    set ddAppSecret = #{ddappsecret,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      ddMchId = #{ddmchid,jdbcType=VARCHAR},
+      ddP12Password = #{ddp12password,jdbcType=VARCHAR},
+      ddKey = #{ddkey,jdbcType=VARCHAR},
+      ddP12 = #{ddp12,jdbcType=VARCHAR},
+      ddShareRes = #{ddshareres,jdbcType=VARCHAR},
+      ddAppSkipRes = #{ddappskipres,jdbcType=VARCHAR},
+      program_type = #{programType,jdbcType=INTEGER},
+      origin_id = #{originId,jdbcType=VARCHAR},
+      origin_name = #{originName,jdbcType=VARCHAR},
+      add_id = #{addId,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      code_manager = #{codeManager,jdbcType=VARCHAR},
+      manager_wechat = #{managerWechat,jdbcType=VARCHAR},
+      belong_company = #{belongCompany,jdbcType=VARCHAR},
+      clear_company = #{clearCompany,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where ddAppId = #{ddappid,jdbcType=VARCHAR}
+  </update>
+    <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wx_config
+    </select>
+
+    <select id="selectAllGames" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wx_config where  program_type = 0
+    </select>
+    <select id="selectAllPrograms" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wx_config where  program_type = 1
+    </select>
+    <select id="selectByProductName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from wx_config
+        where product_name = #{productName,jdbcType=VARCHAR}
+    </select>
+</mapper>

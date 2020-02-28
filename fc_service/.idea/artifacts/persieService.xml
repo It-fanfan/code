@@ -8,6 +8,10 @@
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="libs" />
+<<<<<<< HEAD
+=======
+          <element id="library" level="project" name="Java EE 6-Java EE 6" />
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
         </element>
       </element>
       <element id="javaee-facet-resources" facet="persieService/web/Web" />

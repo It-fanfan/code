@@ -5,9 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+<<<<<<< HEAD
 /**
  * @author xuwei
  */
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 public class ReadConfig
 {
     // 配置文件路径

@@ -3,7 +3,10 @@ package servlet.login;
 import com.alibaba.fastjson.JSONObject;
 import config.ReadConfig;
 import db.CmDbSqlResource;
+<<<<<<< HEAD
 import db.PeDbAppConfig;
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 import pipe.PeConfigGames;
 import service.UserService;
 import servlet.CmServletMain;
@@ -11,11 +14,17 @@ import servlet.CmServletMain;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 
+<<<<<<< HEAD
 /**
  * @author xuwei
  */
 @WebServlet(urlPatterns = "/pingExt")
 public class CmServletPingExt extends CmServletMain {
+=======
+@WebServlet(urlPatterns = "/pingExt")
+public class CmServletPingExt extends CmServletMain
+{
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     /**
      * 需要子类实现的处理逻辑方法
      *
@@ -24,6 +33,7 @@ public class CmServletPingExt extends CmServletMain {
      * @param requestPackage 请求的包体
      * @return 响应的包体
      */
+<<<<<<< HEAD
     @Override
     protected JSONObject handle(CmDbSqlResource sqlResource, HttpServletRequest requestObject, JSONObject requestPackage) {
         JSONObject result = new JSONObject();
@@ -48,6 +58,15 @@ public class CmServletPingExt extends CmServletMain {
         }
         String ddUid = requestPackage.getString("uid");
         if (ddUid != null && !"0".equals(ddUid)) {
+=======
+    protected JSONObject handle(CmDbSqlResource sqlResource, HttpServletRequest requestObject, JSONObject requestPackage)
+    {
+        JSONObject result = new JSONObject();
+        PeConfigGames.gainGamesExtMessage(result, requestPackage);
+        String ddUid = requestPackage.getString("uid");
+        if (ddUid != null && !"0".equals(ddUid))
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             JSONObject user = new JSONObject();
             UserService.putUserValue(user, ddUid);
             result.put("user", user);

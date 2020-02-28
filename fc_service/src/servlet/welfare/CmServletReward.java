@@ -9,9 +9,12 @@ import servlet.CmServletMain;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 
+<<<<<<< HEAD
 /**
  * @author xuwei
  */
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
 @WebServlet(urlPatterns = "/welfare/reward", name = "welfare reward")
 public class CmServletReward extends CmServletMain
 {
@@ -23,7 +26,10 @@ public class CmServletReward extends CmServletMain
      * @param requestPackage 请求的包体
      * @return 响应的包体
      */
+<<<<<<< HEAD
     @Override
+=======
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     protected JSONObject handle(CmDbSqlResource sqlResource, HttpServletRequest requestObject, JSONObject requestPackage)
     {
         String uid = requestPackage.getString("uid");

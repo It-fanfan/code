@@ -16,11 +16,17 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Vector;
 
+<<<<<<< HEAD
 /**
  * @author xuwei
  */
 @WebServlet(urlPatterns = "/reward/record")
 public class CmServletRewardRecord extends CmServletMain {
+=======
+@WebServlet(urlPatterns = "/reward/record")
+public class CmServletRewardRecord extends CmServletMain
+{
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
     /**
      * 需要子类实现的处理逻辑方法
      *
@@ -29,11 +35,20 @@ public class CmServletRewardRecord extends CmServletMain {
      * @param requestPackage 请求的包体
      * @return 响应的包体
      */
+<<<<<<< HEAD
     @Override
     protected JSONObject handle(CmDbSqlResource sqlResource, HttpServletRequest requestObject, JSONObject requestPackage) {
         JSONObject result = new JSONObject();
         String ddUid = requestPackage.getString("uid");
         if (null == ddUid || "0".equals(ddUid)) {
+=======
+    protected JSONObject handle(CmDbSqlResource sqlResource, HttpServletRequest requestObject, JSONObject requestPackage)
+    {
+        JSONObject result = new JSONObject();
+        String ddUid = requestPackage.getString("uid");
+        if (null == ddUid || "0".equals(ddUid))
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             result.put("result", "fail");
             result.put("msg", "user unknown");
             return result;
@@ -43,12 +58,22 @@ public class CmServletRewardRecord extends CmServletMain {
         JSONArray record = addRewardRecord(ddUid, matches);
         result.put("record", record);
 
+<<<<<<< HEAD
         if (!matches.isEmpty()) {
+=======
+        if (!matches.isEmpty())
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             JSONObject matchData = new JSONObject();
             matches.forEach(matchKey ->
             {
                 JSONObject matchInfo = Ranking.getMatchInfo(matchKey);
+<<<<<<< HEAD
                 if (matchInfo != null) {
+=======
+                if (matchInfo != null)
+                {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                     matchData.put(matchKey, matchInfo.getString("name"));
                 }
             });
@@ -64,10 +89,19 @@ public class CmServletRewardRecord extends CmServletMain {
      * @param ddUid 用户信息
      * @return 奖励列表
      */
+<<<<<<< HEAD
     private JSONArray addRewardRecord(String ddUid, Set<String> matches) {
         Vector<PeDbObject> list = PeDbRoundReceive.getDbRecord(ddUid);
         JSONArray array = new JSONArray();
         if (list != null) {
+=======
+    private JSONArray addRewardRecord(String ddUid, Set<String> matches)
+    {
+        Vector<PeDbObject> list = PeDbRoundReceive.getDbRecord(ddUid);
+        JSONArray array = new JSONArray();
+        if (list != null)
+        {
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
             SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
             list.forEach(temp ->
             {
@@ -86,9 +120,14 @@ public class CmServletRewardRecord extends CmServletMain {
                 element.put("times", format.format(data.ddMStart));
                 element.put("start", data.ddMStart.getTime() / 1000);
                 element.put("end", data.ddMEnd.getTime() / 1000);
+<<<<<<< HEAD
                 if (games != null) {
                     element.put("name", games.ddName);
                 }
+=======
+                if (games != null)
+                    element.put("name", games.ddName);
+>>>>>>> 8e4fccbbfce1955a84f9ef20f6bf84773b680aed
                 matches.add(matchKey);
                 array.add(element);
             });
